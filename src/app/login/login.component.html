@@ -1,0 +1,45 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="login-icon">
+      <img src="assets/loginIcon.png" alt="login" />
+    </div>
+
+    <h2 class="login-title">Sign in with email</h2>
+    <p class="login-subtitle">
+      Make a new doc to bring your words, data, and teams together. For free
+    </p>
+
+    <!-- ✅ Reactive Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <!-- Email -->
+      <div class="input-group">
+        <input type="email" placeholder="Email" formControlName="email" />
+        <div class="error" *ngIf="f['email'].touched && f['email'].errors">
+          <small *ngIf="f['email'].errors['required']">Email is required</small>
+          <small *ngIf="f['email'].errors['email']">Enter a valid email</small>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="input-group">
+        <input type="password" placeholder="Password" formControlName="password" />
+        <div class="error" *ngIf="f['password'].touched && f['password'].errors">
+          <small *ngIf="f['password'].errors['required']">Password is required</small>
+          <small *ngIf="f['password'].errors['minlength']">
+            Password must be at least 6 characters
+          </small>
+        </div>
+      </div>
+
+      <button type="button" class="forgot-link">Forgot password?</button>
+
+      <!-- Login Button -->
+      <button type="submit" class="btnlogin">Get Started</button>
+    </form>
+
+    <p class="divider">Or sign in with</p>
+
+    <!-- ✅ Router button -->
+    <button class="btnreqister" (click)="goToRegister()">Register</button>
+  </div>
+</div>

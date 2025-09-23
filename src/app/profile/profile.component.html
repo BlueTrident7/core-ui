@@ -1,0 +1,59 @@
+<div class="profile-wrapper">
+  <div class="profile-card">
+    <!-- Left Section -->
+    <div class="profile-left">
+      <img src="/assets/profile_male.png" alt="Avatar" class="avatar" />
+      <h3 class="user-name">{{ user.name }}</h3>
+      <p class="user-role">{{ user.role }}</p>
+    </div>
+
+    <!-- Right Section -->
+    <div class="profile-right">
+      <h3 class="section-title">Profile</h3>
+      <div class="details-grid">
+        <div>
+          <p class="label">My Role</p>
+          <p class="value">{{ user.details.role }}</p>
+        </div>
+        <div>
+          <p class="label">My Experience Level</p>
+          <p class="value">{{ user.details.experience }}</p>
+        </div>
+        <div>
+          <p class="label">My 3 Favorite Artists</p>
+          <p class="value">{{ user.details.artists }}</p>
+        </div>
+        <div>
+          <p class="label">My Favorite Music Genre</p>
+          <p class="value">{{ user.details.genre }}</p>
+        </div>
+        <div>
+          <p class="label">The Software or Equipment I Use</p>
+          <p class="value">{{ user.details.software }}</p>
+        </div>
+        <div>
+          <p class="label">My Preferred Music Mood</p>
+          <p class="value">{{ user.details.mood }}</p>
+        </div>
+        <div>
+          <p class="label">My City or Region</p>
+          <p class="value">{{ user.details.region }}</p>
+        </div>
+        <div>
+          <p class="label">Availability</p>
+          <p class="availability" [class.available]="user.details.availability">
+            {{ user.details.availability ? 'Available for Collaboration' : 'Not Available' }}
+          </p>
+        </div>
+        <div>
+          <p class="label">Badges</p>
+          <p class="badge" *ngFor="let badge of user.details.badges">{{ badge }}</p>
+        </div>
+        <div>
+          <p class="label">Tags</p>
+          <p class="value">#{{ user.details.tags.join(', #') }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

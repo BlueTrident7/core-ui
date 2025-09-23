@@ -1,0 +1,48 @@
+<nav class="navbar">
+  <!-- Left: Logo -->
+  <div class="navbar-left">
+    <img src="assets/logo_green.jpeg" alt="Logo" class="logo" />
+  </div>
+
+  <!-- Center: Menu Items -->
+  <div class="navbar-center">
+    <a class="nav-item" routerLink="/main/investment" routerLinkActive="active">
+      Investment
+    </a>
+    <a
+      class="nav-item"
+      routerLink="/main/dashboard"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Dashboard
+    </a>
+    <a class="nav-item" routerLink="/main/transaction" routerLinkActive="active">
+      Transaction
+    </a>
+    <a class="nav-item" routerLink="/main/profile" routerLinkActive="active">
+      Profile
+    </a>
+  </div>
+
+  <!-- Right: Search + CipherUi + Profile -->
+  <div class="navbar-right">
+    <span class="p-input-icon-left search-box">
+      <i class="pi pi-search"></i>
+      <input type="text" pInputText placeholder="Search CipherUi..." />
+    </span>
+
+    <!-- Brand + Profile -->
+    <div class="navbar-user">
+      <span class="brand">CipherUi</span>
+      <img src="assets/profile_male.png" alt="User" class="profile-img" />
+    </div>
+
+    <a class="nav-item logout-btn" routerLink="/login">Logout</a>
+  </div>
+</nav>
+
+<!-- Page Content -->
+<div class="content-container">
+  <router-outlet></router-outlet>
+</div>

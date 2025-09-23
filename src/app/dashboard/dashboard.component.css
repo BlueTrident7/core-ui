@@ -1,0 +1,67 @@
+.dashboard-container {
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+  background-color: #f9fafc;
+  color: #1a1a1a;
+}
+
+/* Account Cards */
+.account-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.card {
+  border-radius: 12px;
+  padding: 20px;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card .card-title {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 5px;
+}
+
+.card .card-value {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.card .card-address {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* Gradient Backgrounds */
+.cash { background: linear-gradient(135deg, #4f6ea4, #3755a4); }
+.bitcoin { background: linear-gradient(135deg, #f7931a, #d47d00); }
+.ethereum { background: linear-gradient(135deg, #e6b8c0, #d47db0); }
+.ripple { background: linear-gradient(135deg, #23292f, #11161a); }
+
+/* Charts */
+.charts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.chart-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.chart-card h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.chart-card canvas {
+  margin-top: 10px;
+}

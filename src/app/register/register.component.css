@@ -1,0 +1,122 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to bottom, #cde9ff, #f0f8ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px; /* ✅ spacing for mobile */
+}
+
+.login-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 460px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    width: 100%; /* ✅ full width on small devices */
+    padding: 20px;
+  }
+
+  .login-title {
+    font-size: 18px;
+  }
+
+  .login-subtitle {
+    font-size: 12px;
+  }
+}
+
+.login-icon img {
+  width: 60px;
+  height: 60px;
+}
+
+.login-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.login-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+}
+
+.input-group input:focus {
+  border-color: #333;
+}
+
+/* Register button */
+.btnregister {
+  width: 100%;
+  padding: 14px;
+  background: #000;
+  color: #fff;
+  border-radius: 10px;
+  border: 1px solid #000;
+  font-size: 15px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* Login button inside register page */
+.btnlogin {
+  width: 100%;
+  padding: 14px;
+  background: #fff;
+  color: #000;
+  border-radius: 10px;
+  border: 1px solid #000;
+  font-size: 15px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.btnlogin:hover {
+  background: #f0f0f0;
+}
+
+.divider {
+  font-size: 13px;
+  color: #888;
+  margin: 20px 0;
+}
+.error {
+  text-align: left;
+  margin-top: 5px;
+}
+
+.error small {
+  color: red;
+  font-size: 12px;
+}
