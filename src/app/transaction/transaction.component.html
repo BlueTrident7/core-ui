@@ -1,7 +1,10 @@
 <div class="container mt-4">
   <h3 class="mb-3">Transaction History</h3>
 
-  <p-table [value]="transactions" class="shadow-sm">
+  <p-table
+    [value]="transactions"
+    class="p-datatable-striped p-datatable-hover shadow-sm"
+  >
     <ng-template pTemplate="header">
       <tr>
         <th>Date</th>
@@ -10,19 +13,20 @@
         <th>Status</th>
       </tr>
     </ng-template>
+
     <ng-template pTemplate="body" let-t>
       <tr>
         <td>{{ t.date }}</td>
         <td>{{ t.type }}</td>
         <td>₹{{ t.amount | number }}</td>
         <td>
-          <span
+          <p-chip
+            [label]="t.status"
             [class]="
-              'badge bg-' + (t.status === 'Completed' ? 'success' : 'warning')
+              'p-chip-rounded p-chip-sm p-chip-' +
+              (t.status === 'Completed' ? 'success' : 'warn')
             "
-          >
-            {{ t.status }}
-          </span>
+          ></p-chip>
         </td>
       </tr>
     </ng-template>

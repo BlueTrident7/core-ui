@@ -11,7 +11,6 @@ import { ChartConfiguration } from 'chart.js';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
-  // Line Chart Data
   public lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: [
       'Jan',
@@ -54,7 +53,6 @@ export class DashboardComponent {
     },
   };
 
-  // Bar Chart Data
   public barChartData: ChartConfiguration<'bar'>['data'] = {
     labels: [
       'Jan',

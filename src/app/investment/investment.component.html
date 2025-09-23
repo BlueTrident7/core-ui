@@ -1,62 +1,113 @@
-<div class="container mt-4">
-  <h3 class="mb-3">Available Investments</h3>
+<div class="container">
+  <div class="header">
+    <h1>Available Investments</h1>
+    <p>Choose from our carefully curated investment plans</p>
+  </div>
 
-  <div class="row g-3">
-    <div class="col-md-4" *ngFor="let plan of plans">
-      <p-card class="shadow-sm">
-        <h5>{{ plan.name }}</h5>
-        <p>{{ plan.description }}</p>
-        <p class="text-muted">
-          Min: ₹{{ plan.min | number }} | Max: ₹{{ plan.max | number }}
-        </p>
-        <button
-          pButton
-          type="button"
-          label="Invest Now"
-          class="p-button-success"
-          (click)="openInvest(plan)"
-        ></button>
+  <div class="flex flex-wrap gap-3 justify-content-center">
+    <div
+      *ngFor="let plan of plans"
+      class="card-container flex-auto"
+      style="flex: 1 1 calc(33% - 1rem); min-width: 250px"
+    >
+      <p-card class="investment-card">
+        <ng-template pTemplate="header">
+          <div class="card-header">
+            <i class="pi pi-chart-line" style="font-size: 2rem"></i>
+          </div>
+        </ng-template>
+        <h3 class="mb-2">{{ plan.name }}</h3>
+        <p class="text-secondary mb-3">{{ plan.description }}</p>
+
+        <div class="plan-limits">
+          <span class="text-sm">Min: ₹{{ plan.min | number }}</span>
+          <span class="text-sm font-bold">Max: ₹{{ plan.max | number }}</span>
+        </div>
+
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            type="button"
+            label="Invest Now"
+            icon="pi pi-arrow-right"
+            class="w-full p-button-success p-button-raised p-button-rounded"
+            (click)="openInvest(plan)"
+          ></button>
+        </ng-template>
       </p-card>
     </div>
   </div>
 
-  <!-- Invest Modal -->
   <p-dialog
-    header="Invest"
+    header="Invest in {{ selectedPlan?.name }}"
     [(visible)]="openDialog"
     [modal]="true"
-    [style]="{ width: '400px' }"
+    [style]="{ width: '90vw', 'max-width': '450px' }"
+    [baseZIndex]="10000"
+    (onHide)="closeDialog()"
   >
-    <div *ngIf="selectedPlan">
-      <h5>Invest in {{ selectedPlan.name }}</h5>
+    <form [formGroup]="investForm" *ngIf="selectedPlan" class="p-fluid">
+      <div class="dialog-content">
+        <div class="field mb-4">
+          <label for="amount" class="font-bold block mb-2">Enter Amount</label>
+          <p-inputNumber
+            id="amount"
+            formControlName="amount"
+            [min]="selectedPlan.min"
+            [max]="selectedPlan.max"
+            mode="currency"
+            currency="INR"
+            placeholder="Enter amount"
+            class="w-full"
+          ></p-inputNumber>
+          <small class="text-color-secondary block mt-1">
+            Min: ₹{{ selectedPlan.min | number }} | Max: ₹{{
+              selectedPlan.max | number
+            }}
+          </small>
 
-      <div class="mb-3">
-        <label class="form-label">Enter Amount</label>
-        <input
-          type="number"
-          class="form-control"
-          [(ngModel)]="investAmount"
-          [min]="selectedPlan.min"
-          [max]="selectedPlan.max"
-        />
+          <p-message
+            *ngIf="amountErrors?.['min']"
+            severity="error"
+            text="Amount must be at least ₹{{ selectedPlan.min | number }}."
+            class="mt-1"
+          ></p-message>
+          <p-message
+            *ngIf="amountErrors?.['max']"
+            severity="error"
+            text="Amount cannot exceed ₹{{ selectedPlan.max | number }}."
+            class="mt-1"
+          ></p-message>
+        </div>
+
+        <div class="field mb-4">
+          <label for="payment" class="font-bold block mb-2">Payment Mode</label>
+          <p-dropdown
+            id="payment"
+            formControlName="paymentMode"
+            [options]="paymentOptions"
+            placeholder="Select Mode"
+            class="w-full"
+            [showClear]="true"
+          ></p-dropdown>
+
+          <p-message
+            *ngIf="paymentModeErrors?.['required']"
+            severity="error"
+            text="Payment mode is required."
+            class="mt-1"
+          ></p-message>
+        </div>
+
+        <button
+          pButton
+          type="button"
+          label="Pay & Invest"
+          class="w-full p-button-primary"
+          [disabled]="!isValidInvestment"
+          (click)="confirmInvestment()"
+        ></button>
       </div>
-
-      <div class="mb-3">
-        <label class="form-label">Payment Mode</label>
-        <p-dropdown
-          [options]="['Razorpay', 'UPI', 'Card']"
-          [(ngModel)]="paymentMode"
-          placeholder="Select Mode"
-        >
-        </p-dropdown>
-      </div>
-
-      <button
-        pButton
-        label="Pay & Invest"
-        class="p-button-primary w-100"
-        (click)="confirmInvestment()"
-      ></button>
-    </div>
+    </form>
   </p-dialog>
 </div>
