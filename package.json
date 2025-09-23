@@ -3,8 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve --port 4550 --configuration=local --open",
+    "start-dev": "ng serve --port 4550 --configuration=development --open",
+    "start-prod": "ng serve --port 4550 --configuration=production --open",
+    "build": "ng build --configuration=local",
+    "build-dev": "ng build --configuration=development",
+    "build-prod": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:cipher-ui": "node dist/cipher-ui/server/server.mjs"
