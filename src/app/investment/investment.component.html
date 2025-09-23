@@ -1,0 +1,62 @@
+<div class="container mt-4">
+  <h3 class="mb-3">Available Investments</h3>
+
+  <div class="row g-3">
+    <div class="col-md-4" *ngFor="let plan of plans">
+      <p-card class="shadow-sm">
+        <h5>{{ plan.name }}</h5>
+        <p>{{ plan.description }}</p>
+        <p class="text-muted">
+          Min: ₹{{ plan.min | number }} | Max: ₹{{ plan.max | number }}
+        </p>
+        <button
+          pButton
+          type="button"
+          label="Invest Now"
+          class="p-button-success"
+          (click)="openInvest(plan)"
+        ></button>
+      </p-card>
+    </div>
+  </div>
+
+  <!-- Invest Modal -->
+  <p-dialog
+    header="Invest"
+    [(visible)]="openDialog"
+    [modal]="true"
+    [style]="{ width: '400px' }"
+  >
+    <div *ngIf="selectedPlan">
+      <h5>Invest in {{ selectedPlan.name }}</h5>
+
+      <div class="mb-3">
+        <label class="form-label">Enter Amount</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="investAmount"
+          [min]="selectedPlan.min"
+          [max]="selectedPlan.max"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Payment Mode</label>
+        <p-dropdown
+          [options]="['Razorpay', 'UPI', 'Card']"
+          [(ngModel)]="paymentMode"
+          placeholder="Select Mode"
+        >
+        </p-dropdown>
+      </div>
+
+      <button
+        pButton
+        label="Pay & Invest"
+        class="p-button-primary w-100"
+        (click)="confirmInvestment()"
+      ></button>
+    </div>
+  </p-dialog>
+</div>

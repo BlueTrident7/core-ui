@@ -14,15 +14,12 @@
           "options": {
             "outputPath": "dist/cipher-ui",
             "index": "src/index.html",
-            "browser": "src/main.ts",
-            "polyfills": ["zone.js"],
-            "tsConfig": "tsconfig.app.json",
-            "assets": [{"glob": "**/*", "input": "public"}],
-            "styles": ["src/styles.css"],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {"entry": "src/server.ts"}
+            "main": "src/main.ts",
+"polyfills": ["zone.js"],
+"tsConfig": "tsconfig.app.json",
+"assets": [{ "glob": "**/*", "input": "public" }],
+"styles": ["src/styles.css"],
+"scripts": []
           },
           "configurations": {
             "production": {

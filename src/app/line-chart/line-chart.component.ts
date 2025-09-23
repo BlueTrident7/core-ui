@@ -9,20 +9,31 @@ import {
   Title,
   Tooltip,
   CategoryScale,
-  Legend
+  Legend,
 } from 'chart.js';
 
-Chart.register(LineController, LineElement, PointElement, LinearScale, Title, Tooltip, CategoryScale, Legend);
+Chart.register(
+  LineController,
+  LineElement,
+  PointElement,
+  LinearScale,
+  Title,
+  Tooltip,
+  CategoryScale,
+  Legend
+);
 
 @Component({
   selector: 'app-line-chart',
   template: `<canvas #chartCanvas></canvas>`,
-  styles: [`
-    canvas {
-      max-width: 100%;
-      height: 300px;
-    }
-  `]
+  styles: [
+    `
+      canvas {
+        max-width: 100%;
+        height: 300px;
+      }
+    `,
+  ],
 })
 export class LineChartComponent implements AfterViewInit {
   @ViewChild('chartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
@@ -40,7 +51,7 @@ export class LineChartComponent implements AfterViewInit {
             borderColor: '#4caf50',
             backgroundColor: 'rgba(76, 175, 80, 0.2)',
             fill: true,
-            tension: 0.4
+            tension: 0.4,
           },
           {
             label: 'Expenditure',
@@ -48,32 +59,32 @@ export class LineChartComponent implements AfterViewInit {
             borderColor: '#f44336',
             backgroundColor: 'rgba(244, 67, 54, 0.2)',
             fill: true,
-            tension: 0.4
-          }
-        ]
+            tension: 0.4,
+          },
+        ],
       },
       options: {
         responsive: true,
         plugins: {
           tooltip: {
-            enabled: true
+            enabled: true,
           },
           legend: {
             display: true,
-            position: 'bottom'
-          }
+            position: 'bottom',
+          },
         },
         scales: {
           x: {
             grid: {
-              display: false
-            }
+              display: false,
+            },
           },
           y: {
-            beginAtZero: true
-          }
-        }
-      }
+            beginAtZero: true,
+          },
+        },
+      },
     });
   }
 }
