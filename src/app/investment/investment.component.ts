@@ -17,21 +17,49 @@ import { TabsModule } from 'primeng/tabs';
   styleUrls: ['./investment.component.css'],
 })
 export class InvestmentComponent implements OnInit, OnDestroy {
-  balances = [
+  invetmentPlans = [
     {
       title: 'Daily Investments',
       value: 2625,
-      plans: ['Plan A', 'Plan B', 'Plan C', 'Plan D'],
+      plans: 'Plan A',
+      planType: 'DAILY',
     },
     {
-      title: 'Monthly Investments',
-      value: 10500,
-      plans: ['Crypto Fund', 'Real Estate', 'Stocks'],
+      id: 1,
+      name: 'Monthly Investments',
+      amount: 10500,
+      polycies: 'Stocks',
+      planType: 'MONTHLY',
     },
     {
       title: 'Total Investments',
       value: 2625,
-      plans: ['Monthly Payout', 'Quarterly Bonus'],
+      plans: 'Quarterly Bonus',
+      planType: 'YEARLY',
+    },
+    {
+      title: 'Total Investments',
+      value: 2625,
+      plans: 'Quarterly Bonus',
+      planType: 'YEARLY',
+    },
+    {
+      title: 'Total Investments',
+      value: 2625,
+      plans: 'Quarterly Bonus',
+      planType: 'YEARLY',
+    },
+    {
+      title: 'Total Investments',
+      value: 2625,
+      plans: 'Quarterly Bonus',
+      planType: 'YEARLY',
+    },
+    {
+      title: 'Total Investments',
+      value: 2625,
+      plans: 'Quarterly Bonus',
+      planType: 'YEARLY',
     },
   ];
 
@@ -43,11 +71,11 @@ export class InvestmentComponent implements OnInit, OnDestroy {
   paymentModes = ['Debit Card', 'Credit Card', 'UPI'];
 
   constructor(private renderer: Renderer2, private elRef: ElementRef) {
-    this.currentSlide = this.balances.map(() => 0);
+    this.currentSlide = this.invetmentPlans.map(() => 0);
   }
 
   ngOnInit(): void {
-    this.startAutoSlide();
+    // this.startAutoSlide();
     this.createFallingRupees();
   }
 
@@ -55,22 +83,22 @@ export class InvestmentComponent implements OnInit, OnDestroy {
     if (this.intervalId) clearInterval(this.intervalId);
   }
 
-  startAutoSlide(): void {
-    this.intervalId = window.setInterval(() => {
-      this.balances.forEach((_, i) => {
-        const len = this.balances[i].plans.length || 1;
-        this.currentSlide[i] = (this.currentSlide[i] + 1) % len;
-      });
-    }, 5000);
-  }
+  // startAutoSlide(): void {
+  //   this.intervalId = window.setInterval(() => {
+  //     this.invetmentPlans.forEach((_, i) => {
+  //       const len = this.invetmentPlans[i].plans.length || 1;
+  //       this.currentSlide[i] = (this.currentSlide[i] + 1) % len;
+  //     });
+  //   }, 5000);
+  // }
 
-  nextSlide(index: number): void {
-    const len = this.balances[index]?.plans?.length || 1;
-    this.currentSlide[index] = (this.currentSlide[index] + 1) % len;
-  }
+  // nextSlide(index: number): void {
+  //   const len = this.invetmentPlans[index]?.plans?.length || 1;
+  //   this.currentSlide[index] = (this.currentSlide[index] + 1) % len;
+  // }
 
   prevSlide(index: number): void {
-    const len = this.balances[index]?.plans?.length || 1;
+    const len = this.invetmentPlans[index]?.plans?.length || 1;
     this.currentSlide[index] = (this.currentSlide[index] - 1 + len) % len;
   }
 
@@ -86,7 +114,6 @@ export class InvestmentComponent implements OnInit, OnDestroy {
     }
   }
 
-  /** Create 30+ falling rupees dynamically */
   private createFallingRupees(): void {
     const container = this.elRef.nativeElement.querySelector('.money-bg');
     for (let i = 0; i < 40; i++) {

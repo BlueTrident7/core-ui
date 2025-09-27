@@ -23,7 +23,7 @@
 
   <!-- Balance Cards -->
   <div class="card-container">
-    <div class="card" *ngFor="let balance of balances; let i = index">
+    <div class="card" *ngFor="let balance of invetmentPlans; let i = index">
       <h3 class="card-title">{{ balance.title }}</h3>
 
       <div class="values">₹ {{ balance.value }}</div>
@@ -40,7 +40,6 @@
             {{ plan }}
           </div>
         </div>
-        <button class="slide-btn next" (click)="nextSlide(i)">›</button>
       </div>
     </div>
   </div>
