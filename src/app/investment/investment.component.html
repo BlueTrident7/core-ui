@@ -6,7 +6,7 @@
 
   <!-- Balance Cards -->
   <div class="card-container">
-    <div class="card" *ngFor="let balance of balances; let i = index">
+    <div class="card" *ngFor="let balance of invetmentPlans; let i = index">
       <h3 class="card-title">{{ balance.title }}</h3>
 
       <div class="values">₹ {{ balance.value }}</div>
@@ -23,7 +23,6 @@
             {{ plan }}
           </div>
         </div>
-        <button class="slide-btn next" (click)="nextSlide(i)">›</button>
       </div>
     </div>
   </div>
@@ -33,17 +32,23 @@
     <h3>Add Investments</h3>
 
     <button class="toggle-form" (click)="showForm = !showForm">
-      {{ showForm ? 'Cancel' : 'Add New Investment' }}
+      {{ showForm ? "Cancel" : "Add New Investment" }}
     </button>
 
     <div class="investment-form" *ngIf="showForm">
       <label>Enter Amount (₹)</label>
-      <input type="number" [(ngModel)]="newInvestment.amount" placeholder="e.g. 1000" />
+      <input
+        type="number"
+        [(ngModel)]="newInvestment.amount"
+        placeholder="e.g. 1000"
+      />
 
       <label>Payment Mode</label>
       <select [(ngModel)]="newInvestment.paymentMode">
         <option value="">Select payment mode</option>
-        <option *ngFor="let mode of paymentModes" [value]="mode">{{ mode }}</option>
+        <option *ngFor="let mode of paymentModes" [value]="mode">
+          {{ mode }}
+        </option>
       </select>
 
       <button class="btn invest-btn" (click)="addInvestment()">Invest</button>
