@@ -48,6 +48,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./profile/profile.component').then((m) => m.ProfileComponent),
       },
+      {
+        path: 'admin-contact',
+        loadComponent: () =>
+          import('./admin-contact/admin-contact.component').then(
+            (m) => m.AdminContactComponent
+          ),
+      },
     ],
   },
 
