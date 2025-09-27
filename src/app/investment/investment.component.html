@@ -4,6 +4,23 @@
 
   <h2 class="title">Investments</h2>
 
+  <div class="col-12">
+    <p-tabs value="0">
+      <p-tablist>
+        <p-tab value="0">Daywise Investent</p-tab>
+        <p-tab value="1">WeekWise Investent</p-tab>
+        <p-tab value="2">Monthly Investent</p-tab>
+      </p-tablist>
+      <p-tabpanels>
+        <p-tabpanel value="0"> <h1>hii</h1> </p-tabpanel>
+        <p-tabpanel value="1"> <h1>hello</h1> </p-tabpanel>
+        <p-tabpanel value="2">
+          <h1>send</h1>
+        </p-tabpanel>
+      </p-tabpanels>
+    </p-tabs>
+  </div>
+
   <!-- Balance Cards -->
   <div class="card-container">
     <div class="card" *ngFor="let balance of balances; let i = index">
@@ -33,17 +50,23 @@
     <h3>Add Investments</h3>
 
     <button class="toggle-form" (click)="showForm = !showForm">
-      {{ showForm ? 'Cancel' : 'Add New Investment' }}
+      {{ showForm ? "Cancel" : "Add New Investment" }}
     </button>
 
     <div class="investment-form" *ngIf="showForm">
       <label>Enter Amount (₹)</label>
-      <input type="number" [(ngModel)]="newInvestment.amount" placeholder="e.g. 1000" />
+      <input
+        type="number"
+        [(ngModel)]="newInvestment.amount"
+        placeholder="e.g. 1000"
+      />
 
       <label>Payment Mode</label>
       <select [(ngModel)]="newInvestment.paymentMode">
         <option value="">Select payment mode</option>
-        <option *ngFor="let mode of paymentModes" [value]="mode">{{ mode }}</option>
+        <option *ngFor="let mode of paymentModes" [value]="mode">
+          {{ mode }}
+        </option>
       </select>
 
       <button class="btn invest-btn" (click)="addInvestment()">Invest</button>
