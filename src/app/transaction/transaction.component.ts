@@ -1,0 +1,25 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-transaction',
+  standalone: true,
+  imports: [CommonModule], // <-- needed for ngFor, ngIf, ngClass
+  templateUrl: './transaction.component.html',
+  styleUrls: ['./transaction.component.css'],
+})
+export class TransactionComponent {
+  transactions = [
+    { date: 'Jul 20', icon: '🛒', description: 'Daily spending', link: null, amount: 1493.12, balance: 24896.61, cashback: 22.40 },
+    { date: 'Jul 19', icon: '🛒', description: 'Daily spending', link: null, amount: 3971.41, balance: 23403.49, cashback: 59.57 },
+    { date: 'Jul 18', icon: '🛒', description: 'Daily spending', link: null, amount: 557.76, balance: 19432.08, cashback: 8.37 },
+    { date: 'Jul 17', icon: '🛒', description: 'Daily spending', link: 'View transactions', amount: 390.94, balance: 18874.32, cashback: 5.87 },
+    { date: 'Jul 16', icon: '✈️', description: 'One-time payment', link: null, amount: -15000.0, balance: 16190.11, cashback: null },
+    { date: 'Jul 15', icon: '🛒', description: 'Daily spending', link: null, amount: 4479.44, balance: 31190.11, cashback: 67.19 },
+    { date: 'Jul 15', icon: '💳', description: '2 new cards added', link: null, amount: null, balance: null, cashback: null },
+    { date: 'Jul 14', icon: '🛒', description: 'Daily spending', link: null, amount: 1860.44, balance: 26710.67, cashback: 27.90 },
+    { date: 'Jul 13', icon: '🛒', description: 'Daily spending', link: null, amount: 2069.43, balance: 24850.22, cashback: 31.04 },
+    { date: 'Jul 12', icon: '🛒', description: 'Daily spending', link: null, amount: 3296.35, balance: 22780.79, cashback: 49.45 },
+    { date: 'Jul 10', icon: '🛒', description: 'Daily spending', link: null, amount: 810.33, balance: 19484.44, cashback: 12.15 },
+  ];
+}

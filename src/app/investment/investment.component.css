@@ -1,0 +1,184 @@
+.investment-container {
+  position: relative;
+  padding: 24px;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  color: #0f172a;
+  overflow: hidden;
+}
+
+/* Money background container */
+.money-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Falling rupee spans */
+.money-bg span {
+  position: absolute;
+  top: -10%;
+  font-weight: 700;
+  pointer-events: none; /* don't block interactions */
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Keyframes for falling rupees with random X movement and rotation */
+@keyframes fall {
+  0% {
+    transform: translateX(0px) rotate(0deg);
+    top: -10%;
+  }
+  25% {
+    transform: translateX(calc(var(--x-move) / 4)) rotate(calc(var(--rotation) / 4));
+  }
+  50% {
+    transform: translateX(calc(var(--x-move) / 2)) rotate(calc(var(--rotation) / 2));
+  }
+  75% {
+    transform: translateX(calc(3 * var(--x-move) / 4)) rotate(calc(3 * var(--rotation) / 4));
+  }
+  100% {
+    transform: translateX(var(--x-move)) rotate(var(--rotation));
+    top: 110%;
+  }
+}
+
+/* Cards sit above the background */
+.card-container,
+.add-investments {
+  position: relative;
+  z-index: 1;
+}
+
+/* Titles and cards */
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 8px 24px rgba(17, 24, 39, 0.06);
+  text-align: center;
+}
+
+.card-title {
+  color: #0b4aa8;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.values {
+  font-weight: 700;
+  font-size: 20px;
+  color: #047857;
+  margin-bottom: 14px;
+}
+
+/* Slider styles */
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.slide-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: #eef6ff;
+  color: #0b4aa8;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(11, 74, 168, 0.08);
+}
+
+.slide-btn:hover {
+  background: #dff0ff;
+}
+
+.plan-list {
+  min-width: 140px;
+  max-width: 220px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.plan {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 380ms ease, transform 380ms ease;
+  font-weight: 600;
+  color: #0b4aa8;
+}
+
+.plan.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Add investments form */
+.add-investments {
+  margin-top: 36px;
+}
+
+.toggle-form {
+  border: 1px solid #c7e9ff;
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.investment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 35%;
+  min-width: 240px;
+}
+
+.investment-form input,
+.investment-form select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #dbeafe;
+  font-size: 14px;
+}
+
+.invest-btn {
+  background: linear-gradient(90deg, #16a34a, #15803d);
+  color: white;
+  border: none;
+  padding: 9px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  width: 100%;
+}

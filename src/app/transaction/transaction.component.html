@@ -1,0 +1,49 @@
+<div class="transaction-wrapper">
+  <div class="transactions-header">
+    <div class="month-info">
+      <strong>This month</strong>
+      &nbsp;<span class="cashback-highlight">$745.12 cashback</span>
+      &gt; $41,086 spent &gt; 24 cards &gt;
+    </div>
+    <button class="last-month-btn" aria-label="Show Last month transactions">
+      Last month &#x25BC;
+    </button>
+  </div>
+
+  <table class="transaction-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Ending balance</th>
+        <th>Cashback earned</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tx of transactions">
+        <td class="date">{{ tx.date }}</td>
+        <td class="description">
+          <span class="icon" aria-hidden="true">{{ tx.icon }}</span>
+          {{ tx.description }}
+          <a *ngIf="tx.link" href="#" class="link-text">{{ tx.link }} &gt;</a>
+        </td>
+        <td class="amount" [ngClass]="{ negative: tx.amount && tx.amount < 0 }">
+          {{ tx.amount !== null ? ('$' + tx.amount.toFixed(2)) : '–' }}
+        </td>
+        <td class="balance">
+          {{ tx.balance !== null ? ('$' + tx.balance.toFixed(2)) : '–' }}
+        </td>
+        <td class="cashback" *ngIf="tx.cashback !== null; else dash">
+          ${{ tx.cashback.toFixed(2) }}
+        </td>
+        <ng-template #dash>
+          <td class="cashback">–</td>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Background animation container -->
+<div class="background-animation"></div>
