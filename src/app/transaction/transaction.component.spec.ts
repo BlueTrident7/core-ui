@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+<<<<<<< HEAD
+=======
+
+>>>>>>> c7187ffcab21da838ae88b13fbd0c46cefa1182b
 import { TransactionComponent } from './transaction.component';
 
 describe('TransactionComponent', () => {
@@ -7,14 +11,21 @@ describe('TransactionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+<<<<<<< HEAD
       imports: [TransactionComponent],
     }).compileComponents();
+=======
+      imports: [TransactionComponent]
+    })
+    .compileComponents();
+>>>>>>> c7187ffcab21da838ae88b13fbd0c46cefa1182b
 
     fixture = TestBed.createComponent(TransactionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
+<<<<<<< HEAD
   it('should create the transaction component', () => {
     expect(component).toBeTruthy();
   });
@@ -32,3 +43,9 @@ describe('TransactionComponent', () => {
     expect(negativeCells.length).toBeGreaterThan(0);
   });
 });
+=======
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+>>>>>>> c7187ffcab21da838ae88b13fbd0c46cefa1182b

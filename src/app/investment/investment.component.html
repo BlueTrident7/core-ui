@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="investment-container">
   <!-- Animated rupee background -->
   <div class="money-bg"></div>
@@ -49,4 +50,118 @@
       <button class="btn invest-btn" (click)="addInvestment()">Invest</button>
     </div>
   </div>
+=======
+<div class="container">
+  <div class="header">
+    <h1>Available Investments</h1>
+    <p>Choose from our carefully curated investment plans</p>
+  </div>
+
+  <div class="flex flex-wrap gap-3 justify-content-center">
+    <div
+      *ngFor="let plan of plans"
+      class="card-container flex-auto"
+      style="flex: 1 1 calc(33% - 1rem); min-width: 250px"
+    >
+      <p-card class="investment-card">
+        <ng-template pTemplate="header">
+          <div class="card-header">
+            <i class="pi pi-chart-line" style="font-size: 2rem"></i>
+          </div>
+        </ng-template>
+        <h3 class="mb-2">{{ plan.name }}</h3>
+        <p class="text-secondary mb-3">{{ plan.description }}</p>
+
+        <div class="plan-limits">
+          <span class="text-sm">Min: ₹{{ plan.min | number }}</span>
+          <span class="text-sm font-bold">Max: ₹{{ plan.max | number }}</span>
+        </div>
+
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            type="button"
+            label="Invest Now"
+            icon="pi pi-arrow-right"
+            class="w-full p-button-success p-button-raised p-button-rounded"
+            (click)="openInvest(plan)"
+          ></button>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+
+  <p-dialog
+    header="Invest in {{ selectedPlan?.name }}"
+    [(visible)]="openDialog"
+    [modal]="true"
+    [style]="{ width: '90vw', 'max-width': '450px' }"
+    [baseZIndex]="10000"
+    (onHide)="closeDialog()"
+  >
+    <form [formGroup]="investForm" *ngIf="selectedPlan" class="p-fluid">
+      <div class="dialog-content">
+        <div class="field mb-4">
+          <label for="amount" class="font-bold block mb-2">Enter Amount</label>
+          <p-inputNumber
+            id="amount"
+            formControlName="amount"
+            [min]="selectedPlan.min"
+            [max]="selectedPlan.max"
+            mode="currency"
+            currency="INR"
+            placeholder="Enter amount"
+            class="w-full"
+          ></p-inputNumber>
+          <small class="text-color-secondary block mt-1">
+            Min: ₹{{ selectedPlan.min | number }} | Max: ₹{{
+              selectedPlan.max | number
+            }}
+          </small>
+
+          <p-message
+            *ngIf="amountErrors?.['min']"
+            severity="error"
+            text="Amount must be at least ₹{{ selectedPlan.min | number }}."
+            class="mt-1"
+          ></p-message>
+          <p-message
+            *ngIf="amountErrors?.['max']"
+            severity="error"
+            text="Amount cannot exceed ₹{{ selectedPlan.max | number }}."
+            class="mt-1"
+          ></p-message>
+        </div>
+
+        <div class="field mb-4">
+          <label for="payment" class="font-bold block mb-2">Payment Mode</label>
+          <p-dropdown
+            id="payment"
+            formControlName="paymentMode"
+            [options]="paymentOptions"
+            placeholder="Select Mode"
+            class="w-full"
+            [showClear]="true"
+          ></p-dropdown>
+
+          <p-message
+            *ngIf="paymentModeErrors?.['required']"
+            severity="error"
+            text="Payment mode is required."
+            class="mt-1"
+          ></p-message>
+        </div>
+
+        <button
+          pButton
+          type="button"
+          label="Pay & Invest"
+          class="w-full p-button-primary"
+          [disabled]="!isValidInvestment"
+          (click)="confirmInvestment()"
+        ></button>
+      </div>
+    </form>
+  </p-dialog>
+>>>>>>> c7187ffcab21da838ae88b13fbd0c46cefa1182b
 </div>

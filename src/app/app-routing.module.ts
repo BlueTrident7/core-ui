@@ -8,12 +8,12 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () =>
-      import('./login/login.component').then(m => m.LoginComponent),
+      import('./login/login.component').then((m) => m.LoginComponent),
   },
   {
     path: 'register',
     loadComponent: () =>
-      import('./register/register.component').then(m => m.RegisterComponent),
+      import('./register/register.component').then((m) => m.RegisterComponent),
   },
 
   // ✅ Wrap all main pages inside NavbarComponent
@@ -25,22 +25,28 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () =>
-          import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
+          import('./dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent
+          ),
       },
       {
         path: 'investment',
         loadComponent: () =>
-          import('./investment/investment.component').then(m => m.InvestmentComponent),
+          import('./investment/investment.component').then(
+            (m) => m.InvestmentComponent
+          ),
       },
       {
         path: 'transaction',
         loadComponent: () =>
-          import('./transaction/transaction.component').then(m => m.TransactionComponent),
+          import('./transaction/transaction.component').then(
+            (m) => m.TransactionComponent
+          ),
       },
       {
         path: 'profile',
         loadComponent: () =>
-          import('./profile/profile.component').then(m => m.ProfileComponent),
+          import('./profile/profile.component').then((m) => m.ProfileComponent),
       },
     ],
   },

@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { InvestmentComponent } from './investment.component';
 import { By } from '@angular/platform-browser';
+=======
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { InvestmentComponent } from './investment.component';
+>>>>>>> c7187ffcab21da838ae88b13fbd0c46cefa1182b
 
 describe('InvestmentComponent', () => {
   let component: InvestmentComponent;
@@ -8,6 +14,7 @@ describe('InvestmentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+<<<<<<< HEAD
       imports: [InvestmentComponent], // standalone component
     }).compileComponents();
 
@@ -77,4 +84,18 @@ describe('InvestmentComponent', () => {
     component.prevSlide(0);
     expect(component.currentSlide[0]).toBe(initial % component.balances[0].plans.length);
   });
+=======
+      imports: [InvestmentComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(InvestmentComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+>>>>>>> c7187ffcab21da838ae88b13fbd0c46cefa1182b
 });
