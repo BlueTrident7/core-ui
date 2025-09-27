@@ -1,22 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
-=======
-import { TableModule } from 'primeng/table';
-import { ChipModule } from 'primeng/chip';
-
-interface Transaction {
-  date: string;
-  type: string;
-  amount: number;
-  status: string;
-}
->>>>>>> c7187ffcab21da838ae88b13fbd0c46cefa1182b
 
 @Component({
   selector: 'app-transaction',
   standalone: true,
-<<<<<<< HEAD
   imports: [CommonModule], // <-- needed for ngFor, ngIf, ngClass
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.css'],
@@ -34,36 +21,5 @@ export class TransactionComponent {
     { date: 'Jul 13', icon: '🛒', description: 'Daily spending', link: null, amount: 2069.43, balance: 24850.22, cashback: 31.04 },
     { date: 'Jul 12', icon: '🛒', description: 'Daily spending', link: null, amount: 3296.35, balance: 22780.79, cashback: 49.45 },
     { date: 'Jul 10', icon: '🛒', description: 'Daily spending', link: null, amount: 810.33, balance: 19484.44, cashback: 12.15 },
-=======
-  imports: [CommonModule, TableModule, ChipModule],
-  templateUrl: './transaction.component.html',
-})
-export class TransactionComponent {
-  transactions: Transaction[] = [
-    {
-      date: '2025-09-20',
-      type: 'Credit',
-      amount: 1500,
-      status: 'Completed',
-    },
-    {
-      date: '2025-09-21',
-      type: 'Debit',
-      amount: 500,
-      status: 'Pending',
-    },
-    {
-      date: '2025-09-22',
-      type: 'Credit',
-      amount: 2000,
-      status: 'Completed',
-    },
-    {
-      date: '2025-09-23',
-      type: 'Debit',
-      amount: 1200,
-      status: 'Failed',
-    },
->>>>>>> c7187ffcab21da838ae88b13fbd0c46cefa1182b
   ];
 }
