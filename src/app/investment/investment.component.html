@@ -1,74 +1,50 @@
 <div class="investment-container">
-  <!-- Animated rupee background -->
-  <div class="money-bg"></div>
-
-  <h2 class="title">Investments</h2>
-
-  <div class="col-12">
-    <p-tabs value="0">
-      <p-tablist>
-        <p-tab value="0">Daywise Investent</p-tab>
-        <p-tab value="1">WeekWise Investent</p-tab>
-        <p-tab value="2">Monthly Investent</p-tab>
-      </p-tablist>
-      <p-tabpanels>
-        <p-tabpanel value="0"> <h1>hii</h1> </p-tabpanel>
-        <p-tabpanel value="1"> <h1>hello</h1> </p-tabpanel>
-        <p-tabpanel value="2">
-          <h1>send</h1>
-        </p-tabpanel>
-      </p-tabpanels>
-    </p-tabs>
+  <!-- Tabs -->
+  <div class="tabs">
+    <button
+      *ngFor="let tab of tabs"
+      class="tab-btn"
+      [class.active]="activeTab === tab"
+      (click)="activeTab = tab"
+    >
+      {{ tab }}
+    </button>
   </div>
 
-  <!-- Balance Cards -->
-  <div class="card-container">
-    <div class="card" *ngFor="let balance of invetmentPlans; let i = index">
-      <h3 class="card-title">{{ balance.title }}</h3>
+  <!-- Plans Grid -->
+  <div class="plans-grid">
+    <div
+      class="plan-card"
+      *ngFor="let plan of getPlansByType(activeTab)"
+    >
+      <h3 class="plan-title">{{ plan.name }}</h3>
+      <p class="plan-rate">₹ {{ plan.rate }}</p>
 
-      <div class="values">₹ {{ balance.value }}</div>
+      <div class="plan-actions">
+        <button class="btn invest-btn" (click)="openConfirmDialog(plan)">
+          Invest
+        </button>
+        <button class="btn info-btn" (click)="togglePanel(plan)">
+          ℹ️
+        </button>
+      </div>
 
-      <!-- Slider -->
-      <div class="slider">
-        <button class="slide-btn prev" (click)="prevSlide(i)">‹</button>
-        <div class="plan-list">
-          <div
-            class="plan"
-            *ngFor="let plan of balance.plans; let j = index"
-            [class.active]="j === currentSlide[i]"
-          >
-            {{ plan }}
-          </div>
-        </div>
+      <!-- Overlap panel -->
+      <div class="plan-panel" *ngIf="openPanel === plan">
+        <p>{{ plan.description }}</p>
       </div>
     </div>
   </div>
 
-  <!-- Add Investments -->
-  <div class="add-investments">
-    <h3>Add Investments</h3>
-
-    <button class="toggle-form" (click)="showForm = !showForm">
-      {{ showForm ? "Cancel" : "Add New Investment" }}
-    </button>
-
-    <div class="investment-form" *ngIf="showForm">
-      <label>Enter Amount (₹)</label>
-      <input
-        type="number"
-        [(ngModel)]="newInvestment.amount"
-        placeholder="e.g. 1000"
-      />
-
-      <label>Payment Mode</label>
-      <select [(ngModel)]="newInvestment.paymentMode">
-        <option value="">Select payment mode</option>
-        <option *ngFor="let mode of paymentModes" [value]="mode">
-          {{ mode }}
-        </option>
-      </select>
-
-      <button class="btn invest-btn" (click)="addInvestment()">Invest</button>
+  <!-- Confirm Dialog -->
+  <div class="dialog-backdrop" *ngIf="selectedPlan">
+    <div class="dialog-box">
+      <h3>Confirm Investment</h3>
+      <p>Do you want to invest ₹{{ selectedPlan.rate }} in {{ selectedPlan.name }}?</p>
+      <div class="dialog-actions">
+        <button class="btn yes-btn" (click)="confirmInvestment()">Yes</button>
+        <button class="btn no-btn" (click)="cancelInvestment()">No</button>
+      </div>
     </div>
   </div>
 </div>
