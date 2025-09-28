@@ -55,6 +55,13 @@ export const routes: Routes = [
             (m) => m.AdminContactComponent
           ),
       },
+      {
+        path: 'admin-panel',
+        loadComponent: () =>
+          import('./admin-panel/admin-panel.component').then(
+            (m) => m.AdminPanelComponent
+          ),
+      },
     ],
   },
 

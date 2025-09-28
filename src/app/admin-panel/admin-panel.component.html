@@ -1,0 +1,64 @@
+<div class="admin-panel-container">
+  <h1>Admin Panel</h1>
+
+  <div class="stats-cards">
+    <div class="stat-card">
+      <h3>Total Users</h3>
+      <p>{{ stats.totalUsers }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Active Sessions</h3>
+      <p>{{ stats.activeSessions }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>Total Transactions</h3>
+      <p>{{ stats.totalTransactions }}</p>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <h2>User Management</h2>
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button class="btn-edit">Edit</button>
+            <button class="btn-delete">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="content-section">
+    <h2>Settings</h2>
+    <div class="settings">
+      <label>
+        <input type="checkbox" [(ngModel)]="settings.notifications" /> Enable Notifications
+      </label>
+      <label>
+        <input type="checkbox" [(ngModel)]="settings.twoFactor" /> Two-Factor Authentication
+      </label>
+      <label>
+        Theme:
+        <select [(ngModel)]="settings.theme">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </label>
+    </div>
+  </div>
+</div>
