@@ -1,58 +1,66 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon'; // 👈 import this
+
+
+type PlanType = 'Daily' | 'Weekly' | 'Monthly' | 'Yealy' ;
+
+interface InvestmentPlan {
+  id: number;
+  name: string;
+  rate: number;
+  description: string;
+  type: PlanType;
+}
 
 @Component({
   selector: 'app-investment',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,MatIconModule],
   templateUrl: './investment.component.html',
   styleUrls: ['./investment.component.css'],
 })
 export class InvestmentComponent {
-  tabs = ['Daywise', 'Weekwise', 'Monthly','Yearly'];
-  activeTab = 'Daywise';
+  tabs: PlanType[] = ['Daily', 'Weekly', 'Monthly', 'Yealy'];
+  activeTab: PlanType = this.tabs[0];
 
-  plans = [
-    { name: 'Plan A', rate: 500, type: 'Daywise', description: 'Daily growth plan A' },
-    { name: 'Plan B', rate: 700, type: 'Daywise', description: 'Daily growth plan B' },
-    { name: 'Plan C', rate: 1000, type: 'Daywise', description: 'Daily secure plan C' },
-    { name: 'Plan D', rate: 1200, type: 'Daywise', description: 'Daily premium plan D' },
-    { name: 'Plan E', rate: 1500, type: 'Daywise', description: 'Daily special plan E' },
-    { name: 'Plan E', rate: 1500, type: 'Daywise', description: 'Daily special plan E' },
-    { name: 'Plan E', rate: 1500, type: 'Daywise', description: 'Daily special plan E' },
-    { name: 'Plan E', rate: 1500, type: 'Daywise', description: 'Daily special plan E' },
-
-    { name: 'Plan W1', rate: 3000, type: 'Weekwise', description: 'Weekly secure plan' },
-    { name: 'Plan W2', rate: 4500, type: 'Weekwise', description: 'Weekly premium plan' },
-
-    { name: 'Plan M1', rate: 10000, type: 'Monthly', description: 'Monthly growth plan' },
-    { name: 'Plan M2', rate: 15000, type: 'Monthly', description: 'Monthly secure plan' },
-
-    { name: 'Plan K1', rate: 20000, type: 'Yearly', description: 'Yearly growth plan' },
-    { name: 'Plan K1', rate: 23000, type: 'Yearly', description: 'Yearly premium plan' },
+  plans: InvestmentPlan[] = [
+    { id: 1, name: 'Equity Growth', rate: 12000, description: 'High return long-term equity plan.', type: 'Daily' },
+    { id: 2, name: 'Bluechip Fund', rate: 8000, description: 'Stable growth with bluechip companies.', type: 'Daily' },
+    { id: 3, name: 'Tech Innovators', rate: 15000, description: 'Focused on technology leaders.', type: 'Daily' },
+    { id: 4, name: 'Green Energy', rate: 11000, description: 'Invest in sustainable companies.', type: 'Daily' },
+    { id: 5, name: 'Dividend Kings', rate: 7000, description: 'Steady dividend paying companies.', type: 'Daily' },
+    { id: 6, name: 'Dividend Kings', rate: 7000, description: 'Steady dividend paying companies.', type: 'Daily' },
+    { id: 7, name: 'Dividend Kings', rate: 7000, description: 'Steady dividend paying companies.', type: 'Daily' },
+    { id: 8, name: 'Index Tracker', rate: 9000, description: 'Follows the Nifty 50 index.', type: 'Weekly' },
+    { id: 9, name: 'Corporate Bonds', rate: 6000, description: 'Safe investment in corporate bonds.', type: 'Weekly' },
+    { id: 10, name: 'Corporate Bonds', rate: 6000, description: 'Safe investment in corporate bonds.', type: 'Monthly' },
+    { id: 11, name: 'Real Estate Fund', rate: 13000, description: 'Invest in commercial real estate.', type: 'Monthly' },
+    { id: 12, name: 'International Equity', rate: 14000, description: 'Global market exposure.', type: 'Yealy' },
+    { id: 13, name: 'Balanced Fund', rate: 10000, description: 'Mix of equity and debt.', type: 'Yealy' },
   ];
 
-  selectedPlan: any = null;
-  openPanel: any = null;
+  openPanel: InvestmentPlan | null = null;
+  selectedPlan: InvestmentPlan | null = null;
 
-  getPlansByType(type: string) {
-    return this.plans.filter((p) => p.type === type);
+  getPlansByType(type: PlanType): InvestmentPlan[] {
+    return this.plans.filter(plan => plan.type === type);
   }
 
-  openConfirmDialog(plan: any) {
+  togglePanel(plan: InvestmentPlan) {
+    this.openPanel = this.openPanel === plan ? null : plan;
+  }
+
+  openConfirmDialog(plan: InvestmentPlan) {
     this.selectedPlan = plan;
   }
 
   confirmInvestment() {
-    alert(`Invested ₹${this.selectedPlan.rate} in ${this.selectedPlan.name}`);
+    alert(`✅ Invested in ${this.selectedPlan?.name}`);
     this.selectedPlan = null;
   }
 
   cancelInvestment() {
     this.selectedPlan = null;
-  }
-
-  togglePanel(plan: any) {
-    this.openPanel = this.openPanel === plan ? null : plan;
   }
 }

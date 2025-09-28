@@ -25,7 +25,7 @@
           Invest
         </button>
         <button class="btn info-btn" (click)="togglePanel(plan)">
-          ℹ️
+          <mat-icon class="info-icon">info</mat-icon>
         </button>
       </div>
 
@@ -40,7 +40,11 @@
   <div class="dialog-backdrop" *ngIf="selectedPlan">
     <div class="dialog-box">
       <h3>Confirm Investment</h3>
-      <p>Do you want to invest ₹{{ selectedPlan.rate }} in {{ selectedPlan.name }}?</p>
+      <p>
+        Do you want to invest
+        <strong>₹{{ selectedPlan.rate }}</strong>
+        in <strong>{{ selectedPlan.name }}</strong>?
+      </p>
       <div class="dialog-actions">
         <button class="btn yes-btn" (click)="confirmInvestment()">Yes</button>
         <button class="btn no-btn" (click)="cancelInvestment()">No</button>
