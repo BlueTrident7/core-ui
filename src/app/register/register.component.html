@@ -1,60 +1,32 @@
 <div class="login-wrapper">
-  <div class="login-card">
-    <div class="login-icon">
-      <img src="assets/loginIcon.png" alt="register" />
-    </div>
-
-    <h2 class="login-title">Create an Account</h2>
-    <p class="login-subtitle">
-      Sign up to bring your words, data, and teams together. For free
+  <div class="login-left">
+    <div class="brand">INVEST<span>WISE</span></div>
+    <h1 class="headline">START YOUR JOURNEY</h1>
+    <p class="subhead">Build your portfolio with confidence.</p>
+    <p class="quote">
+      "Do not save what is left after spending, but spend what is left after saving." – Warren Buffett
     </p>
+  </div>
 
-    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
-      <!-- Full Name -->
-      <div class="input-group">
-        <input type="text" placeholder="Full Name" formControlName="name" />
-        <div class="error" *ngIf="f['name'].touched && f['name'].errors">
-          <small *ngIf="f['name'].errors['required']">Full Name is required</small>
-          <small *ngIf="f['name'].errors['minlength']">
-            Name must be at least 3 characters
-          </small>
-        </div>
-      </div>
+  <div class="login-right">
+    <form>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name" />
 
-      <!-- Email -->
-      <div class="input-group">
-        <input type="email" placeholder="Email" formControlName="email" />
-        <div class="error" *ngIf="f['email'].touched && f['email'].errors">
-          <small *ngIf="f['email'].errors['required']">Email is required</small>
-          <small *ngIf="f['email'].errors['email']">Enter a valid email</small>
-        </div>
-      </div>
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" />
 
-      <!-- Password -->
-      <div class="input-group">
-        <input type="password" placeholder="Password" formControlName="password" />
-        <div class="error" *ngIf="f['password'].touched && f['password'].errors">
-          <small *ngIf="f['password'].errors['required']">Password is required</small>
-          <small *ngIf="f['password'].errors['minlength']">
-            Password must be at least 6 characters
-          </small>
-        </div>
-      </div>
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" />
 
-      <!-- Confirm Password -->
-      <div class="input-group">
-        <input type="password" placeholder="Confirm Password" formControlName="confirmPassword" />
-        <div class="error" *ngIf="f['confirmPassword'].touched && (f['confirmPassword'].errors || registerForm.errors?.['mismatch'])">
-          <small *ngIf="f['confirmPassword'].errors?.['required']">Confirm Password is required</small>
-          <small *ngIf="registerForm.errors?.['mismatch']">Passwords do not match</small>
-        </div>
-      </div>
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" placeholder="Confirm password" />
 
-      <!-- Register Button -->
-      <button type="submit" class="btnregister">Register</button>
+      <button type="submit" class="btn-primary">REGISTER</button>
+
+      <p class="register-text">
+        Already have an account? <a routerLink="/login">Sign In</a>
+      </p>
     </form>
-
-    <p class="divider">Already have an account?</p>
-    <button class="btnlogin" (click)="goToLogin()">Login</button>
   </div>
 </div>

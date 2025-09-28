@@ -1,103 +1,147 @@
-body {
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(to bottom, #cde9ff, #f0f8ff);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
 .login-wrapper {
   display: flex;
+  height: 100vh;
+  background: url('/assets/investment-bg.jpg') no-repeat center center/cover;
+  font-family: 'Inter', sans-serif;
+  color: #fff;
+}
+
+.login-left {
+  flex: 1;
+  padding: 60px;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 15px; /* ✅ spacing for mobile */
 }
 
-.login-card {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 20px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-  padding: 40px;
-  width: 360px;
-  text-align: center;
+.brand {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.brand span {
+  color: #4cafef;
 }
 
-@media (max-width: 480px) {
-  .login-card {
-    width: 100%; /* ✅ full width for small screens */
-    padding: 20px;
-  }
-
-  .login-title {
-    font-size: 18px;
-  }
-
-  .login-subtitle {
-    font-size: 12px;
-  }
-}
-
-.login-icon img {
-  width: 60px;
-  height: 60px;
-}
-
-.input-group {
+.headline {
+  font-size: 42px;
+  font-weight: 800;
   margin-bottom: 15px;
 }
 
-.input-group input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  outline: none;
-  background: transparent;
-  font-size: 14px;
+.subhead {
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
-.input-group input:focus {
-  border-color: #333;
+.quote {
+  font-style: italic;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #ddd;
+}
+
+.login-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 380px;
+  color: #222;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 .forgot-link {
   display: block;
-  text-align: right;
   font-size: 13px;
-  color: #333;
   margin-bottom: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
+  text-align: right;
+  color: #4cafef;
+  text-decoration: none;
 }
 
-.btnlogin,
-.btnreqister {
+.btn-primary {
   width: 100%;
-  padding: 14px;
-  background: #000;
+  padding: 12px;
+  background: #4cafef;
+  border: none;
+  border-radius: 6px;
   color: #fff;
-  border-radius: 10px;
-  border: 1px solid #000;
-  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .divider {
-  font-size: 13px;
-  color: #888;
-  margin: 20px 0;
+  text-align: center;
+  margin: 15px 0;
+  font-size: 14px;
+  color: #aaa;
+  position: relative;
+}
+.divider span {
+  background: #fff;
+  padding: 0 10px;
+  position: relative;
+  z-index: 1;
+}
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #ccc;
+  z-index: 0;
 }
 
-.error {
-  text-align: left;
-  margin-top: 5px;
+.btn-google {
+  width: 100%;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin-bottom: 15px;
 }
 
-.error small {
-  color: red;
-  font-size: 12px;
+.btn-google img {
+  width: 20px;
+  height: 20px;
+}
+
+.register-text {
+  font-size: 14px;
+  text-align: center;
+}
+.register-text a {
+  color: #4cafef;
+  text-decoration: none;
 }
