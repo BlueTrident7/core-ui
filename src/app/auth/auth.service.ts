@@ -32,7 +32,7 @@ export class AuthService {
       );
   }
 
-  register(payload: { name?: string; email: string; password: string; }): Observable<AuthResponse> {
+  register(payload: { fullName: string; email: string; password: string; personType: string; mobileNumber: string; termsAccepted: boolean; }): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.baseUrl}/register`, payload)
       .pipe(
         tap(res => {

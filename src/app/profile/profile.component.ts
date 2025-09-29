@@ -15,16 +15,13 @@ export class ProfileComponent {
     role: 'Premium User',
     avatar: 'assets/avatar.png', // replace with your image
     details: {
-      role: 'Beatmaker',
-      experience: 'Intermediate',
-      artists: 'Ninho, Travis Scott, Metro Boomin',
-      genre: 'Trap',
-      software: 'Ableton',
-      mood: 'Melancholic',
-      region: 'California, USA',
-      availability: true,
-      badges: ['Administrator'],
-      tags: ['Drill', 'Melancholic', 'Rap-US']
+      fullName: 'Maria Fernanda Silva',
+      email: 'maria.fernanda@example.com',
+      mobileNumber: '+1 234 567 8901',
+      category: 'Visual Impairment',
+      gender: 'Female',
+      dob: '1990-05-15',
+      badges: ['Administrator']
     }
   };
 

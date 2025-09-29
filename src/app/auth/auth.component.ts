@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -21,7 +22,11 @@ export class AuthComponent {
   registerForm!: FormGroup;
   showTermsModal = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -33,10 +38,25 @@ export class AuthComponent {
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
+        personType: ['', [Validators.required]],
+        mobileNumber: [
+          '+91',
+          [Validators.required, Validators.pattern(/^\+91\d{10}$/)],
+        ],
         termsAccepted: [false, Validators.requiredTrue],
       },
       { validators: this.passwordMatchValidator }
     );
+
+    // Prevent clearing +91 in mobile number input
+    const mobileControl = this.registerForm.get('mobileNumber');
+    if (mobileControl) {
+      mobileControl.valueChanges.subscribe((value) => {
+        if (!value || !value.startsWith('+91')) {
+          mobileControl.setValue('+91', { emitEvent: false });
+        }
+      });
+    }
   }
 
   get lf() {
@@ -60,7 +80,9 @@ export class AuthComponent {
   onLogin() {
     if (this.loginForm.valid) {
       console.log('✅ Login successful:', this.loginForm.value);
-      this.router.navigate(['/main/dashboard']);
+      // Simulate login without backend
+      this.authService.setToken('dummy-token'); // Set a dummy token
+      this.router.navigate(['/main']);
     } else {
       this.loginForm.markAllAsTouched();
     }
@@ -68,8 +90,16 @@ export class AuthComponent {
 
   onRegister() {
     if (this.registerForm.valid) {
-      console.log('✅ Register successful:', this.registerForm.value);
-      this.router.navigate(['/main/investment']);
+      const { confirmPassword, ...payload } = this.registerForm.value;
+      this.authService.register(payload).subscribe({
+        next: (res) => {
+          console.log('✅ Register successful:', res);
+          this.router.navigate(['/main']);
+        },
+        error: (err) => {
+          console.error('Registration failed:', err);
+        },
+      });
     } else {
       this.registerForm.markAllAsTouched();
     }
