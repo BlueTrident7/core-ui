@@ -8,6 +8,10 @@ import { InputTextModule } from 'primeng/inputtext';
   standalone: true,
   imports: [CommonModule, RouterModule, InputTextModule],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  userName: string = 'Nagendra';
+
+  constructor() {}
+}
