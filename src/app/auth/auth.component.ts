@@ -70,7 +70,9 @@ export class AuthComponent {
   onLogin() {
     if (this.loginForm.valid) {
       console.log('✅ Login successful:', this.loginForm.value);
-      this.router.navigate(['/main/home']);
+      // Simulate login without backend
+      this.authService.setToken('dummy-token'); // Set a dummy token
+      this.router.navigate(['/main']);
     } else {
       this.loginForm.markAllAsTouched();
     }
