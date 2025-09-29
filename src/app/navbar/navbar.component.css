@@ -16,9 +16,9 @@
 
 /* Left: Logo (Circle Shape) */
 .navbar-left .logo {
-  height: 52px;
-  width: 52px;       /* Circle shape */
-  border-radius: 80%; /* Circle shape */
+  height: 72px;
+  width: 160px;       /* Circle shape */
+  border-radius: 0%; /* Circle shape */
   object-fit: cover;
   border: 2px solid #ffffff33;
 }
