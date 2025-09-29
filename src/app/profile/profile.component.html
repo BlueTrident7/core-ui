@@ -1,14 +1,9 @@
 <div class="profile-wrapper">
-  <div class="profile-card">
-    <!-- Left Section -->
-    <div class="profile-left">
+  <div class="profile-container">
+    <div class="profile-card">
       <img src="/assets/profile_male.png" alt="Avatar" class="avatar" />
       <h3 class="user-name">{{ user.name }}</h3>
       <p class="user-role">{{ user.role }}</p>
-    </div>
-
-    <!-- Right Section -->
-    <div class="profile-right">
       <h3 class="section-title">Profile</h3>
       <div class="details-grid">
         <div>
@@ -54,6 +49,48 @@
           <p class="value">#{{ user.details.tags.join(', #') }}</p>
         </div>
       </div>
+    </div>
+
+    <!-- Divider -->
+    <!-- <div class="divider"></div> -->
+
+    <div class="bank-card">
+      <h3 class="section-title">Add Bank Details</h3>
+      <form [formGroup]="bankForm" (ngSubmit)="onSubmitBankDetails()" class="bank-form">
+        <div class="input-group">
+          <input type="text" formControlName="accountNumber" placeholder="Account Number" class="form-input" />
+          <div class="error" *ngIf="bf['accountNumber'].touched && bf['accountNumber'].errors">
+            <small *ngIf="bf['accountNumber'].errors['required']">Account number is required</small>
+            <small *ngIf="bf['accountNumber'].errors['pattern']">Enter a valid account number (10-18 digits)</small>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input type="text" formControlName="confirmAccountNumber" placeholder="Confirm Account Number" class="form-input" />
+          <div class="error" *ngIf="bf['confirmAccountNumber'].touched && bankForm.errors?.['mismatch']">
+            <small>Account numbers do not match</small>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input type="text" formControlName="ifscCode" placeholder="IFSC Code" class="form-input" />
+          <div class="error" *ngIf="bf['ifscCode'].touched && bf['ifscCode'].errors">
+            <small *ngIf="bf['ifscCode'].errors['required']">IFSC code is required</small>
+            <small *ngIf="bf['ifscCode'].errors['pattern']">Enter a valid IFSC code (e.g., ABCD0123456)</small>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input type="text" formControlName="name" placeholder="Account Holder Name" class="form-input" />
+          <div class="error" *ngIf="bf['name'].touched && bf['name'].errors">
+            <small *ngIf="bf['name'].errors['required']">Name is required</small>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" [disabled]="!bankForm.valid">
+          {{ bankForm.valid ? 'Save Bank Details' : 'Please fill all fields' }}
+        </button>
+      </form>
     </div>
   </div>
 </div>
