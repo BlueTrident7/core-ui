@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +13,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent {
   isLogin = true;
@@ -22,13 +27,16 @@ export class AuthComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
 
-    this.registerForm = this.fb.group({
-      fullName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]],
-      termsAccepted: [false, Validators.requiredTrue],
-    }, { validators: this.passwordMatchValidator });
+    this.registerForm = this.fb.group(
+      {
+        fullName: ['', [Validators.required]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', [Validators.required]],
+        termsAccepted: [false, Validators.requiredTrue],
+      },
+      { validators: this.passwordMatchValidator }
+    );
   }
 
   get lf() {
@@ -52,7 +60,7 @@ export class AuthComponent {
   onLogin() {
     if (this.loginForm.valid) {
       console.log('✅ Login successful:', this.loginForm.value);
-      this.router.navigate(['/main/investment']);
+      this.router.navigate(['/main/dashboard']);
     } else {
       this.loginForm.markAllAsTouched();
     }
