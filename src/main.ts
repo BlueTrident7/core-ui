@@ -12,11 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(
-      BrowserModule,
-      BrowserAnimationsModule,
-      AppRoutingModule
-    ),
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    provideRouter(routes),
+    provideAnimationsAsync(),
+    provideHttpClient(withInterceptorsFromDi()),
+    importProvidersFrom(ReactiveFormsModule),
   ],
 }).catch((err) => console.error(err));

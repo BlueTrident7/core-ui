@@ -2,21 +2,98 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/auth', pathMatch: 'full' },
-  { path: 'auth', loadComponent: () => import('./auth/auth.component').then(m => m.AuthComponent) },
-  { path: 'forgot-password', loadComponent: () => import('./forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent) },
+  {
+    path: 'auth',
+    loadComponent: () =>
+      import('./auth/auth.component').then((m) => m.AuthComponent),
+  },
+  {
+    path: 'forgot-password',
+    loadComponent: () =>
+      import('./forgot-password/forgot-password.component').then(
+        (m) => m.ForgotPasswordComponent
+      ),
+  },
   {
     path: 'main',
-    loadComponent: () => import('./navbar/navbar.component').then(m => m.NavbarComponent),
+    loadComponent: () =>
+      import('./navbar/navbar.component').then((m) => m.NavbarComponent),
     children: [
-      { path: 'home', loadComponent: () => import('./home/home.component').then(m => m.HomeComponent) },
-      { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent) },
-      { path: 'investment', loadComponent: () => import('./investment/investment.component').then(m => m.InvestmentComponent) },
-      { path: 'transaction', loadComponent: () => import('./transaction/transaction.component').then(m => m.TransactionComponent) },
-      { path: 'profile', loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent) },
-      { path: 'payment', loadComponent: () => import('./payment/payment.component').then(m => m.PaymentComponent) },
-      { path: 'admin-panel', loadComponent: () => import('./admin-panel/admin-panel.component').then(m => m.AdminPanelComponent) },
-      { path: '', redirectTo: 'home', pathMatch: 'full' }
-    ]
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./home/home.component').then((m) => m.HomeComponent),
+      },
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent
+          ),
+      },
+      {
+        path: 'investment',
+        loadComponent: () =>
+          import('./investment/investment.component').then(
+            (m) => m.InvestmentComponent
+          ),
+      },
+      {
+        path: 'transaction',
+        loadComponent: () =>
+          import('./transaction/transaction.component').then(
+            (m) => m.TransactionComponent
+          ),
+      },
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./profile/profile.component').then((m) => m.ProfileComponent),
+      },
+      {
+        path: 'payment',
+        loadComponent: () =>
+          import('./payment/payment.component').then((m) => m.PaymentComponent),
+      },
+      {
+        path: 'admin-main',
+        loadComponent: () =>
+          import('./admin-main/admin-main/admin-main.component').then(
+            (m) => m.AdminMainComponent
+          ),
+        children: [
+          {
+            path: 'investment-plans',
+            loadComponent: () =>
+              import(
+                './admin-main/investment-plans/investment-plans.component'
+              ).then((m) => m.InvestmentPlansComponent),
+          },
+          {
+            path: 'overview',
+            loadComponent: () =>
+              import('./admin-main/overview/overview.component').then(
+                (m) => m.OverviewComponent
+              ),
+          },
+          {
+            path: 'category',
+            loadComponent: () =>
+              import('./admin-main/category/category.component').then(
+                (m) => m.CategoryComponent
+              ),
+          },
+          {
+            path: 'settings',
+            loadComponent: () =>
+              import('./admin-main/logs/logs.component').then(
+                (m) => m.LogsComponent
+              ),
+          },
+          { path: '', redirectTo: 'about', pathMatch: 'full' }, // default child
+        ],
+      },
+    ],
   },
-  { path: '**', redirectTo: '/auth' }
+  { path: '**', redirectTo: '/auth' },
 ];
