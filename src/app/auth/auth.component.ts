@@ -60,7 +60,7 @@ export class AuthComponent {
   onLogin() {
     if (this.loginForm.valid) {
       console.log('✅ Login successful:', this.loginForm.value);
-      this.router.navigate(['/main/dashboard']);
+      this.router.navigate(['/main/home']);
     } else {
       this.loginForm.markAllAsTouched();
     }

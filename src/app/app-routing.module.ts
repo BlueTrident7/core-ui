@@ -18,7 +18,9 @@ export const routes: Routes = [
   {
     path: 'forgot-password',
     loadComponent: () =>
-      import('./forgot-password/forgot-password.component').then((m) => m.ForgotPasswordComponent),
+      import('./forgot-password/forgot-password.component').then(
+        (m) => m.ForgotPasswordComponent
+      ),
   },
 
   // ✅ Wrap all main pages inside NavbarComponent
@@ -66,6 +68,11 @@ export const routes: Routes = [
           import('./admin-panel/admin-panel.component').then(
             (m) => m.AdminPanelComponent
           ),
+      },
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./home/home.component').then((m) => m.HomeComponent),
       },
     ],
   },

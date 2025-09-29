@@ -18,6 +18,14 @@
   <div class="navbar-center">
     <a
       class="nav-item"
+      routerLink="/main/home"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Home
+    </a>
+    <a
+      class="nav-item"
       routerLink="/main/dashboard"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
