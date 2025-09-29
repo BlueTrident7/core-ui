@@ -8,12 +8,12 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () =>
-      import('./login/login.component').then((m) => m.LoginComponent),
+      import('./auth/auth.component').then((m) => m.AuthComponent),
   },
   {
     path: 'register',
     loadComponent: () =>
-      import('./register/register.component').then((m) => m.RegisterComponent),
+      import('./auth/auth.component').then((m) => m.AuthComponent),
   },
 
   // ✅ Wrap all main pages inside NavbarComponent
