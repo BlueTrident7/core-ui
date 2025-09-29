@@ -36,7 +36,7 @@
           </div>
         </div>
 
-        <button type="button" class="forgot-link" (click)="onSocialLogin('forgot')">Forgot password?</button>
+        <a routerLink="/forgot-password" class="forgot-link">Forgot password?</a>
 
         <button type="submit" class="submit-btn" [disabled]="!loginForm.valid">
           {{ loginForm.valid ? 'Log In' : 'Loading...' }}

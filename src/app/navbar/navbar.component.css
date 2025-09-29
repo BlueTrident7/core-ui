@@ -14,11 +14,11 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Left: Logo (Rectangle Shape) */
+/* Left: Logo (Circle Shape) */
 .navbar-left .logo {
   height: 52px;
-  width: 90px;       /* Adjust width as per your logo design */
-  border-radius: 10px; /* Small rounding (optional) */
+  width: 52px;       /* Square for circle */
+  border-radius: 50%; /* Circle shape */
   object-fit: cover;
   border: 2px solid #ffffff33;
 }

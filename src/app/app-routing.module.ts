@@ -15,6 +15,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./auth/auth.component').then((m) => m.AuthComponent),
   },
+  {
+    path: 'forgot-password',
+    loadComponent: () =>
+      import('./forgot-password/forgot-password.component').then((m) => m.ForgotPasswordComponent),
+  },
 
   // ✅ Wrap all main pages inside NavbarComponent
   {
