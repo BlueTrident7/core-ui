@@ -1,0 +1,85 @@
+.payment-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  font-family: 'Inter', sans-serif;
+  color: white;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.description {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  text-align: center;
+  opacity: 0.85;
+}
+
+.payment-card {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.payment-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.payment-form input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  transition: background 0.3s ease;
+}
+
+.payment-form input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.payment-form input:focus {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  background: white;
+  color: #667eea;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #5563c1;
+  color: white;
+}

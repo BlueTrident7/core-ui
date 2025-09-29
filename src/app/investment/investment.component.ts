@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon'; // 👈 import this
-
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 
 type PlanType = 'Daily' | 'Weekly' | 'Monthly' | 'Yealy' ;
 
@@ -16,7 +16,7 @@ interface InvestmentPlan {
 @Component({
   selector: 'app-investment',
   standalone: true,
-  imports: [CommonModule,MatIconModule],
+  imports: [CommonModule, MatIconModule, RouterModule],
   templateUrl: './investment.component.html',
   styleUrls: ['./investment.component.css'],
 })
@@ -43,6 +43,8 @@ export class InvestmentComponent {
   openPanel: InvestmentPlan | null = null;
   selectedPlan: InvestmentPlan | null = null;
 
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+
   getPlansByType(type: PlanType): InvestmentPlan[] {
     return this.plans.filter(plan => plan.type === type);
   }
@@ -56,11 +58,21 @@ export class InvestmentComponent {
   }
 
   confirmInvestment() {
-    alert(`✅ Invested in ${this.selectedPlan?.name}`);
+    if (this.selectedPlan) {
+      this.router.navigate(['main', 'investment', 'payment'], { state: { plan: this.selectedPlan } });
+    }
     this.selectedPlan = null;
   }
 
   cancelInvestment() {
     this.selectedPlan = null;
+  }
+
+  onInvestClick(plan: InvestmentPlan) {
+    const confirmed = confirm('Do you want to proceed to payment for ' + plan.name + '?');
+    if (confirmed) {
+      this.selectedPlan = plan;
+      this.router.navigate(['main', 'investment', 'payment'], { state: { plan: this.selectedPlan } });
+    }
   }
 }

@@ -75,6 +75,26 @@
           </div>
         </div>
 
+        <div class="input-group">
+          <select id="personType" formControlName="personType" class="form-select">
+            <option value="" disabled selected>Select Person Type</option>
+            <option value="specialized">Specialized Person</option>
+            <option value="handicap">Handicap</option>
+          </select>
+          <div class="error" *ngIf="rf['personType'].touched && rf['personType'].errors">
+            <small *ngIf="rf['personType'].errors['required']">Person type is required</small>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="mobileNumber">Mobile Number</label>
+          <input id="mobileNumber" type="tel" formControlName="mobileNumber" placeholder="+91" class="form-input" />
+          <div class="error" *ngIf="rf['mobileNumber'].touched && rf['mobileNumber'].errors">
+            <small *ngIf="rf['mobileNumber'].errors['required']">Mobile number is required</small>
+            <small *ngIf="rf['mobileNumber'].errors['pattern']">Enter a valid mobile number</small>
+          </div>
+        </div>
+
         <div class="input-group checkbox-group">
           <label class="checkbox-label">
             <input type="checkbox" formControlName="termsAccepted" class="checkbox-input" />

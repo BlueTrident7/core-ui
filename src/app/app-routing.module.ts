@@ -4,7 +4,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-
   {
     path: 'login',
     loadComponent: () =>
@@ -40,6 +39,13 @@ export const routes: Routes = [
           import('./investment/investment.component').then(
             (m) => m.InvestmentComponent
           ),
+        children: [
+          {
+            path: 'payment',
+            loadComponent: () =>
+              import('./payment/payment.component').then((m) => m.PaymentComponent),
+          },
+        ],
       },
       {
         path: 'transaction',
