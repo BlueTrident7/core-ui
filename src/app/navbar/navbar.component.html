@@ -1,23 +1,18 @@
 <nav class="navbar">
-  <!-- Left: Logo -->
   <div class="navbar-left flex flex-wrap">
     <div>
       <img src="assets/crop_lightBlue.png" alt="Logo" class="logo" />
     </div>
   </div>
 
-  <!-- <button
-    pButton
-    pRipple
-    icon="pi pi-plus"
-    class="p-button-success mr-2 mb-2"
-    (click)="openNavigation()"
-  ></button> -->
-
-  <!-- Center: Menu Items -->
   <div class="navbar-center">
-    <a class="nav-item" routerLink="/main/investment" routerLinkActive="active">
-      Investment
+    <a
+      class="nav-item"
+      routerLink="/main/home"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Home
     </a>
     <a
       class="nav-item"
@@ -27,6 +22,10 @@
     >
       Dashboard
     </a>
+    <a class="nav-item" routerLink="/main/investment" routerLinkActive="active">
+      Investment
+    </a>
+
     <a
       class="nav-item"
       routerLink="/main/transaction"
@@ -37,21 +36,23 @@
     <a class="nav-item" routerLink="/main/profile" routerLinkActive="active">
       Profile
     </a>
-    <a class="nav-item" routerLink="/main/admin-panel" routerLinkActive="active">
+    <a
+      class="nav-item"
+      routerLink="/main/admin-panel"
+      routerLinkActive="active"
+    >
       Admin Panel
     </a>
   </div>
 
-  <!-- Right: Search + CipherUi + Profile -->
   <div class="navbar-right">
     <span class="p-input-icon-left search-box">
       <i class="pi pi-search"></i>
       <input type="text" pInputText placeholder="Search CipherUi..." />
     </span>
 
-    <!-- Brand + Profile -->
     <div class="navbar-user">
-      <span class="brand">CipherUi</span>
+      <span class="brand">{{ userName }}</span>
       <img src="assets/profile_male.png" alt="User" class="profile-img" />
     </div>
 
@@ -59,7 +60,6 @@
   </div>
 </nav>
 
-<!-- Page Content -->
 <div class="content-container">
   <router-outlet></router-outlet>
 </div>

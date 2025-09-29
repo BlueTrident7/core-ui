@@ -1,0 +1,130 @@
+
+  .rotating-text-background {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #5B6FCF, #7C8FE3, #A3B1F5);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    transition: background 2s ease;
+  }
+  
+  /* Gradient animation */
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Rotating text */
+  .rotating-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .rotating-text {
+    font-size: 8rem;
+    font-weight: bold;
+    max-width: 90%;
+    transition: all 1s ease-in-out;
+  }
+  
+  /* Animations */
+  @keyframes rotateUp {
+    0% { transform: translateY(100%) rotateX(90deg); opacity: 0; }
+    50% { transform: translateY(0) rotateX(0deg); opacity: 1; }
+    100% { transform: translateY(-100%) rotateX(-90deg); opacity: 0; }
+  }
+  
+  @keyframes rotateDown {
+    0% { transform: translateY(-100%) rotateX(-90deg); opacity: 0; }
+    50% { transform: translateY(0) rotateX(0deg); opacity: 1; }
+    100% { transform: translateY(100%) rotateX(90deg); opacity: 0; }
+  }
+  
+  @keyframes rotateLeft {
+    0% { transform: translateX(100%) rotateY(90deg); opacity: 0; }
+    50% { transform: translateX(0) rotateY(0deg); opacity: 1; }
+    100% { transform: translateX(-100%) rotateY(-90deg); opacity: 0; }
+  }
+  
+  @keyframes rotateRight {
+    0% { transform: translateX(-100%) rotateY(-90deg); opacity: 0; }
+    50% { transform: translateX(0) rotateY(0deg); opacity: 1; }
+    100% { transform: translateX(100%) rotateY(90deg); opacity: 0; }
+  }
+  
+  @keyframes zoomIn {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+  
+  @keyframes zoomOut {
+    0% { transform: scale(2); opacity: 0; }
+    50% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+  }
+  
+  /* Animation classes */
+  .rotateUp { animation: rotateUp 3s ease-in-out; }
+  .rotateDown { animation: rotateDown 3s ease-in-out; }
+  .rotateLeft { animation: rotateLeft 3s ease-in-out; }
+  .rotateRight { animation: rotateRight 3s ease-in-out; }
+  .zoomIn { animation: zoomIn 3s ease-in-out; }
+  .zoomOut { animation: zoomOut 3s ease-in-out; }
+  
+
+
+  .branding {
+    position: absolute;
+    bottom: 105px;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff; /* White for the text */
+    letter-spacing: 2px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+    /* 3D text-shadow for depth */
+    text-shadow:
+      1px 1px 0 #ccc,
+      2px 2px 0 #bbb,
+      3px 3px 0 #aaa,
+      4px 4px 0 #999,
+      5px 5px 0 #888,
+      6px 6px 0 #777,
+      7px 7px 0 #666;
+  
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Rotate only the C like a coin */
+  .rotate-c {
+    display: inline-block;
+    transform-origin: center;
+    color: #ffffff; /* White color */
+    backface-visibility: hidden; /* Fix black backface */
+    animation: rotateC 2s linear infinite;
+  }
+  
+  /* Smooth round rotation */
+  @keyframes rotateC {
+    0%   { transform: rotateX(0deg) rotateY(0deg); }
+    25%  { transform: rotateX(90deg) rotateY(90deg); }
+    50%  { transform: rotateX(180deg) rotateY(180deg); }
+    75%  { transform: rotateX(270deg) rotateY(270deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+  }
+  
+  

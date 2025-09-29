@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 
@@ -9,7 +14,7 @@ import { AuthService } from './auth.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent {
   isLogin = true;
@@ -65,7 +70,7 @@ export class AuthComponent {
   onLogin() {
     if (this.loginForm.valid) {
       console.log('✅ Login successful:', this.loginForm.value);
-      this.router.navigate(['/main/investment']);
+      this.router.navigate(['/main/home']);
     } else {
       this.loginForm.markAllAsTouched();
     }

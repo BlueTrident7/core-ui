@@ -8,7 +8,7 @@
 /* Account Cards */
 .account-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 15px;
   margin-bottom: 30px;
 }
@@ -38,9 +38,10 @@
 }
 
 /* Gradient Backgrounds */
-.cash { background: linear-gradient(135deg, #4f6ea4, #3755a4); }
-.bitcoin { background: linear-gradient(135deg, #f7931a, #d47d00); }
-.ethereum { background: linear-gradient(135deg, #e6b8c0, #d47db0); }
+.cash { background: linear-gradient(135deg, #5784d2, #3755a4); }
+.bitcoin { background: linear-gradient(135deg, #f7931a, #dba455); }
+.profit { background: linear-gradient(135deg, #667eea 0%, #9961d0 100%); }
+.ethereum { background: linear-gradient(135deg, #e6b8c0,#a33977); }
 .ripple { background: linear-gradient(135deg, #23292f, #11161a); }
 
 /* Charts */
