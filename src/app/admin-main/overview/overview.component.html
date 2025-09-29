@@ -36,6 +36,7 @@
           <td>{{ user.role }}</td>
           <td>
             <button class="btn-edit">Edit</button>
+            <button class="btn-delete">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -46,12 +47,10 @@
     <h2>Settings</h2>
     <div class="settings">
       <label>
-        <input type="checkbox" [(ngModel)]="settings.notifications" /> Enable
-        Notifications
+        <input type="checkbox" [(ngModel)]="settings.notifications" /> Enable Notifications
       </label>
       <label>
-        <input type="checkbox" [(ngModel)]="settings.twoFactor" /> Two-Factor
-        Authentication
+        <input type="checkbox" [(ngModel)]="settings.twoFactor" /> Two-Factor Authentication
       </label>
       <label>
         Theme:

@@ -8,7 +8,11 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(BrowserModule, BrowserAnimationsModule, AppRoutingModule),
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
-  ]
-}).catch(err => console.error(err));
+    importProvidersFrom(
+      BrowserModule,
+      BrowserAnimationsModule,
+      AppRoutingModule
+    ),
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+  ],
+}).catch((err) => console.error(err));

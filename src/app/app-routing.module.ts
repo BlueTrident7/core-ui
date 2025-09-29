@@ -18,7 +18,9 @@ export const routes: Routes = [
   {
     path: 'forgot-password',
     loadComponent: () =>
-      import('./forgot-password/forgot-password.component').then((m) => m.ForgotPasswordComponent),
+      import('./forgot-password/forgot-password.component').then(
+        (m) => m.ForgotPasswordComponent
+      ),
   },
 
   // ✅ Wrap all main pages inside NavbarComponent
@@ -61,11 +63,42 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'admin-panel',
+        path: 'admin-main',
         loadComponent: () =>
-          import('./admin-panel/admin-panel.component').then(
-            (m) => m.AdminPanelComponent
+          import('./admin-main/admin-main/admin-main.component').then(
+            (m) => m.AdminMainComponent
           ),
+        children: [
+          {
+            path: 'investment-plans',
+            loadComponent: () =>
+              import(
+                './admin-main/investment-plans/investment-plans.component'
+              ).then((m) => m.InvestmentPlansComponent),
+          },
+          {
+            path: 'overview',
+            loadComponent: () =>
+              import('./admin-main/overview/overview.component').then(
+                (m) => m.OverviewComponent
+              ),
+          },
+          {
+            path: 'category',
+            loadComponent: () =>
+              import('./admin-main/category/category.component').then(
+                (m) => m.CategoryComponent
+              ),
+          },
+          {
+            path: 'settings',
+            loadComponent: () =>
+              import('./admin-main/logs/logs.component').then(
+                (m) => m.LogsComponent
+              ),
+          },
+          { path: '', redirectTo: 'about', pathMatch: 'full' }, // default child
+        ],
       },
     ],
   },
