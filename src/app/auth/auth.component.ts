@@ -18,9 +18,10 @@ import { AuthService } from './auth.service';
 })
 export class AuthComponent {
   isLogin = true;
-  loginForm!: FormGroup;
   registerForm!: FormGroup;
+  loginForm!: FormGroup;
   showTermsModal = false;
+  message: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -78,14 +79,22 @@ export class AuthComponent {
   }
 
   onLogin() {
-    if (this.loginForm.valid) {
-      console.log('✅ Login successful:', this.loginForm.value);
-      // Simulate login without backend
-      this.authService.setToken('dummy-token'); // Set a dummy token
-      this.router.navigate(['/main']);
-    } else {
-      this.loginForm.markAllAsTouched();
-    }
+    if (this.loginForm.invalid) return;
+
+    const credentials = this.loginForm.value; // ✅ Get form values
+
+    this.authService.login(credentials).subscribe({
+      next: (res: any) => {
+        if (res.token) {
+          this.authService.setToken(res.token);
+          this.router.navigate(['/main/home']);
+        }
+      },
+      error: (err) => {
+        console.error('Login failed', err);
+        this.message = 'Login failed! Please check your credentials.';
+      },
+    });
   }
 
   onRegister() {
@@ -94,7 +103,7 @@ export class AuthComponent {
       this.authService.register(payload).subscribe({
         next: (res) => {
           console.log('✅ Register successful:', res);
-          this.router.navigate(['/main']);
+          this.router.navigate(['/auth']);
         },
         error: (err) => {
           console.error('Registration failed:', err);
