@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon'; // 👈 import this
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
+import { PaymentComponent } from '../payment/payment.component';
 
 type PlanType = 'Daily' | 'Weekly' | 'Monthly' | 'Yealy' ;
 
@@ -16,14 +17,14 @@ interface InvestmentPlan {
 @Component({
   selector: 'app-investment',
   standalone: true,
-  imports: [CommonModule, MatIconModule, RouterModule],
+  imports: [CommonModule, MatIconModule, RouterModule,PaymentComponent],
   templateUrl: './investment.component.html',
   styleUrls: ['./investment.component.css'],
 })
 export class InvestmentComponent {
   tabs: PlanType[] = ['Daily', 'Weekly', 'Monthly', 'Yealy'];
   activeTab: PlanType = this.tabs[0];
-
+  showDialog:boolean=false
   plans: InvestmentPlan[] = [
     { id: 1, name: 'Equity Growth', rate: 12000, description: 'High return long-term equity plan.', type: 'Daily' },
     { id: 2, name: 'Bluechip Fund', rate: 8000, description: 'Stable growth with bluechip companies.', type: 'Daily' },
@@ -54,6 +55,7 @@ export class InvestmentComponent {
   }
 
   openConfirmDialog(plan: InvestmentPlan) {
+    this.showDialog = true;
     this.selectedPlan = plan;
   }
 
@@ -65,6 +67,11 @@ export class InvestmentComponent {
   }
 
   cancelInvestment() {
+    this.selectedPlan = null;
+  }
+
+  closeDialog() {
+    this.showDialog = false;
     this.selectedPlan = null;
   }
 

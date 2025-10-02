@@ -13,6 +13,7 @@ import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { PaymentComponent } from '../../payment/payment.component';
 
 @Component({
   selector: 'app-investment-plans',
@@ -25,6 +26,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     InputTextModule,
     CheckboxModule,
     CardModule,
+    PaymentComponent
   ],
   templateUrl: './investment-plans.component.html',
   styleUrl: './investment-plans.component.css',
@@ -33,7 +35,6 @@ export class InvestmentPlansComponent implements OnInit {
   investmentPlans: any[] = [];
   showInvestmentDialog = false;
   investmentForm!: FormGroup;
-
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
