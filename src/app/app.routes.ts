@@ -19,6 +19,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./navbar/navbar.component').then((m) => m.NavbarComponent),
     children: [
+      { path: '', redirectTo: 'home_page', pathMatch: 'full' },
+      {
+        path: 'home_page',
+        loadComponent: () =>
+          import('./home_page/home_page.component').then((m) => m.HomePageComponent),
+      },
       {
         path: 'home',
         loadComponent: () =>
