@@ -36,18 +36,15 @@
     </div>
   </div>
 
-  <!-- Confirm Dialog -->
-  <div class="dialog-backdrop" *ngIf="selectedPlan">
-    <div class="dialog-box">
-      <h3>Confirm Investment</h3>
-      <p>
-        Do you want to invest
-        <strong>₹{{ selectedPlan.rate }}</strong>
-        in <strong>{{ selectedPlan.name }}</strong>?
-      </p>
-      <div class="dialog-actions">
-        <button class="btn yes-btn" (click)="confirmInvestment()">Yes</button>
-        <button class="btn no-btn" (click)="cancelInvestment()">No</button>
+  <div class="custom-dialog-overlay" *ngIf="showDialog">
+    <div class="custom-dialog">
+      <div class="custom-dialog-header">
+        <h3> </h3>
+        <button class="close-btn" (click)="closeDialog()">×</button>
+      </div>
+
+      <div class="custom-dialog-body">
+        <app-payment [selectedPlan]="selectedPlan"></app-payment>
       </div>
     </div>
   </div>

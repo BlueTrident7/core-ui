@@ -35,6 +35,7 @@
             formControlName="email"
             placeholder="Enter email"
             class="form-input"
+            autocomplete="username"
           />
           <div class="error" *ngIf="lf['email'].touched && lf['email'].errors">
             <small *ngIf="lf['email'].errors['required']"
@@ -52,6 +53,7 @@
             formControlName="password"
             placeholder="Enter password"
             class="form-input"
+            autocomplete="current-password"
           />
           <div
             class="error"
@@ -88,6 +90,7 @@
             formControlName="fullName"
             placeholder="Full Name"
             class="form-input"
+            autocomplete="name"
           />
           <div
             class="error"
@@ -105,6 +108,7 @@
             formControlName="email"
             placeholder="Enter email"
             class="form-input"
+            autocomplete="username"
           />
           <div class="error" *ngIf="rf['email'].touched && rf['email'].errors">
             <small *ngIf="rf['email'].errors['required']"
@@ -122,6 +126,7 @@
             formControlName="password"
             placeholder="Enter password"
             class="form-input"
+            autocomplete="new-password"
           />
           <div
             class="error"
@@ -142,6 +147,7 @@
             formControlName="confirmPassword"
             placeholder="Confirm password"
             class="form-input"
+            autocomplete="new-password"
           />
           <div
             class="error"
@@ -153,7 +159,7 @@
 
         <div class="input-group">
           <select id="personType" formControlName="personType" class="form-select">
-            <option value="" disabled selected>Select Person Type</option>
+            <option value="" disabled>Select Person Type</option>
             <option value="specialized">Specialized Person</option>
             <option value="handicap">Handicap</option>
           </select>
@@ -164,7 +170,7 @@
 
         <div class="input-group">
           <label for="mobileNumber">Mobile Number</label>
-          <input id="mobileNumber" type="tel" formControlName="mobileNumber" placeholder="+91" class="form-input" />
+          <input id="mobileNumber" type="tel" formControlName="mobileNumber" placeholder="+91" class="form-input" autocomplete="tel" />
           <div class="error" *ngIf="rf['mobileNumber'].touched && rf['mobileNumber'].errors">
             <small *ngIf="rf['mobileNumber'].errors['required']">Mobile number is required</small>
             <small *ngIf="rf['mobileNumber'].errors['pattern']">Enter a valid mobile number</small>
