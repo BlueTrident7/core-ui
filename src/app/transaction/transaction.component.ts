@@ -1,123 +1,88 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
+import { TagModule } from 'primeng/tag';
+import { BadgeModule } from 'primeng/badge';
+import { ButtonModule } from 'primeng/button';
+import { TransactionsDto } from '../dto/transactions-dto';
+import { ApiCallBack } from '../base/api/api-callback';
+import { TransactionService } from '../transaction.service';
+import { ApiConstant } from '../api-constant';
 
 @Component({
   selector: 'app-transaction',
   standalone: true,
-  imports: [CommonModule], // <-- needed for ngFor, ngIf, ngClass
+  imports: [CommonModule, TableModule, TagModule, BadgeModule, ButtonModule],
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.css'],
 })
-export class TransactionComponent {
-  transactions = [
-    {
-      date: 'Jul 20',
-      icon: '🛒',
-      description: 'Daily spending',
-      link: null,
-      amount: 1493.12,
-      balance: 24896.61,
-      cashback: 22.4,
-    },
-    {
-      date: 'Jul 19',
-      icon: '🛒',
-      description: 'Daily spending',
-      link: null,
-      amount: 3971.41,
-      balance: 23403.49,
-      cashback: 59.57,
-      planType: 'DAILY',
-    },
-    {
-      date: 'Jul 18',
-      icon: '🛒',
-      description: 'Daily spending',
-      link: null,
-      amount: 557.76,
-      balance: 19432.08,
-      cashback: 8.37,
-      planType: 'DAILY',
-    },
-    {
-      date: 'Jul 17',
-      icon: '🛒',
-      description: 'Daily spending',
-      link: 'View transactions',
-      amount: 390.94,
-      balance: 18874.32,
-      cashback: 5.87,
-      planType: 'DAILY',
-    },
-    {
-      date: 'Jul 16',
-      icon: '✈️',
-      description: 'One-time payment',
-      link: null,
-      amount: -15000.0,
-      balance: 16190.11,
-      cashback: null,
-      planType: 'MONTHLY',
-    },
-    {
-      date: 'Jul 15',
-      icon: '🛒',
-      description: 'Daily spending',
-      link: null,
-      amount: 4479.44,
-      balance: 31190.11,
-      cashback: 67.19,
-      planType: 'MONTHLY',
-    },
-    {
-      date: 'Jul 15',
-      icon: '💳',
-      description: '2 new cards added',
-      link: null,
-      amount: null,
-      balance: null,
-      cashback: null,
-      planType: 'MONTHLY',
-    },
-    {
-      date: 'Jul 14',
-      icon: '🛒',
-      description: 'Daily spending',
-      link: null,
-      amount: 1860.44,
-      balance: 26710.67,
-      cashback: 27.9,
-      planType: 'MONTHLY',
-    },
-    {
-      date: 'Jul 13',
-      icon: '🛒',
-      description: 'Daily spending',
-      link: null,
-      amount: 2069.43,
-      balance: 24850.22,
-      cashback: 31.04,
-      planType: 'MONTHLY',
-    },
-    {
-      date: 'Jul 12',
-      icon: '🛒',
-      description: 'Daily spending',
-      link: null,
-      amount: 3296.35,
-      balance: 22780.79,
-      cashback: 49.45,
-      planType: 'YEARLY',
-    },
-    {
-      date: 'Jul 10',
-      icon: '🛒',
-      description: 'Daily spending',
-      link: null,
-      amount: 810.33,
-      balance: 19484.44,
-      cashback: 12.15,
-      planType: 'YEARLY',
-    },
-  ];
+export class TransactionComponent implements OnInit, ApiCallBack {
+  transactionList: TransactionsDto[] = [];
+  loading = false;
+
+  constructor(private transactionService: TransactionService) {}
+
+  ngOnInit() {
+    this.getTransactionList();
+  }
+
+  getTransactionList() {
+    this.loading = true;
+    this.transactionService.getTransactionList(this, 1);
+  }
+
+  getTypeSeverity(
+    type: string
+  ): 'success' | 'secondary' | 'info' | 'warn' | 'danger' | 'contrast' {
+    switch (type) {
+      case 'Investment':
+        return 'success';
+      case 'Payment':
+        return 'warn';
+      case 'Withdrawal':
+        return 'danger';
+      case 'Dividend':
+        return 'info';
+      default:
+        return 'secondary';
+    }
+  }
+
+  getStatusSeverity(
+    status: string
+  ): 'success' | 'secondary' | 'info' | 'warn' | 'danger' | 'contrast' {
+    switch (status) {
+      case 'Completed':
+        return 'success';
+      case 'Pending':
+        return 'warn';
+      case 'Failed':
+        return 'danger';
+      case 'Processing':
+        return 'info';
+      default:
+        return 'secondary';
+    }
+  }
+
+  onResult(result: any, type: any): void {
+    switch (type) {
+      case ApiConstant.TRANSACTION_LIST:
+        this.transactionList = (result.data || []).map((tx: any) => ({
+          id: tx.id,
+          type: tx.type,
+          transactionNumber: tx.transactionNumber,
+          date: new Date(tx.date),
+          amount: tx.amount,
+          status: tx.status,
+        }));
+        this.loading = false;
+        break;
+    }
+  }
+
+  onError(err: any, type: any): void {
+    console.error('Error fetching transactions', err);
+    this.loading = false;
+  }
 }
