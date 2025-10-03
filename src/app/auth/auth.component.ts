@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { LoaderService } from '../loader/loader.service';
 
 @Component({
   selector: 'app-auth',
@@ -25,7 +26,8 @@ export class AuthComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private loaderService: LoaderService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -79,10 +81,14 @@ export class AuthComponent {
 
   onLogin() {
     if (this.loginForm.valid) {
+      this.loaderService.showLoader();
       console.log('✅ Login successful:', this.loginForm.value);
       // Simulate login without backend
       this.authService.setToken('dummy-token'); // Set a dummy token
-      this.router.navigate(['/main']);
+      setTimeout(() => {
+        this.loaderService.hideLoader();
+        this.router.navigate(['/main']);
+      }, 2000); // Simulate delay
     } else {
       this.loginForm.markAllAsTouched();
     }
@@ -90,14 +96,19 @@ export class AuthComponent {
 
   onRegister() {
     if (this.registerForm.valid) {
+      this.loaderService.showLoader();
       const { confirmPassword, ...payload } = this.registerForm.value;
       this.authService.register(payload).subscribe({
         next: (res) => {
           console.log('✅ Register successful:', res);
-          this.router.navigate(['/main']);
+          setTimeout(() => {
+            this.loaderService.hideLoader();
+            this.router.navigate(['/main']);
+          }, 2000); // Simulate delay
         },
         error: (err) => {
           console.error('Registration failed:', err);
+          this.loaderService.hideLoader();
         },
       });
     } else {

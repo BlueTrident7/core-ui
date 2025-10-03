@@ -1,10 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { LoaderComponent } from './loader/loader.component';
+import { LoaderService } from './loader/loader.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  template: `<router-outlet></router-outlet>`,
+  imports: [RouterOutlet, CommonModule, LoaderComponent],
+  templateUrl: './app.component.html',
 })
-export class AppComponent {}
+export class AppComponent implements OnInit, OnDestroy {
+  isLoading = false;
+  private subscription: Subscription = new Subscription();
+
+  constructor(private loaderService: LoaderService) {}
+
+  ngOnInit() {
+    this.subscription = this.loaderService.loader$.subscribe(isLoading => {
+      this.isLoading = isLoading;
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+}
