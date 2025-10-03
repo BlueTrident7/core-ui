@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,16 +8,23 @@ import { CommonModule } from '@angular/common';
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.css']
 })
-export class LoaderComponent implements OnInit {
-  @Input() isVisible: boolean = false;
+export class LoaderComponent implements OnInit, OnChanges {
+  @Input() isVisible = false;
 
   ngOnInit() {
     this.generateMatrix();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['isVisible']) {
+      // Handle visibility changes if needed
+    }
+  }
+
   private generateMatrix() {
     const matrix = document.getElementById("matrix");
     if (!matrix) return;
+
     const columns = Math.floor(window.innerWidth / 40); // fewer columns since half screen
     for (let i = 0; i < columns; i++) {
       const row = document.createElement("div");
