@@ -1,15 +1,25 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { ApiCallBack } from '../base/api/api-callback';
+import { CoreService } from '../base/api/Core.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  providers: [MessageService],
 })
-export class ProfileComponent {
+export class ProfileComponent implements ApiCallBack {
   user = {
     name: 'Maria Fernanda',
     role: 'Premium User',
@@ -21,20 +31,39 @@ export class ProfileComponent {
       category: 'Visual Impairment',
       gender: 'Female',
       dob: '1990-05-15',
-      badges: ['Administrator']
-    }
+      badges: ['Administrator'],
+    },
   };
 
   bankForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.bankForm = this.fb.group({
-      accountNumber: ['', [Validators.required, Validators.pattern(/^\d{10,18}$/)]],
-      confirmAccountNumber: ['', Validators.required],
-      ifscCode: ['', [Validators.required, Validators.pattern(/^[A-Z]{4}0[A-Z0-9]{6}$/)]],
-      name: ['', Validators.required]
-    }, { validators: this.accountNumberMatchValidator });
+  constructor(private fb: FormBuilder, private api: CoreService) {
+    this.bankForm = this.fb.group(
+      {
+        accountNumber: [
+          '',
+          [Validators.required, Validators.pattern(/^\d{10,18}$/)],
+        ],
+        confirmAccountNumber: ['', Validators.required],
+        ifscCode: [
+          '',
+          [Validators.required, Validators.pattern(/^[A-Z]{4}0[A-Z0-9]{6}$/)],
+        ],
+        name: ['', Validators.required],
+      },
+      { validators: this.accountNumberMatchValidator }
+    );
+    this.getProfile();
   }
+  // ngOnInit(): void {
+  //   this.getProfile();
+
+  // }
+  getProfile() {
+    this.api.getUsersProfile(this, 1);
+  }
+  onResult(result: any, type: any, other?: any): void {}
+  onError(err: any, type: any, other?: any): void {}
 
   get bf() {
     return this.bankForm.controls;

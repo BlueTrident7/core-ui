@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
-import { ApiService } from './base/api/api.service';
 import { ApiCallBack } from './base/api/api-callback';
 import { ApiCallHelper } from './base/api/api-call-helper';
 import { ApiConstant } from './api-constant';
+import { ApiService } from './base/api/Api.service';
 
 @Injectable({ providedIn: 'root' })
 export class TransactionService {
