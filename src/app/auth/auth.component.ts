@@ -81,20 +81,25 @@ export class AuthComponent {
   }
 
   onLogin() {
+    this.router.navigate(['/main/home_page']);
+
     if (this.loginForm.invalid) return;
 
+    this.loaderService.showLoader();
     const credentials = this.loginForm.value; // ✅ Get form values
 
     this.authService.login(credentials).subscribe({
       next: (res: any) => {
         if (res.token) {
           this.authService.setToken(res.token);
-          this.router.navigate(['/main/home']);
+          this.loaderService.hideLoader();
+          this.router.navigate(['/main/home_page']);
         }
       },
       error: (err) => {
         console.error('Login failed', err);
         this.message = 'Login failed! Please check your credentials.';
+        this.loaderService.hideLoader();
       },
     });
   }
@@ -106,6 +111,7 @@ export class AuthComponent {
       this.authService.register(payload).subscribe({
         next: (res) => {
           console.log('✅ Register successful:', res);
+          this.loaderService.hideLoader();
           this.router.navigate(['/auth']);
         },
         error: (err) => {

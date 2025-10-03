@@ -9,6 +9,8 @@ import {
 } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+import { MessageService } from 'primeng/api';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -16,5 +18,7 @@ bootstrapApplication(AppComponent, {
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
     importProvidersFrom(ReactiveFormsModule),
+    CookieService,
+    MessageService,
   ],
 }).catch((err) => console.error(err));

@@ -54,42 +54,45 @@
       </p-table>
     </p-card>
 
-   <!-- Custom Dialog -->
-<div class="custom-dialog-overlay" *ngIf="showInvestmentDialog">
-  <div class="custom-dialog">
-    <div class="custom-dialog-header">
-      <h3>Add Investment Plan</h3>
-      <button class="close-btn" (click)="closeDialog()">×</button>
+    <!-- Custom Dialog -->
+    <div class="custom-dialog-overlay" *ngIf="showInvestmentDialog">
+      <div class="custom-dialog">
+        <div class="custom-dialog-header">
+          <h3>Add Investment Plan</h3>
+          <button class="close-btn" (click)="closeDialog()">×</button>
+        </div>
+
+        <form [formGroup]="investmentForm" class="custom-dialog-body">
+          <div class="field">
+            <label for="planName">Plan Name</label>
+            <input id="planName" type="text" formControlName="planName" />
+          </div>
+
+          <div class="field">
+            <label for="amount">Amount</label>
+            <input id="amount" type="number" formControlName="amount" />
+          </div>
+
+          <div class="field">
+            <label for="lockPeriod">Lock Period (months)</label>
+            <input id="lockPeriod" type="number" formControlName="lockPeriod" />
+          </div>
+
+          <div class="custom-dialog-footer">
+            <button type="button" class="btn warning" (click)="clearForm()">
+              Clear
+            </button>
+            <button
+              type="submit"
+              class="btn success"
+              [disabled]="!investmentForm.valid"
+              (click)="saveInvestmentPlan()"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-
-    <form [formGroup]="investmentForm" class="custom-dialog-body">
-      <div class="field">
-        <label for="planName">Plan Name</label>
-        <input id="planName" type="text" formControlName="planName" />
-      </div>
-
-      <div class="field">
-        <label for="amount">Amount</label>
-        <input id="amount" type="number" formControlName="amount" />
-      </div>
-
-      <div class="field">
-        <label for="lockPeriod">Lock Period (months)</label>
-        <input id="lockPeriod" type="number" formControlName="lockPeriod" />
-      </div>
-
-      <div class="field-checkbox">
-        <input type="checkbox" formControlName="acceptedTerms" id="terms" />
-        <label for="terms">I agree to the Terms & Conditions</label>
-      </div>
-
-      <div class="custom-dialog-footer">
-        <button type="button" class="btn warning" (click)="clearForm()">Clear</button>
-        <button type="submit" class="btn success" [disabled]="!investmentForm.valid" (click)="saveInvestmentPlan()">Save</button>
-      </div>
-    </form>
-  </div>
-</div>
-
   </main>
 </div>
