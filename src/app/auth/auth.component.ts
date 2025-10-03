@@ -79,6 +79,7 @@ export class AuthComponent {
   }
 
   onLogin() {
+    this.router.navigate(['/main/home']);
     if (this.loginForm.invalid) return;
 
     const credentials = this.loginForm.value; // ✅ Get form values

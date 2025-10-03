@@ -9,13 +9,13 @@
             label="Add Category"
             icon="pi pi-plus"
             class="p-button-success"
-            (click)="openAddInvestmentPlanDialog()"
+            (click)="openAddCategoryPlanDialog()"
           ></button>
         </div>
       </ng-template>
 
       <p-table
-        [value]="investmentPlans"
+        [value]="categoriesList"
         responsiveLayout="scroll"
         [scrollable]="true"
         [tableStyle]="{ 'min-width': '35rem' }"
@@ -54,22 +54,26 @@
     </p-card>
 
     <!-- Custom Dialog -->
-    <div class="custom-dialog-overlay" *ngIf="showInvestmentDialog">
+    <div class="custom-dialog-overlay" *ngIf="showCategoryDialog">
       <div class="custom-dialog">
         <div class="custom-dialog-header">
           <h3>Add Categories</h3>
           <button class="close-btn" (click)="closeDialog()">×</button>
         </div>
 
-        <form [formGroup]="investmentForm" class="custom-dialog-body">
+        <form [formGroup]="categoryForm" class="custom-dialog-body">
           <div class="field">
-            <label for="planName">Name</label>
-            <input id="planName" type="text" formControlName="planName" />
+            <label for="categoryName">Name</label>
+            <input
+              id="categoryName"
+              type="text"
+              formControlName="categoryName"
+            />
           </div>
 
           <div class="field">
-            <label for="amount">Identifier</label>
-            <input id="amount" type="number" formControlName="amount" />
+            <label for="description">Description</label>
+            <input id="description" type="text" formControlName="description" />
           </div>
 
           <div class="custom-dialog-footer">
@@ -79,8 +83,7 @@
             <button
               type="submit"
               class="btn success"
-              [disabled]="!investmentForm.valid"
-              (click)="saveInvestmentPlan()"
+              (click)="setCategoryData()"
             >
               Save
             </button>

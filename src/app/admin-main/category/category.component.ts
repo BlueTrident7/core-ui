@@ -12,6 +12,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
+import { environment } from '../../../environments/environment.local';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { CategoryPostDto } from '../../dto/category-post-dto';
 
 @Component({
   selector: 'app-category',
@@ -29,56 +33,68 @@ import { DialogModule } from 'primeng/dialog';
   styleUrl: './category.component.css',
 })
 export class CategoryComponent implements OnInit {
-  investmentPlans: any[] = [];
-  showInvestmentDialog = false;
-  investmentForm!: FormGroup;
+  categoriesList: any[] = [];
+  showCategoryDialog = false;
+  categoryForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.investmentPlans = [
+    this.categoriesList = [
       { planName: 'General', amount: 50000, identifier: 'GEN' },
       { planName: 'Women', amount: 75000, identifier: 'WOM' },
-      { planName: 'Farmers', amount: 100000, identifier: "FARM" },
+      { planName: 'Farmers', amount: 100000, identifier: 'FARM' },
     ];
     this.initializeForm();
   }
 
   initializeForm(): void {
-    this.investmentForm = this.fb.group({
-      planName: ['', Validators.required],
-      amount: [null, [Validators.required, Validators.min(1)]],
-      lockPeriod: [null, [Validators.required, Validators.min(1)]],
-      acceptedTerms: [false, Validators.requiredTrue],
+    this.categoryForm = this.fb.group({
+      categoryName: ['', Validators.required],
+      description: [null],
     });
   }
 
-  openAddInvestmentPlanDialog(): void {
-    this.investmentForm.reset();
-    this.showInvestmentDialog = true;
+  openAddCategoryPlanDialog(): void {
+    this.categoryForm.reset();
+    this.showCategoryDialog = true;
   }
 
   closeDialog(): void {
-    this.showInvestmentDialog = false;
+    this.showCategoryDialog = false;
   }
 
   saveInvestmentPlan(): void {
-    if (this.investmentForm.valid) {
-      this.investmentPlans.push(this.investmentForm.value);
+    if (this.categoryForm.valid) {
+      this.categoriesList.push(this.categoryForm.value);
       this.closeDialog();
     }
   }
 
   clearForm(): void {
-    this.investmentForm.reset();
+    this.categoryForm.reset();
   }
 
   editInvestmentPlan(plan: any): void {
-    this.investmentForm.patchValue(plan);
-    this.showInvestmentDialog = true;
+    this.categoryForm.patchValue(plan);
+    this.showCategoryDialog = true;
   }
 
   deleteInvestmentPlan(plan: any): void {
-    this.investmentPlans = this.investmentPlans.filter((p) => p !== plan);
+    this.categoriesList = this.categoriesList.filter((p) => p !== plan);
+  }
+
+  setCategoryData() {
+    let catagoryData = new CategoryPostDto();
+    catagoryData.categoryName = this.categoryForm.value.categoryName;
+    catagoryData.description = this.categoryForm.value.description;
+    this.save(catagoryData);
+  }
+
+  save(catagoryData: any): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/master/category`,
+      catagoryData
+    );
   }
 }
