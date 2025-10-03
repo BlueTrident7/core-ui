@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { environment } from '../../environments/environment.local';
 
 export interface AuthResponse {
   token: string;
@@ -9,67 +11,50 @@ export interface AuthResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private tokenKey = 'app_token';
-  private authSubject = new BehaviorSubject<string | null>(this.getToken());
-  auth$ = this.authSubject.asObservable();
+  private readonly TOKEN_KEY = 'authToken';
+  private readonly REFRESH_TOKEN_KEY = 'refreshToken';
 
-  // Replace with your backend base URL
-  private baseUrl = 'https://api.example.com/auth';
+  constructor(private http: HttpClient, private router: Router) {}
 
-  constructor(private http: HttpClient) {}
-
-  login(email: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/login`, { email, password })
-      .pipe(
-        tap(res => {
-          if (res?.token) {
-            this.setToken(res.token);
-          }
-        })
-      );
+  // ---------------- Login / Registration API ----------------
+  register(userData: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/auth/register`, userData);
   }
 
-  register(payload: { name?: string; email: string; password: string; personType?: string; mobileNumber?: string; termsAccepted?: boolean; }): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/register`, payload)
-      .pipe(
-        tap(res => {
-          if (res?.token) {
-            this.setToken(res.token);
-          }
-        })
-      );
+  login(credentials: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/auth/login`, credentials);
   }
 
-  logout() {
-    localStorage.removeItem(this.tokenKey);
-    this.authSubject.next(null);
-  }
-
-  setToken(token: string) {
-    localStorage.setItem(this.tokenKey, token);
-    this.authSubject.next(token);
+  // ---------------- Token Handling ----------------
+  setToken(token: string, remember: boolean = true): void {
+    if (remember) {
+      localStorage.setItem(this.TOKEN_KEY, token);
+    } else {
+      sessionStorage.setItem(this.TOKEN_KEY, token);
+    }
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return (
+      localStorage.getItem(this.TOKEN_KEY) ||
+      sessionStorage.getItem(this.TOKEN_KEY)
+    );
+  }
+
+  removeToken(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
+    sessionStorage.removeItem(this.TOKEN_KEY);
   }
 
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
 
-  // optional: decode token minimally (not secure replacement for backend validation)
-  getDecodedToken(): any {
-    const token = this.getToken();
-    if (!token) { return null; }
-    try {
-      const payload = token.split('.')[1];
-      return JSON.parse(atob(payload));
-    } catch (e) {
-      return null;
-    }
+  logout(): void {
+    this.removeToken();
+    this.router.navigate(['/auth/login']);
   }
 }
