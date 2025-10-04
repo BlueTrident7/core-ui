@@ -133,4 +133,15 @@ export class CoreService {
       ApiConstant.DELETE_INVESTMENT_PLAN
     );
   }
+
+  getAdminPanelInfo(callback: ApiCallBack, userId: any): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.GET_ADMIN_PANEL_INFO + '/' + userId;
+    apiObject.method = 'GET';
+    this.apiService.getData(
+      apiObject,
+      callback,
+      ApiConstant.GET_ADMIN_PANEL_INFO
+    );
+  }
 }

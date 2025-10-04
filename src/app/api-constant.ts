@@ -17,4 +17,6 @@ export class ApiConstant {
   public static TRANSACTION_LIST = 'transaction/list';
 
   public static INVESTMENT_PLANS_LIST = 'investment/plans';
+
+  public static GET_ADMIN_PANEL_INFO = 'admin/panel';
 }
