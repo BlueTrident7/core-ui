@@ -9,6 +9,7 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
@@ -19,6 +20,7 @@ import {
   InvestmentPlansDTO,
 } from '../../dto/investment-plans-dto';
 import { CoreService } from '../../base/api/core.service';
+import { DropdownModule } from 'primeng/dropdown';
 @Component({
   selector: 'app-investment-plans',
   imports: [
@@ -28,8 +30,10 @@ import { CoreService } from '../../base/api/core.service';
     DialogModule,
     TableModule,
     InputTextModule,
+    AutoCompleteModule,
     CheckboxModule,
     CardModule,
+    DropdownModule,
   ],
   templateUrl: './investment-plans.component.html',
   styleUrl: './investment-plans.component.css',
@@ -49,8 +53,11 @@ export class InvestmentPlansComponent implements OnInit {
   initializeForm(): void {
     this.investmentForm = this.fb.group({
       planName: ['', Validators.required],
+      policy: ['', Validators.required],
       amount: [null, [Validators.required, Validators.min(1)]],
       lockPeriod: [null, [Validators.required, Validators.min(1)]],
+      description: ['', Validators.required],
+      planType: ['', Validators.required],
       acceptedTerms: [false, Validators.requiredTrue],
     });
   }
@@ -130,4 +137,10 @@ export class InvestmentPlansComponent implements OnInit {
     }
   }
   onError(err: any, type: any, other?: any): void {}
+  filterPlanPolicies(event: any): void {
+    const query = event.query.toLowerCase();
+    this.filteredPlanPolicies = this.planPolicyOptions.filter((option) =>
+      option.label.toLowerCase().includes(query)
+    );
+  }
 }

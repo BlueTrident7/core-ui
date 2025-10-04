@@ -73,25 +73,49 @@
         </div>
 
         <form [formGroup]="investmentForm" class="custom-dialog-body">
-          <div class="field">
-            <label for="planName">Plan Name</label>
-            <input id="planName" type="text" formControlName="planName" />
+          <div class="form-row">
+            <div class="field">
+              <label for="planName">Plan Name</label>
+              <input id="planName" type="text" formControlName="planName" />
+            </div>
+            <div class="field">
+              <label for="description">Description</label>
+              <textarea
+                pTextarea
+                fluid
+                id="description"
+                formControlName="description"
+                rows="4"
+                placeholder="Enter plan description"
+              ></textarea>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="amount">Amount</label>
-            <input id="amount" type="number" formControlName="amount" />
+          <div class="form-row">
+            <div class="field">
+              <label for="planType">Plan Type</label>
+              <select id="planType" formControlName="planType">
+                <option *ngFor="let option of planTypes" [value]="option.identifierCode">{{option.name}}</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="policy">Policy</label>
+              <input id="policy" type="text" formControlName="policy" />
+            </div>
           </div>
 
-          <div class="field">
-            <label for="lockPeriod">Lock Period (months)</label>
-            <input id="lockPeriod" type="number" formControlName="lockPeriod" />
+          <div class="form-row">
+            <div class="field">
+              <label for="lockPeriod">Lock Period (months)</label>
+              <input id="lockPeriod" type="number" formControlName="lockPeriod" />
+            </div>
+            <div class="field">
+              <label for="amount">Amount</label>
+              <input id="amount" type="number" formControlName="amount" />
+            </div>
           </div>
 
           <div class="custom-dialog-footer">
-            <button type="button" class="btn warning" (click)="clearForm()">
-              Clear
-            </button>
             <button
               type="submit"
               class="btn success"
@@ -99,6 +123,9 @@
               (click)="saveInvestmentPlan()"
             >
               Save
+            </button>
+            <button type="button" class="btn warning" (click)="clearForm()">
+              Clear
             </button>
           </div>
         </form>
