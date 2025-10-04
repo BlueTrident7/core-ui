@@ -19,7 +19,7 @@ export class AdminMainComponent implements OnInit {
   items: string[] = ['Overview', 'Investment Plans', 'Category', 'Logs'];
 
   // Corresponding child route paths (must match app-routing.module paths exactly)
-  routes: string[] = ['overview', 'investment-plans', 'category', 'settings'];
+  routes: string[] = ['overview', 'investment-plans', 'category', 'logs'];
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 

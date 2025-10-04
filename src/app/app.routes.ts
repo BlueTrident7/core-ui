@@ -90,7 +90,7 @@ export const routes: Routes = [
               ),
           },
           {
-            path: 'settings',
+            path: 'logs',
             loadComponent: () =>
               import('./admin-main/logs/logs.component').then(
                 (m) => m.LogsComponent

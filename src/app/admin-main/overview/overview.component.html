@@ -1,87 +1,64 @@
-<div class="p-grid p-dir-col p-m-3 admin-panel-container">
-  <h1 class="p-text-center">Admin Panel</h1>
+<div class="layout">
+  <main class="main-content">
+    <!-- Overview Label -->
+    <div class="overview-header">
+      <h2>Overview</h2>
+    </div>
 
-  <!-- Stats Cards -->
-  <div class="p-grid p-justify-center p-mb-4">
-    <div class="p-col-12 p-md-4">
-      <p-card header="Total Users">
+    <!-- Stats Cards - Below Overview Label -->
+    <div class="stats-cards-top">
+      <div class="stats-card">
+        <h3>Total Users</h3>
         <p>{{ payload.stats.totalUsers }}</p>
-      </p-card>
-    </div>
-    <div class="p-col-12 p-md-4">
-      <p-card header="Active Sessions">
+      </div>
+      <div class="stats-card">
+        <h3>Active Sessions</h3>
         <p>{{ payload.stats.activeSessions }}</p>
-      </p-card>
-    </div>
-    <div class="p-col-12 p-md-4">
-      <p-card header="Total Transactions">
+      </div>
+      <div class="stats-card">
+        <h3>Total Transactions</h3>
         <p>{{ payload.stats.totalTransactions }}</p>
-      </p-card>
-    </div>
-  </div>
-
-  <!-- User Management -->
-  <div class="content-section p-mb-4">
-    <h2>User Management</h2>
-    <p-table [value]="payload.users" class="p-datatable-gridlines">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Actions</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-user>
-        <tr>
-          <td>{{ user.id }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
-          <td>
-            <button
-              pButton
-              type="button"
-              label="Edit"
-              icon="pi pi-pencil"
-              class="p-button-sm p-button-info"
-            ></button>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
-
-  <!-- Settings -->
-  <div class="content-section">
-    <h2>Settings</h2>
-    <div class="p-grid p-formgrid p-fluid">
-      <div class="p-col-12 p-md-6">
-        <p-checkbox
-          name="notifications"
-          [(ngModel)]="payload.settings.notifications"
-          label="Enable Notifications"
-        >
-        </p-checkbox>
       </div>
-      <div class="p-col-12 p-md-6">
-        <p-checkbox
-          name="twoFactor"
-          [(ngModel)]="payload.settings.twoFactor"
-          label="Two-Factor Authentication"
-        >
-        </p-checkbox>
-      </div>
-      <!-- <div class="p-col-12 p-md-6">
-        <label>Theme</label>
-        <p-dropdown
-          [options]="payload.themes"
-          [(ngModel)]="payload.settings.theme"
-          placeholder="Select Theme"
-        >
-        </p-dropdown>
-      </div> -->
     </div>
-  </div>
+
+    <!-- User Management Table - Below Stats Cards -->
+    <div class="content-section p-mb-4 main-table-section">
+      <h2>User Management</h2>
+      <p-table [value]="payload.users" class="p-datatable-gridlines">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+              <button
+                pButton
+                type="button"
+                label="Edit"
+                icon="pi pi-pencil"
+                class="p-button-sm edit-btn"
+              ></button>
+              <button
+                pButton
+                type="button"
+                label="Delete"
+                icon="pi pi-trash"
+                class="p-button-sm delete-btn"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </main>
 </div>
