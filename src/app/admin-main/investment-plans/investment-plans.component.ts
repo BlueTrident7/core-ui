@@ -13,6 +13,12 @@ import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { ApiConstant } from '../../api-constant';
+import {
+  InvestmentGETDTO,
+  InvestmentPlansDTO,
+} from '../../dto/investment-plans-dto';
+import { CoreService } from '../../base/api/core.service';
 @Component({
   selector: 'app-investment-plans',
   imports: [
@@ -23,23 +29,20 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     TableModule,
     InputTextModule,
     CheckboxModule,
-    CardModule
+    CardModule,
   ],
   templateUrl: './investment-plans.component.html',
   styleUrl: './investment-plans.component.css',
 })
 export class InvestmentPlansComponent implements OnInit {
-  investmentPlans: any[] = [];
+  investmentPlans: InvestmentGETDTO[] = [];
   showInvestmentDialog = false;
   investmentForm!: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  buttonLabel: string = 'Save';
+  selectedPlan: any;
+  constructor(private fb: FormBuilder, public coreService: CoreService) {}
 
   ngOnInit(): void {
-    this.investmentPlans = [
-      { planName: 'Growth Plus', amount: 50000, lockPeriod: 12 },
-      { planName: 'Secure Future', amount: 75000, lockPeriod: 24 },
-      { planName: 'Wealth Builder', amount: 100000, lockPeriod: 36 },
-    ];
     this.initializeForm();
   }
 
@@ -72,12 +75,59 @@ export class InvestmentPlansComponent implements OnInit {
     this.investmentForm.reset();
   }
 
+  deleteInvestmentPlan(plan: any): void {
+    this.investmentPlans = this.investmentPlans.filter((p) => p !== plan);
+  }
+
+  getAllInvestmentPlans() {
+    this.coreService.getAllInvestmentPlans(this);
+  }
+
   editInvestmentPlan(plan: any): void {
+    this.buttonLabel = 'Update';
+    this.selectedPlan = plan;
     this.investmentForm.patchValue(plan);
     this.showInvestmentDialog = true;
   }
 
-  deleteInvestmentPlan(plan: any): void {
-    this.investmentPlans = this.investmentPlans.filter((p) => p !== plan);
+  deleteCategory(category: any): void {
+    this.coreService.deleteCategory(this, category.id);
   }
+
+  setCategoryData() {
+    let investment = new InvestmentPlansDTO();
+    investment.name = this.investmentForm.value.planName;
+    investment.description = this.investmentForm.value.description;
+    if (this.buttonLabel === 'Update') {
+      this.coreService.updateCategory(this, this.selectedPlan.id, investment);
+    } else {
+      this.coreService.saveInvestmentPlan(this, investment);
+    }
+  }
+
+  onResult(result: any, type: any, other?: any): void {
+    switch (type) {
+      case ApiConstant.SAVE_INVESTMENT_PLAN:
+        this.showInvestmentDialog = false;
+        this.buttonLabel = 'Save';
+        this.getAllInvestmentPlans();
+        break;
+      case ApiConstant.GET_INVESTMENT_PLANS:
+        this.investmentPlans = [];
+        this.investmentPlans = result.data;
+
+        break;
+      case ApiConstant.DELETE_INVESTMENT_PLAN:
+        this.getAllInvestmentPlans();
+        break;
+      case ApiConstant.UPDATE_INVESTMENT_PLAN:
+        this.showInvestmentDialog = false;
+        this.getAllInvestmentPlans();
+        this.buttonLabel = 'Save';
+        break;
+      default:
+        break;
+    }
+  }
+  onError(err: any, type: any, other?: any): void {}
 }
