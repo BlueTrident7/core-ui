@@ -9,18 +9,15 @@
         <ng-template pTemplate="header">
           <div class="card-header">
             <h2>Investment Plans Management</h2>
+            <button
+              pButton
+              label="Add Investment Plan"
+              icon="pi pi-plus"
+              class="add-btn"
+              (click)="openAddInvestmentPlanDialog()"
+            ></button>
           </div>
         </ng-template>
-
-        <div class="add-button-container">
-          <button
-            pButton
-            label="Add Investment Plan"
-            icon="pi pi-plus"
-            class="add-btn"
-            (click)="openAddInvestmentPlanDialog()"
-          ></button>
-        </div>
 
         <p-table
           [value]="investmentPlans"

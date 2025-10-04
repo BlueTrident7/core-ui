@@ -48,14 +48,14 @@
   font-size: 1.4rem !important;
   font-weight: 600 !important;
   margin-bottom: 1rem !important;
-  border-bottom: 2px solid #667eea !important;
-  padding-bottom: 0.5rem !important;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
 }
 
-.add-button-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1rem;
+.card-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
 }
 
 /* Table styling - main focus */
