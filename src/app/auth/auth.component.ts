@@ -23,6 +23,7 @@ export class AuthComponent {
   loginForm!: FormGroup;
   showTermsModal = false;
   message: string = '';
+  currentDate = new Date();
 
   constructor(
     private fb: FormBuilder,
@@ -96,7 +97,7 @@ export class AuthComponent {
           this.router.navigate(['/main/home_page']);
         }
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Login failed', err);
         this.message = 'Login failed! Please check your credentials.';
         this.loaderService.hideLoader();
