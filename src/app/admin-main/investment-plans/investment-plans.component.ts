@@ -55,17 +55,17 @@ export class InvestmentPlansComponent implements OnInit {
       { name: 'Year', identifierCode: 'YEARLY' },
     ];
     this.initializeForm();
+    this.getAllInvestmentPlans();
   }
 
   initializeForm(): void {
     this.investmentForm = this.fb.group({
-      planName: ['', Validators.required],
-      policy: ['', Validators.required],
-      amount: [null, [Validators.required, Validators.min(1)]],
-      lockPeriod: [null, [Validators.required, Validators.min(1)]],
-      description: ['', Validators.required],
-      planType: ['', Validators.required],
-      acceptedTerms: [false, Validators.requiredTrue],
+      planName: [''],
+      description: [''],
+      planType: [''],
+      planPolicy: [''],
+      lockPeriod: [null],
+      amount: [null],
     });
   }
 
@@ -78,19 +78,12 @@ export class InvestmentPlansComponent implements OnInit {
     this.showInvestmentDialog = false;
   }
 
-  saveInvestmentPlan(): void {
-    if (this.investmentForm.valid) {
-      this.investmentPlans.push(this.investmentForm.value);
-      this.closeDialog();
-    }
-  }
-
   clearForm(): void {
     this.investmentForm.reset();
   }
 
   deleteInvestmentPlan(plan: any): void {
-    this.investmentPlans = this.investmentPlans.filter((p) => p !== plan);
+    this.coreService.deleteInvestmentPlan(this, plan.id);
   }
 
   getAllInvestmentPlans() {
@@ -104,16 +97,22 @@ export class InvestmentPlansComponent implements OnInit {
     this.showInvestmentDialog = true;
   }
 
-  deleteCategory(category: any): void {
-    this.coreService.deleteCategory(this, category.id);
-  }
+  saveInvestmentPlan(): void {
+    const formValues = this.investmentForm.value;
+    const investment = new InvestmentPlansDTO();
+    investment.name = formValues.planName;
+    investment.description = formValues.description;
+    investment.amount = formValues.amount;
+    investment.planType = formValues.planType;
+    investment.planPolicy = formValues.planPolicy;
+    investment.lockPeriod = formValues.lockPeriod;
 
-  setCategoryData() {
-    let investment = new InvestmentPlansDTO();
-    investment.name = this.investmentForm.value.planName;
-    investment.description = this.investmentForm.value.description;
     if (this.buttonLabel === 'Update') {
-      this.coreService.updateCategory(this, this.selectedPlan.id, investment);
+      this.coreService.updateInvestmentPlan(
+        this,
+        this.selectedPlan.id,
+        investment
+      );
     } else {
       this.coreService.saveInvestmentPlan(this, investment);
     }

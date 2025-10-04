@@ -102,8 +102,8 @@
               </select>
             </div>
             <div class="field">
-              <label for="policy">Policy</label>
-              <input id="policy" type="text" formControlName="policy" />
+              <label for="planPolicy">Policy</label>
+              <input id="planPolicy" type="text" formControlName="planPolicy" />
             </div>
           </div>
 
@@ -126,10 +126,9 @@
             <button
               type="submit"
               class="btn success"
-              [disabled]="!investmentForm.valid"
               (click)="saveInvestmentPlan()"
             >
-              Save
+              {{ this.buttonLabel }}
             </button>
             <button type="button" class="btn warning" (click)="clearForm()">
               Clear
