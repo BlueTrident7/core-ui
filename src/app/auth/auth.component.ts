@@ -81,7 +81,7 @@ export class AuthComponent {
   }
 
   onLogin() {
-     this.router.navigate(['/main/home_page']);
+    this.router.navigate(['/main/home_page']);
 
     if (this.loginForm.invalid) return;
 

@@ -1,6 +1,6 @@
+import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { environment } from '../../../environments/environment.local';
@@ -16,19 +16,31 @@ import { ArtifactUtils } from '../../../util/artifact-utils';
 })
 export class ApiService {
   public previewFile: any;
+  private readonly TOKEN_KEY = 'authToken';
 
   constructor(
     private http: HttpClient,
-    private cookieService: CookieService,
     private networkService: NetworkService,
-    private offlineQueue: OfflineQueueService,
-    private messageService: MessageService
-  ) {}
+    private offlineQueue: OfflineQueueService
+  ) // private messageService: MessageService
+  {}
 
-  private getAuthHeader(): HttpHeaders {
-    const token = this.cookieService.get(btoa(CookieConstant.ACCESS_TOKEN));
-    return new HttpHeaders({ Authorization: 'Bearer ' + atob(token) });
+  getToken(): string | null {
+    return (
+      localStorage.getItem(this.TOKEN_KEY) ||
+      sessionStorage.getItem(this.TOKEN_KEY)
+    );
   }
+
+  getAuthHeader(): HttpHeaders {
+    const token = this.getToken();
+    return new HttpHeaders({ Authorization: 'Bearer ' + token });
+  }
+
+  // private getAuthHeader(): HttpHeaders {
+  //   const token = this.cookieService.get(btoa(CookieConstant.ACCESS_TOKEN));
+  //   return new HttpHeaders({ Authorization: 'Bearer ' + atob(token) });
+  // }
 
   getImage(url: string): Observable<Blob> {
     return this.http.get(url, {
@@ -209,22 +221,24 @@ export class ApiService {
   }
 
   showMessage(msg: string, msgType: MessageType): void {
-    switch (msgType) {
-      case MessageType.SUCCESS:
-        ArtifactUtils.showSuccessViaToast(this.messageService, msg);
-        break;
-      case MessageType.ERROR:
-        ArtifactUtils.showErrorViaToast(this.messageService, msg);
-        break;
-      case MessageType.WARNING:
-        ArtifactUtils.showWarnViaToast(this.messageService, msg);
-        break;
-      case MessageType.INFO:
-        ArtifactUtils.showInfoViaToast(this.messageService, msg);
-        break;
-      default:
-        ArtifactUtils.showSuccessViaToast(this.messageService, msg);
-        break;
+    switch (
+      msgType
+      //   case MessageType.SUCCESS:
+      //     ArtifactUtils.showSuccessViaToast(this.messageService, msg);
+      //     break;
+      //   case MessageType.ERROR:
+      //     ArtifactUtils.showErrorViaToast(this.messageService, msg);
+      //     break;
+      //   case MessageType.WARNING:
+      //     ArtifactUtils.showWarnViaToast(this.messageService, msg);
+      //     break;
+      //   case MessageType.INFO:
+      //     ArtifactUtils.showInfoViaToast(this.messageService, msg);
+      //     break;
+      //   default:
+      //     ArtifactUtils.showSuccessViaToast(this.messageService, msg);
+      //     break;
+    ) {
     }
   }
 }

@@ -12,6 +12,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
+import { environment } from '../../../environments/environment.local';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { CategoryPostDto } from '../../dto/category-post-dto';
+import { CoreService } from '../../base/api/core.service';
+import { ApiCallBack } from '../../base/api/api-callback';
+import { ApiConstant } from '../../api-constant';
 
 @Component({
   selector: 'app-category',
@@ -28,57 +35,64 @@ import { DialogModule } from 'primeng/dialog';
   templateUrl: './category.component.html',
   styleUrl: './category.component.css',
 })
-export class CategoryComponent implements OnInit {
-  investmentPlans: any[] = [];
-  showInvestmentDialog = false;
-  investmentForm!: FormGroup;
+export class CategoryComponent implements OnInit, ApiCallBack {
+  categoriesList: any[] = [];
+  showCategoryDialog = false;
+  categoryForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, public coreService: CoreService) {}
 
   ngOnInit(): void {
-    this.investmentPlans = [
+    this.categoriesList = [
       { planName: 'General', amount: 50000, identifier: 'GEN' },
       { planName: 'Women', amount: 75000, identifier: 'WOM' },
-      { planName: 'Farmers', amount: 100000, identifier: "FARM" },
+      { planName: 'Farmers', amount: 100000, identifier: 'FARM' },
     ];
     this.initializeForm();
   }
 
   initializeForm(): void {
-    this.investmentForm = this.fb.group({
-      planName: ['', Validators.required],
-      amount: [null, [Validators.required, Validators.min(1)]],
-      lockPeriod: [null, [Validators.required, Validators.min(1)]],
-      acceptedTerms: [false, Validators.requiredTrue],
+    this.categoryForm = this.fb.group({
+      categoryName: ['', Validators.required],
+      description: [null],
     });
   }
 
-  openAddInvestmentPlanDialog(): void {
-    this.investmentForm.reset();
-    this.showInvestmentDialog = true;
+  openAddCategoryPlanDialog(): void {
+    this.categoryForm.reset();
+    this.showCategoryDialog = true;
   }
 
   closeDialog(): void {
-    this.showInvestmentDialog = false;
-  }
-
-  saveInvestmentPlan(): void {
-    if (this.investmentForm.valid) {
-      this.investmentPlans.push(this.investmentForm.value);
-      this.closeDialog();
-    }
+    this.showCategoryDialog = false;
   }
 
   clearForm(): void {
-    this.investmentForm.reset();
+    this.categoryForm.reset();
   }
 
-  editInvestmentPlan(plan: any): void {
-    this.investmentForm.patchValue(plan);
-    this.showInvestmentDialog = true;
+  editCategory(category: any): void {
+    this.categoryForm.patchValue(category);
+    this.showCategoryDialog = true;
   }
 
-  deleteInvestmentPlan(plan: any): void {
-    this.investmentPlans = this.investmentPlans.filter((p) => p !== plan);
+  deleteCategory(category: any): void {
+    this.categoriesList = this.categoriesList.filter((p) => p !== category);
   }
+
+  setCategoryData() {
+    let catagoryData = new CategoryPostDto();
+    catagoryData.categoryName = this.categoryForm.value.categoryName;
+    catagoryData.description = this.categoryForm.value.description;
+    this.coreService.saveCategory(this, catagoryData);
+  }
+  onResult(result: any, type: any, other?: any): void {
+    switch (type) {
+      case ApiConstant.SAVE_CATEGORY:
+        break;
+      default:
+        break;
+    }
+  }
+  onError(err: any, type: any, other?: any): void {}
 }
