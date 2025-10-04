@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -8,8 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ApiCallBack } from '../base/api/api-callback';
-import { CoreService } from '../base/api/Core.service';
 import { MessageService } from 'primeng/api';
+import { CoreService } from '../base/api/core.service';
 
 @Component({
   selector: 'app-profile',
@@ -37,7 +36,7 @@ export class ProfileComponent implements ApiCallBack {
 
   bankForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private api: CoreService) {
+  constructor(private fb: FormBuilder, private coreService: CoreService) {
     this.bankForm = this.fb.group(
       {
         accountNumber: [
@@ -55,15 +54,10 @@ export class ProfileComponent implements ApiCallBack {
     );
     this.getProfile();
   }
-  // ngOnInit(): void {
-  //   this.getProfile();
 
-  // }
   getProfile() {
-    this.api.getUsersProfile(this, 1);
+    this.coreService.getUsersProfile(this, 1);
   }
-  onResult(result: any, type: any, other?: any): void {}
-  onError(err: any, type: any, other?: any): void {}
 
   get bf() {
     return this.bankForm.controls;
@@ -83,4 +77,6 @@ export class ProfileComponent implements ApiCallBack {
       this.bankForm.markAllAsTouched();
     }
   }
+  onResult(result: any, type: any, other?: any): void {}
+  onError(err: any, type: any, other?: any): void {}
 }

@@ -16,6 +16,9 @@ import { environment } from '../../../environments/environment.local';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CategoryPostDto } from '../../dto/category-post-dto';
+import { CoreService } from '../../base/api/core.service';
+import { ApiCallBack } from '../../base/api/api-callback';
+import { ApiConstant } from '../../api-constant';
 
 @Component({
   selector: 'app-category',
@@ -32,12 +35,12 @@ import { CategoryPostDto } from '../../dto/category-post-dto';
   templateUrl: './category.component.html',
   styleUrl: './category.component.css',
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, ApiCallBack {
   categoriesList: any[] = [];
   showCategoryDialog = false;
   categoryForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  constructor(private fb: FormBuilder, public coreService: CoreService) {}
 
   ngOnInit(): void {
     this.categoriesList = [
@@ -64,37 +67,32 @@ export class CategoryComponent implements OnInit {
     this.showCategoryDialog = false;
   }
 
-  saveInvestmentPlan(): void {
-    if (this.categoryForm.valid) {
-      this.categoriesList.push(this.categoryForm.value);
-      this.closeDialog();
-    }
-  }
-
   clearForm(): void {
     this.categoryForm.reset();
   }
 
-  editInvestmentPlan(plan: any): void {
-    this.categoryForm.patchValue(plan);
+  editCategory(category: any): void {
+    this.categoryForm.patchValue(category);
     this.showCategoryDialog = true;
   }
 
-  deleteInvestmentPlan(plan: any): void {
-    this.categoriesList = this.categoriesList.filter((p) => p !== plan);
+  deleteCategory(category: any): void {
+    this.categoriesList = this.categoriesList.filter((p) => p !== category);
   }
 
   setCategoryData() {
     let catagoryData = new CategoryPostDto();
     catagoryData.categoryName = this.categoryForm.value.categoryName;
     catagoryData.description = this.categoryForm.value.description;
-    this.save(catagoryData);
+    this.coreService.saveCategory(this, catagoryData);
   }
-
-  save(catagoryData: any): Observable<any> {
-    return this.http.post(
-      `${environment.apiUrl}/master/category`,
-      catagoryData
-    );
+  onResult(result: any, type: any, other?: any): void {
+    switch (type) {
+      case ApiConstant.SAVE_CATEGORY:
+        break;
+      default:
+        break;
+    }
   }
+  onError(err: any, type: any, other?: any): void {}
 }

@@ -5,6 +5,7 @@ import { ApiCallHelper } from './api-call-helper';
 import { ApiConstant } from '../../api-constant';
 import { ApiCallBack } from './api-callback';
 import { ApiService } from './Api.service';
+import { CategoryPostDto } from '../../dto/category-post-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +14,123 @@ export class CoreService {
   constructor(private apiService: ApiService) {}
 
   getUsersProfile(callback: ApiCallBack, id: any): void {
-    // const params = new HttpParams().set('isPhysician', isPhysician);
     const apiObject: ApiCallHelper = {} as ApiCallHelper;
     apiObject.service = ApiConstant.USER_PROFILE + '/' + id;
     apiObject.method = 'GET';
-    //apiObject.params = params;
     this.apiService.getData(apiObject, callback, ApiConstant.USER_PROFILE);
+  }
+
+  saveCategory(apiCallBack: ApiCallBack, request: CategoryPostDto): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.SAVE_CATEGORY;
+    apiObject.method = 'POST';
+    apiObject.params = request;
+    this.apiService.getData(
+      apiObject,
+      apiCallBack,
+      ApiConstant.SAVE_CATEGORY,
+      request
+    );
+  }
+
+  getAllCategories(callback: ApiCallBack): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.GET_CATEGORIES;
+    apiObject.method = 'GET';
+    this.apiService.getData(apiObject, callback, ApiConstant.GET_CATEGORIES);
+  }
+
+  getCategoriesById(callback: ApiCallBack, id: any): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.GET_CATEGORY_BY_ID + '/' + id;
+    apiObject.method = 'GET';
+    this.apiService.getData(
+      apiObject,
+      callback,
+      ApiConstant.GET_CATEGORY_BY_ID
+    );
+  }
+  updateCategory(
+    apiCallBack: ApiCallBack,
+    id: number,
+    request: CategoryPostDto
+  ): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.UPDATE_CATEGORY + '/' + id;
+    apiObject.method = 'POST';
+    apiObject.params = request;
+    this.apiService.getData(
+      apiObject,
+      apiCallBack,
+      ApiConstant.UPDATE_CATEGORY,
+      request
+    );
+  }
+  deleteCategory(callback: ApiCallBack, categoryId: number): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.DELETE_CATEGORY + categoryId;
+    apiObject.method = 'PUT';
+    this.apiService.getData(apiObject, callback, ApiConstant.DELETE_CATEGORY);
+  }
+
+  saveInvestmentPlan(apiCallBack: ApiCallBack, request: CategoryPostDto): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.SAVE_INVESTMENT_PLAN;
+    apiObject.method = 'POST';
+    apiObject.params = request;
+    this.apiService.getData(
+      apiObject,
+      apiCallBack,
+      ApiConstant.SAVE_INVESTMENT_PLAN,
+      request
+    );
+  }
+
+  getAllInvestmentPlans(callback: ApiCallBack): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.GET_INVESTMENT_PLANS;
+    apiObject.method = 'GET';
+    this.apiService.getData(
+      apiObject,
+      callback,
+      ApiConstant.GET_INVESTMENT_PLANS
+    );
+  }
+
+  getInvestmentPlanById(callback: ApiCallBack, id: any): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.GET_INVESTMENT_PLAN_ID + '/' + id;
+    apiObject.method = 'GET';
+    this.apiService.getData(
+      apiObject,
+      callback,
+      ApiConstant.GET_INVESTMENT_PLAN_ID
+    );
+  }
+  updateInvestmentPlan(
+    apiCallBack: ApiCallBack,
+    id: number,
+    request: CategoryPostDto
+  ): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.UPDATE_INVESTMENT_PLAN + '/' + id;
+    apiObject.method = 'POST';
+    apiObject.params = request;
+    this.apiService.getData(
+      apiObject,
+      apiCallBack,
+      ApiConstant.UPDATE_INVESTMENT_PLAN,
+      request
+    );
+  }
+  deleteInvestmentPlan(callback: ApiCallBack, planId: number): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.DELETE_INVESTMENT_PLAN + planId;
+    apiObject.method = 'PUT';
+    this.apiService.getData(
+      apiObject,
+      callback,
+      ApiConstant.DELETE_INVESTMENT_PLAN
+    );
   }
 }

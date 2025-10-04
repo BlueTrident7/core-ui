@@ -29,23 +29,23 @@
           </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-plan>
+        <ng-template pTemplate="body" let-category>
           <tr>
-            <td>{{ plan.planName }}</td>
-            <td>{{ plan.identifier }}</td>
+            <td>{{ category.planName }}</td>
+            <td>{{ category.identifier }}</td>
 
             <td>
               <button
                 pButton
                 icon="pi pi-pencil"
                 class="p-button-rounded p-button-info mr-2"
-                (click)="editInvestmentPlan(plan)"
+                (click)="editCategory(category)"
               ></button>
               <button
                 pButton
                 icon="pi pi-trash"
                 class="p-button-rounded p-button-danger"
-                (click)="deleteInvestmentPlan(plan)"
+                (click)="deleteCategory(category)"
               ></button>
             </td>
           </tr>
