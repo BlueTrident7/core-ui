@@ -78,16 +78,14 @@
               <label for="planName">Plan Name</label>
               <input id="planName" type="text" formControlName="planName" />
             </div>
+
             <div class="field">
-              <label for="description">Description</label>
-              <textarea
-                pTextarea
-                fluid
+              <label for="planName">Description</label>
+              <input
                 id="description"
+                type="text"
                 formControlName="description"
-                rows="4"
-                placeholder="Enter plan description"
-              ></textarea>
+              />
             </div>
           </div>
 
@@ -95,19 +93,28 @@
             <div class="field">
               <label for="planType">Plan Type</label>
               <select id="planType" formControlName="planType">
-                <option *ngFor="let option of planTypes" [value]="option.identifierCode">{{option.name}}</option>
+                <option
+                  *ngFor="let option of planTypes"
+                  [value]="option.identifierCode"
+                >
+                  {{ option.name }}
+                </option>
               </select>
             </div>
             <div class="field">
-              <label for="policy">Policy</label>
-              <input id="policy" type="text" formControlName="policy" />
+              <label for="planPolicy">Policy</label>
+              <input id="planPolicy" type="text" formControlName="planPolicy" />
             </div>
           </div>
 
           <div class="form-row">
             <div class="field">
               <label for="lockPeriod">Lock Period (months)</label>
-              <input id="lockPeriod" type="number" formControlName="lockPeriod" />
+              <input
+                id="lockPeriod"
+                type="number"
+                formControlName="lockPeriod"
+              />
             </div>
             <div class="field">
               <label for="amount">Amount</label>
@@ -119,10 +126,9 @@
             <button
               type="submit"
               class="btn success"
-              [disabled]="!investmentForm.valid"
               (click)="saveInvestmentPlan()"
             >
-              Save
+              {{ this.buttonLabel }}
             </button>
             <button type="button" class="btn warning" (click)="clearForm()">
               Clear
