@@ -1,8 +1,8 @@
 <div class="layout">
   <main class="main-content">
-    <div class="overview-header">
+    <!-- <div class="overview-header">
       <h2>Logs</h2>
-    </div>
+    </div> -->
 
     <div class="main-table-section">
       <p-card class="user-management-card">
@@ -14,11 +14,8 @@
 
         <p-table
           [value]="logs"
-          selectionMode="single"
-          [(selection)]="selectedLog"
-          dataKey="id"
-          (onRowSelect)="onRowSelect($event)"
           responsiveLayout="scroll"
+          [scrollable]="true"
           [tableStyle]="{ 'min-width': '50rem' }"
           class="p-datatable-gridlines"
         >
@@ -33,7 +30,7 @@
           </ng-template>
 
           <ng-template pTemplate="body" let-log>
-            <tr [pSelectableRow]="log">
+            <tr>
               <td>{{ log.timestamp }}</td>
               <td>
                 <span
@@ -55,6 +52,7 @@
     </div>
 
     <!-- Details Sidebar -->
+    <!--
     <p-sidebar
       [(visible)]="detailsVisible"
       position="right"
@@ -91,5 +89,6 @@
         </table>
       </div>
     </p-sidebar>
+    -->
   </main>
 </div>
