@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/api', // local backend
-  baseUrl: 'http://localhost:8080/api-gateway',
+  baseUrl: 'http://localhost:8080/',
 };

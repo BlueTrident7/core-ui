@@ -15,7 +15,7 @@
       </ng-template>
 
       <p-table
-        [value]="categoriesList"
+        [value]="this.categoriesList"
         responsiveLayout="scroll"
         [scrollable]="true"
         [tableStyle]="{ 'min-width': '35rem' }"
@@ -24,15 +24,15 @@
         <ng-template pTemplate="header">
           <tr>
             <th>Name</th>
-            <th>Identifier</th>
+            <th>Description</th>
             <th>Action</th>
           </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-category>
           <tr>
-            <td>{{ category.planName }}</td>
-            <td>{{ category.identifier }}</td>
+            <td>{{ category.categoryName }}</td>
+            <td>{{ category.description }}</td>
 
             <td>
               <button

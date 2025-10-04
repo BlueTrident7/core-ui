@@ -43,11 +43,8 @@ export class CategoryComponent implements OnInit, ApiCallBack {
   constructor(private fb: FormBuilder, public coreService: CoreService) {}
 
   ngOnInit(): void {
-    this.categoriesList = [
-      { planName: 'General', amount: 50000, identifier: 'GEN' },
-      { planName: 'Women', amount: 75000, identifier: 'WOM' },
-      { planName: 'Farmers', amount: 100000, identifier: 'FARM' },
-    ];
+    this.getAllCategories();
+
     this.initializeForm();
   }
 
@@ -86,9 +83,18 @@ export class CategoryComponent implements OnInit, ApiCallBack {
     catagoryData.description = this.categoryForm.value.description;
     this.coreService.saveCategory(this, catagoryData);
   }
+
+  getAllCategories() {
+    this.coreService.getAllCategories(this);
+  }
   onResult(result: any, type: any, other?: any): void {
     switch (type) {
       case ApiConstant.SAVE_CATEGORY:
+        this.showCategoryDialog = false;
+        break;
+      case ApiConstant.GET_CATEGORIES:
+        this.categoriesList = [];
+        this.categoriesList = result.data;
         break;
       default:
         break;
