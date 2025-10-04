@@ -1,0 +1,134 @@
+/* Layout (uses the light theme palette used earlier) */
+.noaccess-layout {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem;
+  box-sizing: border-box;
+  color: #2c3e50;
+}
+
+/* Main card */
+.noaccess-card {
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2.25rem;
+  box-shadow: 0 6px 30px rgba(44, 62, 80, 0.06);
+  border: 1px solid #e1e8ed;
+  align-items: center;
+}
+
+.illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.illustration img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(100, 116, 139, 0.06);
+}
+
+/* Content */
+.content {
+  padding: 0.5rem 0.25rem;
+}
+
+.content h1 {
+  margin: 0 0 0.6rem 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #233447;
+  letter-spacing: 0.2px;
+}
+
+.lead {
+  margin: 0 0 1rem 0;
+  color: #465a6b;
+  line-height: 1.5;
+}
+
+/* meta list with small icons */
+.meta-list {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.meta-list li {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  color: #4a6578;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.meta-icon {
+  flex: 0 0 22px;
+  height: 22px;
+}
+
+/* Buttons */
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(102, 126, 234, 0.15);
+}
+
+.btn.outline {
+  background: transparent;
+  color: #465a6b;
+  border: 1px solid rgba(35, 52, 71, 0.08);
+}
+
+/* hint paragraph */
+.hint {
+  margin-top: 0.9rem;
+  color: #718899;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .noaccess-card {
+    grid-template-columns: 1fr;
+    padding: 1.25rem;
+  }
+
+  .illustration {
+    order: -1;
+  }
+
+  .content h1 {
+    font-size: 1.6rem;
+  }
+}
