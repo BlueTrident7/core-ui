@@ -57,7 +57,7 @@ export class CoreService {
   ): void {
     const apiObject: ApiCallHelper = {} as ApiCallHelper;
     apiObject.service = ApiConstant.UPDATE_CATEGORY + '/' + id;
-    apiObject.method = 'POST';
+    apiObject.method = 'PUT';
     apiObject.params = request;
     this.apiService.getData(
       apiObject,
@@ -68,8 +68,8 @@ export class CoreService {
   }
   deleteCategory(callback: ApiCallBack, categoryId: number): void {
     const apiObject: ApiCallHelper = {} as ApiCallHelper;
-    apiObject.service = ApiConstant.DELETE_CATEGORY + categoryId;
-    apiObject.method = 'PUT';
+    apiObject.service = ApiConstant.DELETE_CATEGORY + '/' + categoryId;
+    apiObject.method = 'DELETE';
     this.apiService.getData(apiObject, callback, ApiConstant.DELETE_CATEGORY);
   }
 
@@ -114,7 +114,7 @@ export class CoreService {
   ): void {
     const apiObject: ApiCallHelper = {} as ApiCallHelper;
     apiObject.service = ApiConstant.UPDATE_INVESTMENT_PLAN + '/' + id;
-    apiObject.method = 'POST';
+    apiObject.method = 'PUT';
     apiObject.params = request;
     this.apiService.getData(
       apiObject,
@@ -125,8 +125,8 @@ export class CoreService {
   }
   deleteInvestmentPlan(callback: ApiCallBack, planId: number): void {
     const apiObject: ApiCallHelper = {} as ApiCallHelper;
-    apiObject.service = ApiConstant.DELETE_INVESTMENT_PLAN + planId;
-    apiObject.method = 'PUT';
+    apiObject.service = ApiConstant.DELETE_INVESTMENT_PLAN + '/' + planId;
+    apiObject.method = 'DELETE';
     this.apiService.getData(
       apiObject,
       callback,
