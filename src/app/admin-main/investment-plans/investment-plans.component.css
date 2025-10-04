@@ -177,7 +177,8 @@
 .custom-dialog {
   background-color: #fff;
   border-radius: 10px;
-  width: 500px;
+  width: 600px;
+  max-width: 90vw;
   padding: 1.5rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.3s ease-in-out;
@@ -218,11 +219,22 @@
 }
 
 .custom-dialog-body input[type="text"],
-.custom-dialog-body input[type="number"] {
+.custom-dialog-body input[type="number"],
+.custom-dialog-body textarea,
+.custom-dialog-body select {
   width: 100%;
   padding: 0.5rem;
   border-radius: 6px;
   border: 1px solid #ccc;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row .field {
+  flex: 1;
 }
 
 .field-checkbox {

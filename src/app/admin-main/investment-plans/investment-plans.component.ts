@@ -9,10 +9,12 @@ import {
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DropdownModule } from 'primeng/dropdown';
 @Component({
   selector: 'app-investment-plans',
   imports: [
@@ -22,8 +24,10 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     DialogModule,
     TableModule,
     InputTextModule,
+    AutoCompleteModule,
     CheckboxModule,
-    CardModule
+    CardModule,
+    DropdownModule
   ],
   templateUrl: './investment-plans.component.html',
   styleUrl: './investment-plans.component.css',
@@ -32,6 +36,13 @@ export class InvestmentPlansComponent implements OnInit {
   investmentPlans: any[] = [];
   showInvestmentDialog = false;
   investmentForm!: FormGroup;
+  planPolicyOptions = [
+    { label: 'Standard', value: 'standard' },
+    { label: 'Premium', value: 'premium' },
+    { label: 'VIP', value: 'vip' }
+  ];
+  planTypes:any []=[];
+  filteredPlanPolicies: any[] = [];
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -40,14 +51,24 @@ export class InvestmentPlansComponent implements OnInit {
       { planName: 'Secure Future', amount: 75000, lockPeriod: 24 },
       { planName: 'Wealth Builder', amount: 100000, lockPeriod: 36 },
     ];
+
+ this. planTypes = [
+    { name: 'Day', identifierCode: 'DAILY' },
+    { name: 'Week', identifierCode: 'WEEKLY' },
+     { name: 'Month', identifierCode: 'MONTHLY' },
+    { name: 'Year', identifierCode: 'YEARLY' },
+  ]
     this.initializeForm();
   }
 
   initializeForm(): void {
     this.investmentForm = this.fb.group({
       planName: ['', Validators.required],
+      policy: ['', Validators.required],
       amount: [null, [Validators.required, Validators.min(1)]],
       lockPeriod: [null, [Validators.required, Validators.min(1)]],
+      description: ['', Validators.required],
+      planType: ['', Validators.required],
       acceptedTerms: [false, Validators.requiredTrue],
     });
   }
@@ -79,5 +100,12 @@ export class InvestmentPlansComponent implements OnInit {
 
   deleteInvestmentPlan(plan: any): void {
     this.investmentPlans = this.investmentPlans.filter((p) => p !== plan);
+  }
+
+  filterPlanPolicies(event: any): void {
+    const query = event.query.toLowerCase();
+    this.filteredPlanPolicies = this.planPolicyOptions.filter(option =>
+      option.label.toLowerCase().includes(query)
+    );
   }
 }
