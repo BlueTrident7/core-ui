@@ -44,9 +44,16 @@ export class InvestmentPlansComponent implements OnInit {
   investmentForm!: FormGroup;
   buttonLabel: string = 'Save';
   selectedPlan: any;
+  planTypes: any[] = [];
   constructor(private fb: FormBuilder, public coreService: CoreService) {}
 
   ngOnInit(): void {
+    this.planTypes = [
+      { name: 'Day', identifierCode: 'DAILY' },
+      { name: 'Week', identifierCode: 'WEEKLY' },
+      { name: 'Month', identifierCode: 'MONTHLY' },
+      { name: 'Year', identifierCode: 'YEARLY' },
+    ];
     this.initializeForm();
   }
 
@@ -137,10 +144,4 @@ export class InvestmentPlansComponent implements OnInit {
     }
   }
   onError(err: any, type: any, other?: any): void {}
-  filterPlanPolicies(event: any): void {
-    const query = event.query.toLowerCase();
-    this.filteredPlanPolicies = this.planPolicyOptions.filter((option) =>
-      option.label.toLowerCase().includes(query)
-    );
-  }
 }

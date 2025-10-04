@@ -78,16 +78,14 @@
               <label for="planName">Plan Name</label>
               <input id="planName" type="text" formControlName="planName" />
             </div>
+
             <div class="field">
-              <label for="description">Description</label>
-              <textarea
-                pTextarea
-                fluid
+              <label for="planName">Description</label>
+              <input
                 id="description"
+                type="text"
                 formControlName="description"
-                rows="4"
-                placeholder="Enter plan description"
-              ></textarea>
+              />
             </div>
           </div>
 
@@ -95,7 +93,12 @@
             <div class="field">
               <label for="planType">Plan Type</label>
               <select id="planType" formControlName="planType">
-                <option *ngFor="let option of planTypes" [value]="option.identifierCode">{{option.name}}</option>
+                <option
+                  *ngFor="let option of planTypes"
+                  [value]="option.identifierCode"
+                >
+                  {{ option.name }}
+                </option>
               </select>
             </div>
             <div class="field">
@@ -107,7 +110,11 @@
           <div class="form-row">
             <div class="field">
               <label for="lockPeriod">Lock Period (months)</label>
-              <input id="lockPeriod" type="number" formControlName="lockPeriod" />
+              <input
+                id="lockPeriod"
+                type="number"
+                formControlName="lockPeriod"
+              />
             </div>
             <div class="field">
               <label for="amount">Amount</label>
