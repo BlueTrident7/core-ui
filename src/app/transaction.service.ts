@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
-import { ApiService } from './base/api/api.service';
+import { ApiService } from './base/api/Api.service';
 import { ApiCallBack } from './base/api/api-callback';
 import { ApiCallHelper } from './base/api/api-call-helper';
 import { ApiConstant } from './api-constant';
