@@ -13,8 +13,6 @@ import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { PaymentComponent } from '../../payment/payment.component';
-
 @Component({
   selector: 'app-investment-plans',
   imports: [
@@ -25,8 +23,7 @@ import { PaymentComponent } from '../../payment/payment.component';
     TableModule,
     InputTextModule,
     CheckboxModule,
-    CardModule,
-    PaymentComponent
+    CardModule
   ],
   templateUrl: './investment-plans.component.html',
   styleUrl: './investment-plans.component.css',
