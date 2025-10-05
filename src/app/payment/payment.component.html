@@ -1,12 +1,12 @@
-<div class="payment-gateway-container">
-  <div class="header">
-    <!-- <h1 class="title">Choose Your Payment Method</h1>
+<!-- <div class="payment-gateway-container">
+  <div class="header"> -->
+<!-- <h1 class="title">Choose Your Payment Method</h1>
     <p class="subtitle">Secure and instant payments with your preferred option</p> -->
-  </div>
+<!-- </div>
 
-  <div class="payment-options">
-    <!-- GPay Option -->
-    <div class="payment-card gpay-card" (click)="selectPaymentMethod('gpay')">
+  <div class="payment-options"> -->
+<!-- GPay Option -->
+<!-- <div class="payment-card gpay-card" (click)="selectPaymentMethod('gpay')">
       <div class="card-icon gpay-icon">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -22,10 +22,10 @@
       <div class="card-arrow">
         <i class="pi pi-chevron-right"></i>
       </div>
-    </div>
+    </div> -->
 
-    <!-- UPI ID Option -->
-    <div class="payment-card upi-card" (click)="selectPaymentMethod('upi')">
+<!-- UPI ID Option -->
+<!-- <div class="payment-card upi-card" (click)="selectPaymentMethod('upi')">
       <div class="card-icon upi-icon">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="2" y="2" width="20" height="20" rx="4" fill="#FF6B35"/>
@@ -39,10 +39,10 @@
       <div class="card-arrow">
         <i class="pi pi-chevron-right"></i>
       </div>
-    </div>
+    </div> -->
 
-    <!-- PhonePay Option -->
-    <div class="payment-card phonepay-card" (click)="selectPaymentMethod('phonepay')">
+<!-- PhonePay Option -->
+<!-- <div class="payment-card phonepay-card" (click)="selectPaymentMethod('phonepay')">
       <div class="card-icon phonepay-icon">
         <img src="assets/Phonepe_logo.jfif" alt="PhonePe" style="width: 100%; height: 100%; object-fit: contain;" />
       </div>
@@ -54,10 +54,10 @@
         <i class="pi pi-chevron-right"></i>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <!-- UPI ID Input Form (shown when UPI is selected) -->
-  <div class="upi-form" *ngIf="selectedMethod === 'upi'">
+<!-- UPI ID Input Form (shown when UPI is selected) -->
+<!-- <div class="upi-form" *ngIf="selectedMethod === 'upi'">
     <form [formGroup]="upiForm" (ngSubmit)="processUPIPayment()">
       <div class="form-group">
         <label for="upiId">UPI ID</label>
@@ -74,11 +74,19 @@
         Pay Now
       </button>
     </form>
-  </div>
+  </div> -->
 
-  <!-- Amount Display -->
-  <div class="amount-display">
+<!-- Amount Display -->
+<!-- <div class="amount-display">
     <div class="amount-label">Total Amount:</div>
     <div class="amount-value">₹{{ amount }}</div>
   </div>
+</div> -->
+
+
+<div class="text-center mt-5">
+  <button class="btn btn-primary btn-lg" (click)="payNow()">
+    Pay ₹500
+  </button>
 </div>
+

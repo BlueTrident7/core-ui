@@ -17,4 +17,13 @@ export class ApiConstant {
   public static TRANSACTION_LIST = 'transaction/list';
 
   public static INVESTMENT_PLANS_LIST = 'investment/plans';
+
+
+  // -----------------PAYMENT----------------
+  public static CREATE_ORDER = 'create/order';
+  public static VERIFY_PAYMENT = 'verify/payment';
+
+
+
+
 }

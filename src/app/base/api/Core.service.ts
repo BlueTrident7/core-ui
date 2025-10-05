@@ -6,6 +6,8 @@ import { ApiConstant } from '../../api-constant';
 import { ApiCallBack } from './api-callback';
 import { ApiService } from './Api.service';
 import { CategoryPostDto } from '../../dto/category-post-dto';
+import { CreateOrderRequest } from '../../dto/CreateOrderRequest';
+import { PaymentVerificationRequest } from '../../dto/PaymentVerificationRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -132,5 +134,21 @@ export class CoreService {
       callback,
       ApiConstant.DELETE_INVESTMENT_PLAN
     );
+  }
+
+  createOrder(callback: ApiCallBack, request: CreateOrderRequest): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.CREATE_ORDER;
+    apiObject.method = 'POST';
+    apiObject.params = request;
+    this.apiService.getData(apiObject, callback, ApiConstant.CREATE_ORDER);
+  }
+
+  verifyPayment(callback: ApiCallBack, vreq: PaymentVerificationRequest): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.VERIFY_PAYMENT;
+    apiObject.method = 'POST';
+    apiObject.params = vreq;
+    this.apiService.getData(apiObject, callback, ApiConstant.VERIFY_PAYMENT);
   }
 }
