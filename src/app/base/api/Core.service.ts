@@ -4,13 +4,15 @@ import { HttpParams } from '@angular/common/http';
 import { ApiCallHelper } from './api-call-helper';
 import { ApiConstant } from '../../api-constant';
 import { ApiCallBack } from './api-callback';
-import { ApiService } from './Api.service';
+import { ApiService } from './api.service';
 import { CategoryPostDto } from '../../dto/category-post-dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoreService {
+  selectedPlan: any;
+
   constructor(private apiService: ApiService) {}
 
   getUsersProfile(callback: ApiCallBack, id: any): void {

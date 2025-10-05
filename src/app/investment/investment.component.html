@@ -13,10 +13,7 @@
 
   <!-- Plans Grid -->
   <div class="plans-grid">
-    <div
-      class="plan-card"
-      *ngFor="let plan of getPlansByType(activeTab)"
-    >
+    <div class="plan-card" *ngFor="let plan of getPlansByType(activeTab)">
       <h3 class="plan-title">{{ plan.name }}</h3>
       <p class="plan-rate">₹ {{ plan.rate }}</p>
 
@@ -29,26 +26,11 @@
         </button>
       </div>
 
-      <!-- Overlap panel -->
       <div class="plan-panel" *ngIf="openPanel === plan">
         <p>{{ plan.description }}</p>
       </div>
     </div>
   </div>
-
-  <div class="custom-dialog-overlay" *ngIf="showDialog">
-    <div class="custom-dialog">
-      <div class="custom-dialog-header">
-        <h3> </h3>
-        <button class="close-btn" (click)="closeDialog()">×</button>
-      </div>
-
-      <div class="custom-dialog-body">
-        <app-payment [selectedPlan]="selectedPlan"></app-payment>
-      </div>
-    </div>
-  </div>
 </div>
 
-<!-- Router outlet for child routes like payment -->
 <router-outlet></router-outlet>

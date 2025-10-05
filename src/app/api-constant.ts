@@ -19,4 +19,8 @@ export class ApiConstant {
   public static INVESTMENT_PLANS_LIST = 'investment/plans';
 
   public static GET_ADMIN_PANEL_INFO = 'admin/panel';
+
+  public static CREATE_PAYMENT_ORDER = 'create-transaction';
+
+  public static VERIFY_PAYMENT = 'verify';
 }
