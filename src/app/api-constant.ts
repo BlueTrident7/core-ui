@@ -26,4 +26,6 @@ export class ApiConstant {
   public static CREATE_PAYMENT_ORDER = 'create-transaction';
 
   public static VERIFY_PAYMENT = 'verify';
+
+  public static MARK_AS_FAIL_PAYMENT = 'payment/fail';
 }

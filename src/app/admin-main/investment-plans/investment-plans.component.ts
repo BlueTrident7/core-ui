@@ -128,7 +128,6 @@ export class InvestmentPlansComponent implements OnInit {
       case ApiConstant.GET_INVESTMENT_PLANS:
         this.investmentPlans = [];
         this.investmentPlans = result.data;
-
         break;
       case ApiConstant.DELETE_INVESTMENT_PLAN:
         this.getAllInvestmentPlans();

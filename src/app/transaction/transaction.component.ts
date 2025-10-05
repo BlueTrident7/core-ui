@@ -4,7 +4,10 @@ import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
-import { TransactionsDto } from '../dto/transactions-dto';
+import {
+  PaymentTransactionDTO,
+  TransactionsDto,
+} from '../dto/transactions-dto';
 import { ApiCallBack } from '../base/api/api-callback';
 import { TransactionService } from '../transaction.service';
 import { ApiConstant } from '../api-constant';
@@ -17,8 +20,7 @@ import { ApiConstant } from '../api-constant';
   styleUrls: ['./transaction.component.css'],
 })
 export class TransactionComponent implements OnInit, ApiCallBack {
-  transactionList: TransactionsDto[] = [];
-  loading = false;
+  transactionList: PaymentTransactionDTO[] = [];
 
   constructor(private transactionService: TransactionService) {}
 
@@ -27,7 +29,6 @@ export class TransactionComponent implements OnInit, ApiCallBack {
   }
 
   getTransactionList() {
-    this.loading = true;
     this.transactionService.getTransactionList(this, 1);
   }
 
@@ -64,25 +65,50 @@ export class TransactionComponent implements OnInit, ApiCallBack {
         return 'secondary';
     }
   }
+  mapStatus(status: string): string {
+    switch ((status || '').toUpperCase()) {
+      case 'SUCCESS':
+      case 'REFUNDED':
+        return 'Completed';
+      case 'FAILED':
+        return 'Failed';
+      case 'CREATED':
+      case 'INITIATED':
+        return 'Pending';
+      default:
+        return 'Processing';
+    }
+  }
+
+  mapTransactionType(status: string): string {
+    switch ((status || '').toUpperCase()) {
+      case 'INVESTMENT':
+        return 'Investment';
+      case 'INVESTMENT':
+        return 'WithDrawl';
+      case 'REFUNDED':
+        return 'Refund';
+      default:
+        return 'Investment';
+    }
+  }
 
   onResult(result: any, type: any): void {
     switch (type) {
       case ApiConstant.TRANSACTION_LIST:
         this.transactionList = (result.data || []).map((tx: any) => ({
-          id: tx.id,
-          type: tx.type,
-          transactionNumber: tx.transactionNumber,
-          date: new Date(tx.date),
-          amount: tx.amount,
-          status: tx.status,
+          id: tx.transactionId || tx.paymentId,
+          type: this.mapTransactionType(tx.transactionType),
+          transactionNumber: tx.externalTransactionId || tx.orderId || '-',
+          date: tx.createdAt ? new Date(tx.createdAt) : null,
+          amount: tx.amount || 0,
+          status: this.mapStatus(tx.transactionStatus || tx.paymentStatus),
         }));
-        this.loading = false;
         break;
     }
   }
 
   onError(err: any, type: any): void {
     console.error('Error fetching transactions', err);
-    this.loading = false;
   }
 }

@@ -5,14 +5,19 @@ export class CreateOrderData {
   key?: string;
 }
 export class CreateOrderRequest {
-  amount?: number;
+  public amount?: number;
   receipt?: string;
   userId?: number;
   investmentId?: number;
 }
 
 export class VerifyPaymentRequest {
-  razorpayOrderId?: string;
-  razorpayPaymentId?: string;
-  razorpaySignature?: string;
+  public razorpayOrderId?: string;
+  public razorpayPaymentId?: string;
+  public razorpaySignature?: string;
+}
+
+export class MarkPaymentFailedRequest {
+  public orderId?: string;
+  public reason?: string;
 }

@@ -2,27 +2,28 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon'; // 👈 import this
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
-import { CoreService } from '../base/api/core.service';
 import { PaymentService } from '../base/api/payment.service';
 import {
   CreateOrderRequest,
+  MarkPaymentFailedRequest,
   VerifyPaymentRequest,
 } from '../dto/create-order-data';
 import { Init } from 'v8';
 import { ApiCallBack } from '../base/api/api-callback';
 import { ApiConstant } from '../api-constant';
 import { Colors } from 'chart.js';
+import { CoreService } from '../base/api/core.service';
 
 type PlanType = 'Daily' | 'Weekly' | 'Monthly' | 'Yealy';
 
 interface InvestmentPlan {
   id: number;
-  name: string;
-  rate: number;
+  planName: string;
+  amount: number;
   description: string;
-  type: PlanType;
+  planType: PlanType;
 }
-declare var Razorpay: any; // tell TypeScript this global exists
+declare var Razorpay: any;
 
 @Component({
   selector: 'app-investment',
@@ -36,99 +37,7 @@ export class InvestmentComponent implements ApiCallBack {
   activeTab: PlanType = this.tabs[0];
   showDialog: boolean = false;
 
-  plans: InvestmentPlan[] = [
-    {
-      id: 1,
-      name: 'Equity Growth',
-      rate: 10,
-      description: 'High return long-term equity plan.',
-      type: 'Daily',
-    },
-    {
-      id: 2,
-      name: 'Bluechip Fund',
-      rate: 8000,
-      description: 'Stable growth with bluechip companies.',
-      type: 'Daily',
-    },
-    {
-      id: 3,
-      name: 'Tech Innovators',
-      rate: 15000,
-      description: 'Focused on technology leaders.',
-      type: 'Daily',
-    },
-    {
-      id: 4,
-      name: 'Green Energy',
-      rate: 11000,
-      description: 'Invest in sustainable companies.',
-      type: 'Daily',
-    },
-    {
-      id: 5,
-      name: 'Dividend Kings',
-      rate: 7000,
-      description: 'Steady dividend paying companies.',
-      type: 'Daily',
-    },
-    {
-      id: 6,
-      name: 'Dividend Kings',
-      rate: 7000,
-      description: 'Steady dividend paying companies.',
-      type: 'Daily',
-    },
-    {
-      id: 7,
-      name: 'Dividend Kings',
-      rate: 7000,
-      description: 'Steady dividend paying companies.',
-      type: 'Daily',
-    },
-    {
-      id: 8,
-      name: 'Index Tracker',
-      rate: 9000,
-      description: 'Follows the Nifty 50 index.',
-      type: 'Weekly',
-    },
-    {
-      id: 9,
-      name: 'Corporate Bonds',
-      rate: 6000,
-      description: 'Safe investment in corporate bonds.',
-      type: 'Weekly',
-    },
-    {
-      id: 10,
-      name: 'Corporate Bonds',
-      rate: 6000,
-      description: 'Safe investment in corporate bonds.',
-      type: 'Monthly',
-    },
-    {
-      id: 11,
-      name: 'Real Estate Fund',
-      rate: 13000,
-      description: 'Invest in commercial real estate.',
-      type: 'Monthly',
-    },
-    {
-      id: 12,
-      name: 'International Equity',
-      rate: 14000,
-      description: 'Global market exposure.',
-      type: 'Yealy',
-    },
-    {
-      id: 13,
-      name: 'Balanced Fund',
-      rate: 10000,
-      description: 'Mix of equity and debt.',
-      type: 'Yealy',
-    },
-  ];
+  investmentPlans: InvestmentPlan[] = [];
 
   openPanel: InvestmentPlan | null = null;
   selectedPlan: InvestmentPlan | null = null;
@@ -140,10 +49,14 @@ export class InvestmentComponent implements ApiCallBack {
     public paymentService: PaymentService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getAllInvestmentPlans();
+  }
 
-  getPlansByType(type: PlanType): InvestmentPlan[] {
-    return this.plans.filter((plan) => plan.type === type);
+  getPlansByType(type: string): InvestmentPlan[] {
+    const upperType = type.toUpperCase();
+
+    return this.investmentPlans.filter((plan) => plan.planType === upperType);
   }
 
   togglePanel(plan: InvestmentPlan) {
@@ -151,16 +64,16 @@ export class InvestmentComponent implements ApiCallBack {
   }
 
   openConfirmDialog(plan: InvestmentPlan) {
-    this.coreService.selectedPlan = plan;
+    this.selectedPlan = plan;
     this.createPaymentOrder();
   }
 
   createPaymentOrder() {
     const order = new CreateOrderRequest();
-    order.amount = this.coreService.selectedPlan?.rate;
+    order.amount = this.selectedPlan?.amount;
     order.receipt = 'SJQWIDKM';
     order.userId = 1;
-    order.investmentId = this.coreService.selectedPlan?.id;
+    order.investmentId = this.selectedPlan?.id;
     this.paymentService.createPaymentOrder(this, order);
   }
 
@@ -188,14 +101,14 @@ export class InvestmentComponent implements ApiCallBack {
       order_id: response.orderId, // corrected
       currency: response.currency,
       amount: response.amount, // optional, if your backend sends it
-      name: this.selectedPlan?.name || 'Investment Plan',
+      name: this.selectedPlan?.planName || 'Investment Plan',
       description: this.selectedPlan?.description || '',
       handler: (res: any) => {
         this.processResponse(res);
       },
       prefill: {
         // corrected spelling
-        name: this.selectedPlan?.name,
+        name: this.selectedPlan?.planName,
         email: '', // optional
         contact: '', // optional
       },
@@ -203,8 +116,23 @@ export class InvestmentComponent implements ApiCallBack {
         color: '#528FF0',
       },
       notes: {
-        userId: 1, // custom fields
+        userId: 1,
         planId: this.selectedPlan?.id,
+      },
+      method: {
+        card: true,
+        netbanking: true,
+        upi: true,
+        wallet: true,
+      },
+      modal: {
+        escape: true,
+        backdropclose: true,
+        ondismiss: () => {
+          console.warn('Payment dismissed by user');
+          // Call method to mark as failed
+          this.updateFailedPayment(response.orderId);
+        },
       },
     };
 
@@ -220,6 +148,16 @@ export class InvestmentComponent implements ApiCallBack {
 
     this.paymentService.verifyPayment(this, request);
   }
+
+  getAllInvestmentPlans() {
+    this.coreService.getAllInvestmentPlans(this);
+  }
+  updateFailedPayment(orderId: string): void {
+    let request = new MarkPaymentFailedRequest();
+    request.orderId = orderId;
+    request.reason = 'User Dismissed';
+    this.paymentService.markPaymentAsFailed(this, request);
+  }
   onResult(result: any, type: any, other?: any): void {
     switch (type) {
       case ApiConstant.CREATE_PAYMENT_ORDER:
@@ -228,12 +166,16 @@ export class InvestmentComponent implements ApiCallBack {
         break;
       case ApiConstant.VERIFY_PAYMENT:
         console.log('success Payment');
-
+        break;
+      case ApiConstant.GET_INVESTMENT_PLANS:
+        this.investmentPlans = [];
+        this.investmentPlans = result.data;
         break;
       default:
         break;
     }
   }
+
   onError(err: any, type: any, other?: any): void {
     console.error('Payment error:', err);
     alert('Payment failed. Please try again.');

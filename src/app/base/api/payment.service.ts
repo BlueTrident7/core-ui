@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment.local';
 import {
   CreateOrderData,
   CreateOrderRequest,
+  MarkPaymentFailedRequest,
   VerifyPaymentRequest,
 } from '../../dto/create-order-data';
 import { ApiConstant } from '../../api-constant';
@@ -51,5 +52,19 @@ export class PaymentService {
     apiObject.method = 'POST';
     apiObject.params = request;
     this.apiService.getData(apiObject, apiCallBack, ApiConstant.VERIFY_PAYMENT);
+  }
+  markPaymentAsFailed(
+    apiCallBack: ApiCallBack,
+    request: MarkPaymentFailedRequest
+  ): void {
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.MARK_AS_FAIL_PAYMENT;
+    apiObject.method = 'POST';
+    apiObject.params = request;
+    this.apiService.getData(
+      apiObject,
+      apiCallBack,
+      ApiConstant.MARK_AS_FAIL_PAYMENT
+    );
   }
 }

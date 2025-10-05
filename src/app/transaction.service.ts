@@ -11,12 +11,10 @@ export class TransactionService {
 
   getTransactionList(callback: ApiCallBack, userId: any): void {
     const params = new HttpParams().set('userId', userId);
-
     const apiObject: ApiCallHelper = {} as ApiCallHelper;
     apiObject.service = ApiConstant.TRANSACTION_LIST;
     apiObject.method = 'GET';
     apiObject.params = params;
-
     this.apiService.getData(apiObject, callback, ApiConstant.TRANSACTION_LIST);
   }
 }

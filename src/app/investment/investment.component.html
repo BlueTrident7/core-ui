@@ -14,8 +14,8 @@
   <!-- Plans Grid -->
   <div class="plans-grid">
     <div class="plan-card" *ngFor="let plan of getPlansByType(activeTab)">
-      <h3 class="plan-title">{{ plan.name }}</h3>
-      <p class="plan-rate">₹ {{ plan.rate }}</p>
+      <h3 class="plan-title">{{ plan.planName }}</h3>
+      <p class="plan-rate">₹ {{ plan.amount }}</p>
 
       <div class="plan-actions">
         <button class="btn invest-btn" (click)="openConfirmDialog(plan)">
