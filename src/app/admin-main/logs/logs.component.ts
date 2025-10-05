@@ -64,7 +64,7 @@ export class LogsComponent implements OnInit {
     ];
   }
 
-  onRowSelect(event: any) {
-    this.detailsVisible = true;
-  }
+  // onRowSelect(event: any) {
+  //   this.detailsVisible = true;
+  // }
 }

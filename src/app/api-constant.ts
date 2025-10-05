@@ -23,7 +23,5 @@ export class ApiConstant {
   public static CREATE_ORDER = 'create/order';
   public static VERIFY_PAYMENT = 'verify/payment';
 
-
-
-
+  public static GET_ADMIN_PANEL_INFO = 'admin/panel';
 }

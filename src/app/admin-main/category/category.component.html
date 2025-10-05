@@ -1,26 +1,23 @@
 <div class="layout">
   <main class="main-content">
-    <div class="overview-header">
+    <!-- <div class="overview-header">
       <h2>Category</h2>
-    </div>
+    </div> -->
 
     <div class="main-table-section">
       <p-card class="user-management-card">
         <ng-template pTemplate="header">
           <div class="card-header">
             <h2>Category Management</h2>
+            <button
+              pButton
+              label="Add Category"
+              icon="pi pi-plus"
+              class="add-btn"
+              (click)="openAddCategoryPlanDialog()"
+            ></button>
           </div>
         </ng-template>
-
-        <div class="add-button-container">
-          <button
-            pButton
-            label="Add Category"
-            icon="pi pi-plus"
-            class="add-btn"
-            (click)="openAddCategoryPlanDialog()"
-          ></button>
-        </div>
 
         <p-table
           [value]="categoriesList"
@@ -32,7 +29,7 @@
           <ng-template pTemplate="header">
             <tr>
               <th>Name</th>
-              <th>Identifier</th>
+              <th>Description</th>
               <th>Action</th>
             </tr>
           </ng-template>
@@ -98,7 +95,7 @@
               class="btn success"
               (click)="setCategoryData()"
             >
-              Save
+              {{ this.buttonLabel }}
             </button>
           </div>
         </form>

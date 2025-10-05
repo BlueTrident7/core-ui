@@ -15,6 +15,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'no-access',
+    loadComponent: () =>
+      import('./pages/no-access/no-access.component').then(
+        (m) => m.NoAccessComponent
+      ),
+  },
+  {
     path: 'main',
     loadComponent: () =>
       import('./navbar/navbar.component').then((m) => m.NavbarComponent),

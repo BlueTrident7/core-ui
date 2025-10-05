@@ -1,26 +1,23 @@
 <div class="layout">
   <main class="main-content">
-    <div class="overview-header">
+    <!-- <div class="overview-header">
       <h2>Investment Plans</h2>
-    </div>
+    </div> -->
 
     <div class="main-table-section">
       <p-card class="user-management-card">
         <ng-template pTemplate="header">
           <div class="card-header">
             <h2>Investment Plans Management</h2>
+            <button
+              pButton
+              label="Add Investment Plan"
+              icon="pi pi-plus"
+              class="add-btn"
+              (click)="openAddInvestmentPlanDialog()"
+            ></button>
           </div>
         </ng-template>
-
-        <div class="add-button-container">
-          <button
-            pButton
-            label="Add Investment Plan"
-            icon="pi pi-plus"
-            class="add-btn"
-            (click)="openAddInvestmentPlanDialog()"
-          ></button>
-        </div>
 
         <p-table
           [value]="investmentPlans"
@@ -76,32 +73,65 @@
         </div>
 
         <form [formGroup]="investmentForm" class="custom-dialog-body">
-          <div class="field">
-            <label for="planName">Plan Name</label>
-            <input id="planName" type="text" formControlName="planName" />
+          <div class="form-row">
+            <div class="field">
+              <label for="planName">Plan Name</label>
+              <input id="planName" type="text" formControlName="planName" />
+            </div>
+
+            <div class="field">
+              <label for="planName">Description</label>
+              <input
+                id="description"
+                type="text"
+                formControlName="description"
+              />
+            </div>
           </div>
 
-          <div class="field">
-            <label for="amount">Amount</label>
-            <input id="amount" type="number" formControlName="amount" />
+          <div class="form-row">
+            <div class="field">
+              <label for="planType">Plan Type</label>
+              <select id="planType" formControlName="planType">
+                <option
+                  *ngFor="let option of planTypes"
+                  [value]="option.identifierCode"
+                >
+                  {{ option.name }}
+                </option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="planPolicy">Policy</label>
+              <input id="planPolicy" type="text" formControlName="planPolicy" />
+            </div>
           </div>
 
-          <div class="field">
-            <label for="lockPeriod">Lock Period (months)</label>
-            <input id="lockPeriod" type="number" formControlName="lockPeriod" />
+          <div class="form-row">
+            <div class="field">
+              <label for="lockPeriod">Lock Period (months)</label>
+              <input
+                id="lockPeriod"
+                type="number"
+                formControlName="lockPeriod"
+              />
+            </div>
+            <div class="field">
+              <label for="amount">Amount</label>
+              <input id="amount" type="number" formControlName="amount" />
+            </div>
           </div>
 
           <div class="custom-dialog-footer">
-            <button type="button" class="btn warning" (click)="clearForm()">
-              Clear
-            </button>
             <button
               type="submit"
               class="btn success"
-              [disabled]="!investmentForm.valid"
               (click)="saveInvestmentPlan()"
             >
-              Save
+              {{ this.buttonLabel }}
+            </button>
+            <button type="button" class="btn warning" (click)="clearForm()">
+              Clear
             </button>
           </div>
         </form>

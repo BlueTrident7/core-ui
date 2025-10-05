@@ -9,22 +9,25 @@
     <div class="stats-cards-top">
       <div class="stats-card">
         <h3>Total Users</h3>
-        <p>{{ payload.stats.totalUsers }}</p>
+        <p>{{ adminData?.stats?.totalUsers }}</p>
       </div>
       <div class="stats-card">
         <h3>Active Sessions</h3>
-        <p>{{ payload.stats.activeSessions }}</p>
+        <p>{{ adminData?.stats?.activeSessions }}</p>
       </div>
       <div class="stats-card">
         <h3>Total Transactions</h3>
-        <p>{{ payload.stats.totalTransactions }}</p>
+        <p>{{ adminData?.stats?.totalTransactions }}</p>
       </div>
     </div>
 
     <!-- User Management Table - Below Stats Cards -->
     <div class="content-section p-mb-4 main-table-section">
       <h2>User Management</h2>
-      <p-table [value]="payload.users" class="p-datatable-gridlines">
+      <p-table
+        [value]="this.adminData?.users || []"
+        class="p-datatable-gridlines"
+      >
         <ng-template pTemplate="header">
           <tr>
             <th>ID</th>

@@ -15,7 +15,7 @@ import { DialogModule } from 'primeng/dialog';
 import { environment } from '../../../environments/environment.local';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CategoryPostDto } from '../../dto/category-post-dto';
+import { CategoryGetDTO, CategoryPostDto } from '../../dto/category-post-dto';
 import { CoreService } from '../../base/api/core.service';
 import { ApiCallBack } from '../../base/api/api-callback';
 import { ApiConstant } from '../../api-constant';
@@ -36,10 +36,11 @@ import { ApiConstant } from '../../api-constant';
   styleUrl: './category.component.css',
 })
 export class CategoryComponent implements OnInit, ApiCallBack {
-  categoriesList: any[] = [];
+  categoriesList: CategoryGetDTO[] = [];
   showCategoryDialog = false;
   categoryForm!: FormGroup;
-
+  selectedCategory: any;
+  buttonLabel: string = 'Save';
   constructor(private fb: FormBuilder, public coreService: CoreService) {}
 
   ngOnInit(): void {
@@ -69,19 +70,29 @@ export class CategoryComponent implements OnInit, ApiCallBack {
   }
 
   editCategory(category: any): void {
+    this.buttonLabel = 'Update';
+    this.selectedCategory = category;
     this.categoryForm.patchValue(category);
     this.showCategoryDialog = true;
   }
 
   deleteCategory(category: any): void {
-    this.categoriesList = this.categoriesList.filter((p) => p !== category);
+    this.coreService.deleteCategory(this, category.id);
   }
 
   setCategoryData() {
     let catagoryData = new CategoryPostDto();
     catagoryData.categoryName = this.categoryForm.value.categoryName;
     catagoryData.description = this.categoryForm.value.description;
-    this.coreService.saveCategory(this, catagoryData);
+    if (this.buttonLabel === 'Update') {
+      this.coreService.updateCategory(
+        this,
+        this.selectedCategory.id,
+        catagoryData
+      );
+    } else {
+      this.coreService.saveCategory(this, catagoryData);
+    }
   }
 
   getAllCategories() {
@@ -91,10 +102,21 @@ export class CategoryComponent implements OnInit, ApiCallBack {
     switch (type) {
       case ApiConstant.SAVE_CATEGORY:
         this.showCategoryDialog = false;
+        this.buttonLabel = 'Save';
+        this.getAllCategories();
         break;
       case ApiConstant.GET_CATEGORIES:
         this.categoriesList = [];
         this.categoriesList = result.data;
+
+        break;
+      case ApiConstant.DELETE_CATEGORY:
+        this.getAllCategories();
+        break;
+      case ApiConstant.UPDATE_CATEGORY:
+        this.showCategoryDialog = false;
+        this.getAllCategories();
+        this.buttonLabel = 'Save';
         break;
       default:
         break;
