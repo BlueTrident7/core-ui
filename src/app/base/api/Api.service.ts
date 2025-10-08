@@ -21,9 +21,9 @@ export class ApiService {
   constructor(
     private http: HttpClient,
     private networkService: NetworkService,
-    private offlineQueue: OfflineQueueService
-  ) // private messageService: MessageService
-  {}
+    private offlineQueue: OfflineQueueService,
+    private messageService: MessageService
+  ) {}
 
   getToken(): string | null {
     return (
@@ -36,11 +36,6 @@ export class ApiService {
     const token = this.getToken();
     return new HttpHeaders({ Authorization: 'Bearer ' + token });
   }
-
-  // private getAuthHeader(): HttpHeaders {
-  //   const token = this.cookieService.get(btoa(CookieConstant.ACCESS_TOKEN));
-  //   return new HttpHeaders({ Authorization: 'Bearer ' + atob(token) });
-  // }
 
   getImage(url: string): Observable<Blob> {
     return this.http.get(url, {
@@ -221,24 +216,22 @@ export class ApiService {
   }
 
   showMessage(msg: string, msgType: MessageType): void {
-    switch (
-      msgType
-      //   case MessageType.SUCCESS:
-      //     ArtifactUtils.showSuccessViaToast(this.messageService, msg);
-      //     break;
-      //   case MessageType.ERROR:
-      //     ArtifactUtils.showErrorViaToast(this.messageService, msg);
-      //     break;
-      //   case MessageType.WARNING:
-      //     ArtifactUtils.showWarnViaToast(this.messageService, msg);
-      //     break;
-      //   case MessageType.INFO:
-      //     ArtifactUtils.showInfoViaToast(this.messageService, msg);
-      //     break;
-      //   default:
-      //     ArtifactUtils.showSuccessViaToast(this.messageService, msg);
-      //     break;
-    ) {
+    switch (msgType) {
+      case MessageType.SUCCESS:
+        ArtifactUtils.showSuccessViaToast(this.messageService, msg);
+        break;
+      case MessageType.ERROR:
+        ArtifactUtils.showErrorViaToast(this.messageService, msg);
+        break;
+      case MessageType.WARNING:
+        ArtifactUtils.showWarnViaToast(this.messageService, msg);
+        break;
+      case MessageType.INFO:
+        ArtifactUtils.showInfoViaToast(this.messageService, msg);
+        break;
+      default:
+        ArtifactUtils.showSuccessViaToast(this.messageService, msg);
+        break;
     }
   }
 }

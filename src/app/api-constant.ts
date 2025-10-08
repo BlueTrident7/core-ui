@@ -1,4 +1,7 @@
 export class ApiConstant {
+  public static AUTH_LOGIN = '/auth/login';
+  public static AUTH_REGISTER = '/auth/register';
+
   public static USER_PROFILE = '/user';
   public static SAVE_CATEGORY = 'add/category';
   public static GET_CATEGORIES = 'get/category';
