@@ -18,6 +18,78 @@
         color: #fff;
       }
 
+      /* Contact Section */
+      .contact {
+        padding: 80px 50px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .contact-content {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .contact h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        background: linear-gradient(90deg, #fff, #00d4ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .contact p {
+        font-size: 18px;
+        color: #b0b8d4;
+        margin-bottom: 30px;
+        line-height: 1.6;
+      }
+
+      .contact-email {
+        display: inline-block;
+        padding: 15px 30px;
+        background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 18px;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+      }
+
+      .contact-email:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        background: transparent;
+        border-color: #00d4ff;
+        color: #00d4ff;
+      }
+
+      .contact-email-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 16px;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+        margin: 5px;
+      }
+
+      .contact-email-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        background: transparent;
+        border-color: #00d4ff;
+        color: #00d4ff;
+      }
+
       /* Animated Background */
       .animated-bg {
         position: fixed;
@@ -479,7 +551,7 @@
           <button class="primary-btn" routerLink="/main/investment">
             Start Investing
           </button>
-          <button class="secondary-btn">Learn More</button>
+          <!-- <button class="secondary-btn">Learn More</button> -->
         </div>
       </div>
     </section>
@@ -560,12 +632,25 @@
       </div>
     </section>
 
-    <section class="final-cta" id="contact">
+    <!-- <section class="final-cta" id="contact">
       <h2>Ready to Start Your Investment Journey?</h2>
       <p>
         Join millions of investors already growing their wealth with InvestPro
       </p>
-      <!-- <button class="primary-btn">Create Free Account</button> -->
+      <button class="primary-btn">Create Free Account</button>
+    </section> -->
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact-info">
+      <div class="contact-content">
+        <h2>Contact Developer</h2>
+        <p>For technical support, feature requests, or any inquiries, feel free to reach out:</p>
+        <button class="contact-email" (click)="toggleEmails()">Contact Developer</button>
+        <div *ngIf="showEmails" style="margin-top: 15px;">
+          <a href="mailto:sreehariradhakrishnan2000&#64;gmail.com" class="contact-email-link">sreehariradhakrishnan2000&#64;gmail.com</a>
+          <a href="mailto:kakarlanage29&#64;gmail.com" class="contact-email-link">kakarlanage29&#64;gmail.com</a>
+        </div>
+      </div>
     </section>
 
     <footer>
@@ -654,6 +739,15 @@
           setTimeout(() => ripple.remove(), 600);
         });
       });
+
+      function toggleEmails() {
+        const emailList = document.getElementById("email-list");
+        if (emailList.style.display === "none") {
+          emailList.style.display = "block";
+        } else {
+          emailList.style.display = "none";
+        }
+      }
     </script>
   </body>
 </html>
