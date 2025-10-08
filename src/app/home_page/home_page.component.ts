@@ -10,5 +10,9 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./home_page.component.css']
 })
 export class HomePageComponent {
+  showEmails = false;
 
+  toggleEmails() {
+    this.showEmails = !this.showEmails;
+  }
 }
