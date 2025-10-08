@@ -1,5 +1,4 @@
 export const environment = {
-  production: false,
-  apiUrl: 'https://dev.myserver.com/api', // dev backend
-  baseUrl: './api/',
+  production: true,
+  baseUrl: 'https://cipher07.com/api/',
 };

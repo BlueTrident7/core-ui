@@ -5,7 +5,6 @@
     "cipher-ui": {
       "projectType": "application",
       "root": "",
-      "projectType": "application",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
@@ -15,22 +14,30 @@
             "outputPath": "dist/cipher-ui",
             "index": "src/index.html",
             "main": "src/main.ts",
-"polyfills": ["zone.js"],
-"tsConfig": "tsconfig.app.json",
-"assets": [{ "glob": "**/*", "input": "public" }],
-"styles": [
-  "@angular/material/prebuilt-themes/azure-blue.css",
-  "src/styles.css"
-],
-"scripts": [
-    "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-]
+            "polyfills": ["zone.js"],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [{ "glob": "**/*", "input": "public" }],
+            "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
-                {"type": "initial", "maximumWarning": "500kB", "maximumError": "1MB"},
-                {"type": "anyComponentStyle", "maximumWarning": "4kB", "maximumError": "8kB"}
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
               ],
               "outputHashing": "all",
               "fileReplacements": [
@@ -68,31 +75,23 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": { "buildTarget": "cipher-ui:build:production" },
-            "development": { "buildTarget": "cipher-ui:build:development" },
-            "local": { "buildTarget": "cipher-ui:build:local" }
+            "production": {
+              "buildTarget": "cipher-ui:build:production"
+            },
+            "development": {
+              "buildTarget": "cipher-ui:build:development"
+            },
+            "local": {
+              "buildTarget": "cipher-ui:build:local",
+              "proxyConfig": "proxy.conf.json"
+            }
           },
           "defaultConfiguration": "local"
-        },
-        "extract-i18n": { "builder": "@angular-devkit/build-angular:extract-i18n" },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": ["zone.js","zone.js/testing"],
-            "tsConfig": "tsconfig.spec.json",
-            "assets": [{"glob": "**/*", "input": "public"}],
-            "styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css",
-              "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
-            ],
-            "scripts": [
-                "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-            ]
-          }
         }
       }
     }
   },
-  "cli": {"analytics": "46dc8a41-a162-4bb6-9971-ec094c0f535b"}
+  "cli": {
+    "analytics": "46dc8a41-a162-4bb6-9971-ec094c0f535b"
+  }
 }

@@ -9,6 +9,9 @@ import {
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { LoaderService } from '../loader/loader.service';
+import { ApiCallBack } from '../base/api/api-callback';
+import { ApiCallHelper } from '../base/api/api-call-helper';
+import { ApiConstant } from '../api-constant';
 
 @Component({
   selector: 'app-auth',
@@ -17,14 +20,13 @@ import { LoaderService } from '../loader/loader.service';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
 })
-export class AuthComponent {
+export class AuthComponent implements ApiCallBack {
   isLogin = true;
   registerForm!: FormGroup;
   loginForm!: FormGroup;
-  showTermsModal = false;
   message: string = '';
   currentDate = new Date();
-
+  showTermsModal = false;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -52,7 +54,6 @@ export class AuthComponent {
       { validators: this.passwordMatchValidator }
     );
 
-    // Prevent clearing +91 in mobile number input
     const mobileControl = this.registerForm.get('mobileNumber');
     if (mobileControl) {
       mobileControl.valueChanges.subscribe((value) => {
@@ -82,51 +83,56 @@ export class AuthComponent {
   }
 
   onLogin() {
-    this.router.navigate(['/main/home_page']);
-
-    if (this.loginForm.invalid) return;
-
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
     this.loaderService.showLoader();
-    const credentials = this.loginForm.value; // ✅ Get form values
+    const credentials = this.loginForm.value;
 
-    this.authService.login(credentials).subscribe({
-      next: (res: any) => {
-        if (res.token) {
-          this.authService.setToken(res.token);
-          this.loaderService.hideLoader();
-          this.router.navigate(['/main/home_page']);
-        }
-      },
-      error: (err: any) => {
-        console.error('Login failed', err);
-        this.message = 'Login failed! Please check your credentials.';
-        this.loaderService.hideLoader();
-      },
-    });
+    this.authService.login(this, credentials);
   }
 
   onRegister() {
-    if (this.registerForm.valid) {
-      this.loaderService.showLoader();
-      const { confirmPassword, ...payload } = this.registerForm.value;
-      this.authService.register(payload).subscribe({
-        next: (res) => {
-          console.log('✅ Register successful:', res);
-          this.loaderService.hideLoader();
-          this.router.navigate(['/auth']);
-        },
-        error: (err) => {
-          console.error('Registration failed:', err);
-          this.loaderService.hideLoader();
-        },
-      });
-    } else {
+    if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
+      return;
+    }
+    this.loaderService.showLoader();
+
+    const { confirmPassword, ...payload } = this.registerForm.value;
+
+    this.authService.register(this, confirmPassword);
+  }
+
+  onResult(result: any, type: any, other?: any): void {
+    this.loaderService.hideLoader();
+
+    switch (type) {
+      case ApiConstant.AUTH_LOGIN:
+        if (result.data.token) {
+          this.authService.setToken(result.data.token);
+          this.router.navigate(['/main/home_page']);
+        } else {
+          this.message = 'Login failed: invalid token.';
+        }
+        break;
+
+      case ApiConstant.AUTH_REGISTER:
+        this.message = 'Registration successful! Please login.';
+        this.toggleAuth();
+        this.registerForm.reset();
+        break;
+
+      default:
+        break;
     }
   }
 
-  onSocialLogin(provider: string) {
-    console.log(`Login with ${provider}`);
-    // Implement social login logic here
+  onError(err: any, type: any, other?: any): void {
+    this.loaderService.hideLoader();
+    if (type === ApiConstant.AUTH_LOGIN) {
+    } else if (type === ApiConstant.AUTH_REGISTER) {
+    }
   }
 }

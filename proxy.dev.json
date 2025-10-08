@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "https://canary-dev.lifetrenz.com/api-gateway/",
+    "target": "https://cipher07.com/",
     "secure": false,
     "logLevel": "debug",
     "pathRewrite": {

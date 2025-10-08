@@ -15,19 +15,9 @@ import { ApiService } from './api.service';
 
 @Injectable({ providedIn: 'root' })
 export class PaymentService {
-  private base = environment.apiUrl;
+  private base = environment.baseUrl;
 
   constructor(private http: HttpClient, public apiService: ApiService) {}
-
-  finalizeInvestment(
-    intentId: number,
-    payload: { orderId: string; paymentId: string }
-  ) {
-    return this.http.post<any>(
-      `${this.base}/investments/${intentId}/confirm`,
-      payload
-    );
-  }
 
   createPaymentOrder(
     apiCallBack: ApiCallBack,
