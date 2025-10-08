@@ -12,11 +12,23 @@ import { LoaderService } from '../loader/loader.service';
 import { ApiCallBack } from '../base/api/api-callback';
 import { ApiCallHelper } from '../base/api/api-call-helper';
 import { ApiConstant } from '../api-constant';
+import { RegisterRequest } from '../dto/register-request';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { ArtifactUtils } from '../../util/artifact-utils';
+import { MessageService } from 'primeng/api';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ConfirmDialogModule,
+    ToastModule,
+    TranslateModule,
+  ],
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
 })
@@ -31,7 +43,9 @@ export class AuthComponent implements ApiCallBack {
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private messageService: MessageService,
+    private translateService: TranslateService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -99,10 +113,17 @@ export class AuthComponent implements ApiCallBack {
       return;
     }
     this.loaderService.showLoader();
+    const formValues = this.registerForm.value;
 
-    const { confirmPassword, ...payload } = this.registerForm.value;
-
-    this.authService.register(this, confirmPassword);
+    let payload = new RegisterRequest();
+    payload.confirmPassword = formValues.confirmPassword;
+    payload.email = formValues.email;
+    payload.fullName = formValues.fullName;
+    payload.phoneNumber = formValues.phoneNumber;
+    payload.password = formValues.password;
+    payload.categoryId = formValues.category;
+    payload.termsAccepted = formValues.termsAccepted;
+    this.authService.register(this, payload);
   }
 
   onResult(result: any, type: any, other?: any): void {
@@ -113,6 +134,10 @@ export class AuthComponent implements ApiCallBack {
         if (result.data.token) {
           this.authService.setToken(result.data.token);
           this.router.navigate(['/main/home_page']);
+          ArtifactUtils.showSuccessViaToast(
+            this.messageService,
+            this.translateService.instant('Item Added Successfully')
+          );
         } else {
           this.message = 'Login failed: invalid token.';
         }
@@ -120,6 +145,7 @@ export class AuthComponent implements ApiCallBack {
 
       case ApiConstant.AUTH_REGISTER:
         this.message = 'Registration successful! Please login.';
+        this.authService.setToken(result.data.token);
         this.toggleAuth();
         this.registerForm.reset();
         break;

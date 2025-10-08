@@ -158,22 +158,45 @@
         </div>
 
         <div class="input-group">
-          <select id="personType" formControlName="personType" class="form-select">
+          <select
+            id="personType"
+            formControlName="personType"
+            class="form-select"
+          >
             <option value="" disabled>Select Person Type</option>
             <option value="specialized">Specialized Person</option>
             <option value="handicap">Handicap</option>
           </select>
-          <div class="error" *ngIf="rf['personType'].touched && rf['personType'].errors">
-            <small *ngIf="rf['personType'].errors['required']">Person type is required</small>
+          <div
+            class="error"
+            *ngIf="rf['personType'].touched && rf['personType'].errors"
+          >
+            <small *ngIf="rf['personType'].errors['required']"
+              >Person type is required</small
+            >
           </div>
         </div>
 
         <div class="input-group">
           <label for="mobileNumber">Mobile Number</label>
-          <input id="mobileNumber" type="tel" formControlName="mobileNumber" placeholder="+91" class="form-input" autocomplete="tel" />
-          <div class="error" *ngIf="rf['mobileNumber'].touched && rf['mobileNumber'].errors">
-            <small *ngIf="rf['mobileNumber'].errors['required']">Mobile number is required</small>
-            <small *ngIf="rf['mobileNumber'].errors['pattern']">Enter a valid mobile number</small>
+          <input
+            id="mobileNumber"
+            type="tel"
+            formControlName="mobileNumber"
+            placeholder="+91"
+            class="form-input"
+            autocomplete="tel"
+          />
+          <div
+            class="error"
+            *ngIf="rf['mobileNumber'].touched && rf['mobileNumber'].errors"
+          >
+            <small *ngIf="rf['mobileNumber'].errors['required']"
+              >Mobile number is required</small
+            >
+            <small *ngIf="rf['mobileNumber'].errors['pattern']"
+              >Enter a valid mobile number</small
+            >
           </div>
         </div>
 
@@ -256,34 +279,69 @@
       <div class="modal-body">
         <div class="terms-content">
           <!-- <h4>Terms and Conditions</h4> -->
-          <p>Welcome to our platform. By using our services, you agree to the following terms and conditions:</p>
+          <p>
+            Welcome to our platform. By using our services, you agree to the
+            following terms and conditions:
+          </p>
 
           <h5>1. Acceptance of Terms</h5>
-          <p>By accessing and using this platform, you accept and agree to be bound by the terms and provision of this agreement.</p>
+          <p>
+            By accessing and using this platform, you accept and agree to be
+            bound by the terms and provision of this agreement.
+          </p>
 
           <h5>2. User Responsibilities</h5>
-          <p>You are responsible for maintaining the confidentiality of your account and password. You agree to accept responsibility for all activities that occur under your account or password.</p>
+          <p>
+            You are responsible for maintaining the confidentiality of your
+            account and password. You agree to accept responsibility for all
+            activities that occur under your account or password.
+          </p>
 
           <h5>3. Privacy Policy</h5>
-          <p>Your privacy is important to us. Please review our Privacy Policy, which also governs your use of the service, to understand our practices.</p>
+          <p>
+            Your privacy is important to us. Please review our Privacy Policy,
+            which also governs your use of the service, to understand our
+            practices.
+          </p>
 
           <h5>4. Prohibited Activities</h5>
-          <p>You may not use the service for any illegal or unauthorized purpose. You must not violate any laws in your jurisdiction.</p>
+          <p>
+            You may not use the service for any illegal or unauthorized purpose.
+            You must not violate any laws in your jurisdiction.
+          </p>
 
           <h5>5. Content Ownership</h5>
-          <p>All content, features, and functionality of the service are owned by us and are protected by copyright, trademark, and other intellectual property laws.</p>
+          <p>
+            All content, features, and functionality of the service are owned by
+            us and are protected by copyright, trademark, and other intellectual
+            property laws.
+          </p>
 
           <h5>6. Limitation of Liability</h5>
-          <p>In no event shall we be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of the service.</p>
+          <p>
+            In no event shall we be liable for any indirect, incidental,
+            special, consequential, or punitive damages arising out of or
+            related to your use of the service.
+          </p>
 
           <h5>7. Termination</h5>
-          <p>We may terminate or suspend your account and access to the service immediately, without prior notice, for any reason.</p>
+          <p>
+            We may terminate or suspend your account and access to the service
+            immediately, without prior notice, for any reason.
+          </p>
 
           <h5>8. Changes to Terms</h5>
-          <p>We reserve the right to modify or replace these terms at any time. If a revision is material, we will provide at least 30 days notice prior to any new terms taking effect.</p>
+          <p>
+            We reserve the right to modify or replace these terms at any time.
+            If a revision is material, we will provide at least 30 days notice
+            prior to any new terms taking effect.
+          </p>
 
           <h5>9. Contact Information</h5>
-          <p>If you have any questions about these Terms and Conditions, please contact us through our support channels.</p>
+          <p>
+            If you have any questions about these Terms and Conditions, please
+            contact us through our support channels.
+          </p>
 
           <!-- <p><strong>Last updated:</strong> {{ currentDate | date:'mediumDate' }}</p> -->
         </div>
@@ -291,3 +349,5 @@
     </div>
   </div>
 </div>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+<p-toast key="tst" [preventOpenDuplicates]="true"></p-toast>

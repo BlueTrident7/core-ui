@@ -51,7 +51,7 @@ export class AuthService {
 
   register(apiCallBack: ApiCallBack, userData: any): void {
     const apiObject: ApiCallHelper = {} as ApiCallHelper;
-    apiObject.service = ApiConstant.AUTH_REGISTER; // define e.g. '/auth/register'
+    apiObject.service = ApiConstant.AUTH_REGISTER;
     apiObject.method = 'POST';
     apiObject.params = userData;
 

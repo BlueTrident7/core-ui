@@ -23,6 +23,8 @@ import { CoreService } from '../../base/api/core.service';
 import { DropdownModule } from 'primeng/dropdown';
 @Component({
   selector: 'app-investment-plans',
+  standalone: true,
+
   imports: [
     CommonModule,
     ReactiveFormsModule,

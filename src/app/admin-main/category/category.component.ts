@@ -22,6 +22,7 @@ import { ApiConstant } from '../../api-constant';
 
 @Component({
   selector: 'app-category',
+  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
