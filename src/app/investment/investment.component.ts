@@ -11,7 +11,6 @@ import {
 import { Init } from 'v8';
 import { ApiCallBack } from '../base/api/api-callback';
 import { ApiConstant } from '../api-constant';
-import { Colors } from 'chart.js';
 import { CoreService } from '../base/api/core.service';
 
 type PlanType = 'Daily' | 'Weekly' | 'Monthly' | 'Yealy';

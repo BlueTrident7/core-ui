@@ -16,8 +16,7 @@ import { RegisterRequest } from '../dto/register-request';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ArtifactUtils } from '../../util/artifact-utils';
-import { MessageService } from 'primeng/api';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-auth',
@@ -27,10 +26,10 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     ReactiveFormsModule,
     ConfirmDialogModule,
     ToastModule,
-    TranslateModule,
   ],
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
+  providers: [ConfirmationService],
 })
 export class AuthComponent implements ApiCallBack {
   isLogin = true;
@@ -44,8 +43,7 @@ export class AuthComponent implements ApiCallBack {
     private router: Router,
     private authService: AuthService,
     private loaderService: LoaderService,
-    private messageService: MessageService,
-    private translateService: TranslateService
+    private messageService: MessageService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -136,7 +134,7 @@ export class AuthComponent implements ApiCallBack {
           this.router.navigate(['/main/home_page']);
           ArtifactUtils.showSuccessViaToast(
             this.messageService,
-            this.translateService.instant('Item Added Successfully')
+            'Item Added Successfully'
           );
         } else {
           this.message = 'Login failed: invalid token.';

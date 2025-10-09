@@ -17,8 +17,7 @@
     <ng-template pTemplate="body" let-tx>
       <tr>
         <td>
-          <p-tag [value]="tx.type" [severity]="getTypeSeverity(tx.type)">
-          </p-tag>
+          <p-tag [value]="tx.type"> </p-tag>
         </td>
         <td>{{ tx.transactionNumber }}</td>
         <td>{{ tx.date | date : "dd MMM yyyy" }}</td>
@@ -26,11 +25,7 @@
           {{ tx.amount | currency : "INR" : "symbol" : "1.2-2" : "en-IN" }}
         </td>
         <td>
-          <p-badge
-            [value]="tx.status"
-            [severity]="getStatusSeverity(tx.status)"
-          >
-          </p-badge>
+          <p-badge [value]="tx.status"> </p-badge>
         </td>
       </tr>
     </ng-template>
