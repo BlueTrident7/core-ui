@@ -1,6 +1,83 @@
 .topbar {
-  display:flex; justify-content:space-between; align-items:center; padding:0.75rem 1rem;
-  background: transparent;
-  .left { .title { margin:0; } .subtitle { color:#6b7280; font-size:0.9rem; } }
-  .right { display:flex; align-items:center; gap:0.5rem; .search { max-width:320px; } }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--white);
+  border-bottom: 1px solid var(--medium-grey);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  .left {
+    .title {
+      margin: 0;
+      color: var(--light-black);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      color: var(--text-grey);
+      font-size: 0.9rem;
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .search {
+      max-width: 320px;
+
+      ::ng-deep {
+        .p-input-icon-left {
+          width: 100%;
+
+          i {
+            color: var(--text-grey);
+          }
+
+          input {
+            background: var(--light-grey);
+            border: 1px solid var(--border-grey);
+            color: var(--dark-grey);
+            padding: 0.5rem 0.75rem;
+
+            &:focus {
+              border-color: var(--primary-blue);
+              box-shadow: 0 0 0 1px var(--primary-blue);
+            }
+          }
+        }
+      }
+    }
+
+    .p-button {
+      background: var(--light-grey);
+      border: 1px solid var(--border-grey);
+      color: var(--dark-grey);
+
+      &:hover {
+        background: var(--medium-grey);
+        border-color: var(--medium-grey);
+      }
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      border: 2px solid var(--border-grey);
+      border-radius: 50%;
+      transition: border-color 0.2s ease;
+
+      &:hover {
+        border-color: var(--primary-blue);
+      }
+
+      ::ng-deep img {
+        object-fit: cover;
+      }
+    }
+  }
 }

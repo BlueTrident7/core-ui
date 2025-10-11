@@ -23,7 +23,7 @@ export class TopbarComponent {
 
   profileMenuItems: MenuItem[] = [
     { label: 'Profile', icon: 'pi pi-user', routerLink: '/profile' },
-    { label: 'Admin Setting', icon: 'pi pi-cog', routerLink: '/admin-setting' },
+    { label: 'Admin Settings', icon: 'pi pi-cog', routerLink: '/admin-setting' },
     { label: 'Logout', icon: 'pi pi-sign-out', command: () => this.logout() }
   ];
 

@@ -1,1 +1,14 @@
-<p-menu [model]="menuItems" class="sidebar"></p-menu>
+<ul class="sidebar-nav">
+  <li *ngFor="let item of menuItems" 
+      [routerLink]="item.routerLink" 
+      routerLinkActive="active" 
+      class="nav-item"
+      pTooltip="{{item.label}}" 
+      tooltipPosition="right"
+      tooltipStyleClass="sidebar-tooltip">
+    <i [class]="item.icon" class="nav-icon"></i>
+  </li>
+  <div class="sidebar-profile">
+    <img src="assets/profile_male.png" alt="Profile" class="profile-avatar">
+  </div>
+</ul>
