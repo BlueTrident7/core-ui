@@ -1,12 +1,18 @@
 <div class="investment-container">
   <p-tabView [(activeIndex)]="activeIndex" (onChange)="onTabChange($event)">
     <p-tabPanel header="Daily" leftIcon="pi pi-clock">
-      <div class="plans-grid">
+      <div class="grid">
         @for (plan of dailyPlans; track plan.name) {
           <p-card header="{{ plan.name }}" subheader="Amount: ${{ plan.amount }}">
             <p><strong>Duration:</strong> {{ plan.duration }}</p>
             <p><strong>Return Rate:</strong> {{ plan.returnRate }}%</p>
             <p>{{ plan.description }}</p>
+            <ng-template pTemplate="footer">
+              <div class="footer-content">
+                <p-button label="Invest Now" icon="pi pi-check" class="p-button p-button-primary invest-button"></p-button>
+                <i class="pi pi-info-circle info-icon" pTooltip="I'll add the conditions for the invest plan" tooltipPosition="top"></i>
+              </div>
+            </ng-template>
           </p-card>
         }
       </div>
@@ -18,6 +24,12 @@
             <p><strong>Duration:</strong> {{ plan.duration }}</p>
             <p><strong>Return Rate:</strong> {{ plan.returnRate }}%</p>
             <p>{{ plan.description }}</p>
+            <ng-template pTemplate="footer">
+              <div class="footer-content">
+                <p-button label="Invest Now" icon="pi pi-check" class="p-button p-button-primary invest-button"></p-button>
+                <i class="pi pi-info-circle info-icon" pTooltip="I'll add the conditions for the invest plan" tooltipPosition="top"></i>
+              </div>
+            </ng-template>
           </p-card>
         }
       </div>
@@ -29,6 +41,12 @@
             <p><strong>Duration:</strong> {{ plan.duration }}</p>
             <p><strong>Return Rate:</strong> {{ plan.returnRate }}%</p>
             <p>{{ plan.description }}</p>
+            <ng-template pTemplate="footer">
+              <div class="footer-content">
+                <p-button label="Invest Now" icon="pi pi-check" class="p-button p-button-primary invest-button"></p-button>
+                <i class="pi pi-info-circle info-icon" pTooltip="I'll add the conditions for the invest plan" tooltipPosition="top"></i>
+              </div>
+            </ng-template>
           </p-card>
         }
       </div>
@@ -40,6 +58,12 @@
             <p><strong>Duration:</strong> {{ plan.duration }}</p>
             <p><strong>Return Rate:</strong> {{ plan.returnRate }}%</p>
             <p>{{ plan.description }}</p>
+            <ng-template pTemplate="footer">
+              <div class="footer-content">
+                <p-button label="Invest Now" icon="pi pi-check" class="p-button p-button-primary invest-button"></p-button>
+                <i class="pi pi-info-circle info-icon" pTooltip="I'll add the conditions for the invest plan" tooltipPosition="top"></i>
+              </div>
+            </ng-template>
           </p-card>
         }
       </div>
