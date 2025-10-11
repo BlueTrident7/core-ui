@@ -8,4 +8,16 @@ export class ApiService {
   getOverview(): Observable<any> {
     return this.http.get('/api/overview');
   }
+
+  getMetrics(): Observable<any> {
+    return this.http.get('/api/metrics');
+  }
+
+  getMonthlyRevenue(): Observable<any[]> {
+    return this.http.get<any[]>('/api/monthly-revenue');
+  }
+
+  getCashFlow(): Observable<any[]> {
+    return this.http.get<any[]>('/api/cash-flow');
+  }
 }

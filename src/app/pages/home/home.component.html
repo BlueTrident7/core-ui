@@ -1,1 +1,35 @@
-<p>Home Page</p>
+<div class="home-container">
+  <div class="metrics-grid">
+    <div class="metric-card blue">
+      <h3>Monthly Revenue</h3>
+      <p class="value">₹{{ metrics.monthlyRevenue | number }}</p>
+    </div>
+    <div class="metric-card orange">
+      <h3>Revenue Percentage</h3>
+      <p class="value">{{ metrics.revenuePercentage }}%</p>
+    </div>
+    <div class="metric-card purple">
+      <h3>Cash</h3>
+      <p class="value">₹{{ metrics.cash | number }}</p>
+    </div>
+    <div class="metric-card pink">
+      <h3>Revenue Amount</h3>
+      <p class="value">₹{{ metrics.revenue1 | number }}</p>
+    </div>
+    <div class="metric-card black">
+      <h3>Revenue Amount</h3>
+      <p class="value">₹{{ metrics.revenue2 | number }}</p>
+    </div>
+  </div>
+
+  <div class="charts-container">
+    <div class="chart-wrapper">
+      <h3>Monthly Revenue</h3>
+      <canvas #revenueChart></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <h3>Cash Flow</h3>
+      <canvas #cashFlowChart></canvas>
+    </div>
+  </div>
+</div>
