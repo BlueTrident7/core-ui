@@ -1,0 +1,48 @@
+<div class="investment-container">
+  <p-tabView [(activeIndex)]="activeIndex" (onChange)="onTabChange($event)">
+    <p-tabPanel header="Daily" leftIcon="pi pi-clock">
+      <div class="plans-grid">
+        @for (plan of dailyPlans; track plan.name) {
+          <p-card header="{{ plan.name }}" subheader="Amount: ${{ plan.amount }}">
+            <p><strong>Duration:</strong> {{ plan.duration }}</p>
+            <p><strong>Return Rate:</strong> {{ plan.returnRate }}%</p>
+            <p>{{ plan.description }}</p>
+          </p-card>
+        }
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Weekly" leftIcon="pi pi-calendar">
+      <div class="plans-grid">
+        @for (plan of weeklyPlans; track plan.name) {
+          <p-card header="{{ plan.name }}" subheader="Amount: ${{ plan.amount }}">
+            <p><strong>Duration:</strong> {{ plan.duration }}</p>
+            <p><strong>Return Rate:</strong> {{ plan.returnRate }}%</p>
+            <p>{{ plan.description }}</p>
+          </p-card>
+        }
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Monthly" leftIcon="pi pi-calendar-plus">
+      <div class="plans-grid">
+        @for (plan of monthlyPlans; track plan.name) {
+          <p-card header="{{ plan.name }}" subheader="Amount: ${{ plan.amount }}">
+            <p><strong>Duration:</strong> {{ plan.duration }}</p>
+            <p><strong>Return Rate:</strong> {{ plan.returnRate }}%</p>
+            <p>{{ plan.description }}</p>
+          </p-card>
+        }
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Yearly" leftIcon="pi pi-calendar-times">
+      <div class="plans-grid">
+        @for (plan of yearlyPlans; track plan.name) {
+          <p-card header="{{ plan.name }}" subheader="Amount: ${{ plan.amount }}">
+            <p><strong>Duration:</strong> {{ plan.duration }}</p>
+            <p><strong>Return Rate:</strong> {{ plan.returnRate }}%</p>
+            <p>{{ plan.description }}</p>
+          </p-card>
+        }
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</div>

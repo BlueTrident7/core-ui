@@ -1,1 +1,36 @@
-<p>Transaction Page</p>
+<div class="transaction-container">
+  <p-table [value]="sales" [tableStyle]="{'min-width': '100%'}">
+    <ng-template pTemplate="header">
+      <tr>
+        <th rowspan="3">Product</th>
+        <th colspan="4">Sale Rate</th>
+      </tr>
+      <tr>
+        <th colspan="2">Sales</th>
+        <th colspan="2">Profits</th>
+      </tr>
+      <tr>
+        <th>Last Year</th>
+        <th>This Year</th>
+        <th>Last Year</th>
+        <th>This Year</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-sale>
+      <tr>
+        <td>{{sale.product}}</td>
+        <td>{{sale.lastYearSale}}%</td>
+        <td>{{sale.thisYearSale}}%</td>
+        <td>{{sale.lastYearProfit | currency: 'USD'}}</td>
+        <td>{{sale.thisYearProfit | currency: 'USD'}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <tr>
+        <td colspan="3" class="text-right font-bold p-3 pb-0">Totals</td>
+        <td class="font-bold p-3 pb-0">{{ lastYearTotal | currency: 'USD' }}</td>
+        <td class="font-bold p-3 pb-0">{{ thisYearTotal | currency: 'USD' }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

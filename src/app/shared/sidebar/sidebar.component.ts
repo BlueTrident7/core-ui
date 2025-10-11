@@ -18,6 +18,7 @@ export class SidebarComponent {
     { label: 'Dashboard', icon: 'pi pi-chart-line', routerLink: '/dashboard', title: 'Dashboard' },
     { label: 'Portfolio', icon: 'pi pi-briefcase', routerLink: '/portfolio', title: 'Portfolio' },
     { label: 'Transaction', icon: 'pi pi-exchange', routerLink: '/transaction', title: 'Transaction' },
+    { label: 'Investment', icon: 'pi pi-money-bill', routerLink: '/investment', title: 'Investment' },
     { label: 'Admin', icon: 'pi pi-cog', routerLink: '/admin', title: 'Admin' }
   ];
 }

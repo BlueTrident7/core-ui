@@ -1,0 +1,63 @@
+.investment-container {
+  padding: 1rem;
+  width: 100%;
+  height: calc(100vh - 120px);
+  overflow: auto;
+
+  ::ng-deep {
+    .p-tabview {
+      height: 100%;
+
+      .p-tabview-panels {
+        padding: 1rem;
+        height: calc(100% - 50px);
+        overflow: auto;
+      }
+
+      .p-tabview-nav {
+        background: var(--primary-blue);
+        color: white;
+      }
+
+      .p-tabview-nav-link {
+        color: white !important;
+      }
+
+      .p-tabview-nav-link:hover {
+        color: var(--primary-light) !important;
+      }
+
+      .p-tabview-selected {
+        background: var(--primary-light) !important;
+        color: white !important;
+      }
+    }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    ::ng-deep .p-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid var(--primary-blue);
+
+      .p-card-header {
+        color: var(--primary-blue);
+        font-weight: 600;
+      }
+
+      .p-card-subheader {
+        color: var(--text-grey);
+      }
+
+      .p-card-content p {
+        margin: 0.5rem 0;
+        color: #666;
+      }
+    }
+  }
+}
