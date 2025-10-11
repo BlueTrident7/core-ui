@@ -1,6 +1,7 @@
 export class ApiConstant {
   public static AUTH_LOGIN = 'login';
   public static AUTH_REGISTER = 'register';
+  public static AUTH_REFRESH_TOKEN ='refresh-token';
 
   public static USER_PROFILE = 'user';
   public static SAVE_CATEGORY = 'add/category';

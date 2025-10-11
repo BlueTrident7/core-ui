@@ -1,8 +1,8 @@
+import { UserData } from './../base/api/user-data';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment.local';
+
 import { ApiConstant } from '../api-constant';
 import { ApiCallBack } from '../base/api/api-callback';
 import { ApiCallHelper } from '../base/api/api-call-helper';
@@ -18,13 +18,14 @@ export interface AuthResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly TOKEN_KEY = 'authToken';
+  private readonly TOKEN_KEY = 'accessToken';
   private readonly REFRESH_TOKEN_KEY = 'refreshToken';
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    public apiService: ApiService
+    public apiService: ApiService,
+    public userData: UserData
   ) {}
 
   // register(userData: any): Observable<any> {
@@ -63,24 +64,27 @@ export class AuthService {
     );
   }
 
-  setToken(token: string, remember: boolean = true): void {
-    if (remember) {
-      localStorage.setItem(this.TOKEN_KEY, token);
-    } else {
-      sessionStorage.setItem(this.TOKEN_KEY, token);
-    }
+  setTokens(accessToken: string, refreshToken: string) {
+    localStorage.setItem(this.TOKEN_KEY, accessToken);
+    localStorage.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
+
+    // Decode JWT to extract user info
+    const decoded: any = this.decodeToken(accessToken);
+    this.userData.setUserProfile(decoded);
   }
 
   getToken(): string | null {
-    return (
-      localStorage.getItem(this.TOKEN_KEY) ||
-      sessionStorage.getItem(this.TOKEN_KEY)
-    );
+    return localStorage.getItem(this.TOKEN_KEY);
   }
 
-  removeToken(): void {
+  getRefreshToken(): string | null {
+    return localStorage.getItem(this.REFRESH_TOKEN_KEY);
+  }
+
+  removeTokens() {
     localStorage.removeItem(this.TOKEN_KEY);
-    sessionStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.REFRESH_TOKEN_KEY);
+    this.userData.clear();
   }
 
   isLoggedIn(): boolean {
@@ -88,7 +92,38 @@ export class AuthService {
   }
 
   logout(): void {
-    this.removeToken();
+    this.removeTokens();
     this.router.navigate(['/auth/login']);
+  }
+
+  decodeToken(token: string): any {
+    if (!token) return null;
+    const payload = token.split('.')[1];
+    return JSON.parse(atob(payload));
+  }
+  getUser(): any {
+    return this.userData.getUserProfile();
+  }
+  refreshAccessToken(apiCallBack: ApiCallBack): void {
+    const refreshToken = this.getRefreshToken();
+    if (!refreshToken) {
+      apiCallBack.onResult(
+        { error: 'No refresh token' },
+        'AUTH_REFRESH_TOKEN_ERROR'
+      );
+      return;
+    }
+
+    const apiObject: ApiCallHelper = {} as ApiCallHelper;
+    apiObject.service = ApiConstant.AUTH_REFRESH_TOKEN; // define this constant
+    apiObject.method = 'POST';
+    apiObject.params = { refreshToken };
+
+    this.apiService.getData(
+      apiObject,
+      apiCallBack,
+      ApiConstant.AUTH_REFRESH_TOKEN,
+      { refreshToken }
+    );
   }
 }

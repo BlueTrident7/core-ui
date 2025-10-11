@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { CookieConstant } from '../api/cookie-constant';
 import { ArtifactUtils } from '../../../util/artifact-utils';
+import { AuthService } from '../../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,25 +12,15 @@ export class UserData {
 
   profileImageSrc = 'assets/avatar/avatar-70.png';
 
-  constructor(private cookieService: CookieService) {}
-
-  public getUserName(): string {
-    return atob(this.cookieService.get(btoa(CookieConstant.USER_NAME)));
+  setUserProfile(user: any) {
+    this.userProfile = user;
   }
-  public getUserFullName(): any {
-    let fullname = '';
 
-    fullname =
-      this.userProfile?.user?.name?.firstname +
-      ' ' +
-      (ArtifactUtils.isNull(this.userProfile?.user?.name?.middlename)
-        ? ''
-        : this.userProfile?.user?.name?.middlename) +
-      ' ' +
-      (ArtifactUtils.isNull(this.userProfile?.user?.name?.lastname)
-        ? ''
-        : this.userProfile?.user?.name?.lastname);
+  getUserProfile(): any {
+    return this.userProfile;
+  }
 
-    return fullname;
+  clear() {
+    this.userProfile = null;
   }
 }

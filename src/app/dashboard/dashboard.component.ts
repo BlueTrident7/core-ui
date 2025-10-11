@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.dashboardData = dashboardResponse;
+  
 
     this.lineChartData = {
       labels: this.dashboardData.charts.months,

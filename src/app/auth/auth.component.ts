@@ -1,3 +1,4 @@
+import { UserData } from './../base/api/user-data';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -43,7 +44,8 @@ export class AuthComponent implements ApiCallBack {
     private router: Router,
     private authService: AuthService,
     private loaderService: LoaderService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private userData: UserData
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -129,9 +131,14 @@ export class AuthComponent implements ApiCallBack {
 
     switch (type) {
       case ApiConstant.AUTH_LOGIN:
-        if (result.data.token) {
-          this.authService.setToken(result.data.token);
+        if (result.data) {
+          this.authService.setTokens(
+            result.data.accessToken,
+            result.data.refreshToken
+          );
+          console.log(this.userData?.userProfile);
           this.router.navigate(['/main/home_page']);
+
           ArtifactUtils.showSuccessViaToast(
             this.messageService,
             'Item Added Successfully'
@@ -143,9 +150,18 @@ export class AuthComponent implements ApiCallBack {
 
       case ApiConstant.AUTH_REGISTER:
         this.message = 'Registration successful! Please login.';
-        this.authService.setToken(result.data.token);
+        //this.authService.setToken(result.data.token);
         this.toggleAuth();
         this.registerForm.reset();
+        break;
+
+      case ApiConstant.AUTH_REFRESH_TOKEN:
+        if (result.data) {
+          this.authService.setTokens(
+            result.data.accessToken,
+            result.data.refreshToken
+          );
+        }
         break;
 
       default:
