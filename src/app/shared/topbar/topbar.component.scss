@@ -1,0 +1,6 @@
+.topbar {
+  display:flex; justify-content:space-between; align-items:center; padding:0.75rem 1rem;
+  background: transparent;
+  .left { .title { margin:0; } .subtitle { color:#6b7280; font-size:0.9rem; } }
+  .right { display:flex; align-items:center; gap:0.5rem; .search { max-width:320px; } }
+}

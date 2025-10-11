@@ -1,0 +1,9 @@
+- [x] Generate Home component
+- [x] Generate Portfolio component
+- [x] Generate Transaction component
+- [x] Generate Admin component
+- [x] Generate Profile component
+- [x] Generate AdminSetting component
+- [x] Update sidebar menuItems
+- [x] Update topbar for profile dropdown
+- [x] Update app routes

@@ -1,0 +1,23 @@
+<header class="topbar">
+  <div class="left">
+    <h3 class="title">Welcome to PrimeNG</h3>
+    <span class="subtitle">Overview</span>
+  </div>
+
+  <div class="right">
+    <span class="p-input-icon-left search">
+      <i class="pi pi-search"></i>
+      <input pInputText placeholder="Search..." />
+    </span>
+
+    <p-calendar [(ngModel)]="dateRange" selectionMode="range" [showIcon]="true" dateFormat="dd/mm/yy" styleClass="ml-2"></p-calendar>
+
+    <button pButton type="button" icon="pi pi-download" label="Export" class="p-button-text"></button>
+
+    <p-avatar image="assets/avatar.png" (click)="op.toggle($event)" styleClass="avatar" [style]="{ cursor: 'pointer' }"></p-avatar>
+
+    <p-overlayPanel #op>
+      <p-menu [model]="profileMenuItems"></p-menu>
+    </p-overlayPanel>
+  </div>
+</header>
