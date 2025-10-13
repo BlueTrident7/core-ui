@@ -1,7 +1,7 @@
 <div class="investment-container">
   <p-tabView [(activeIndex)]="activeIndex" (onChange)="onTabChange($event)">
     <p-tabPanel header="Daily" leftIcon="pi pi-clock">
-      <div class="grid">
+      <div class="plans-grid">
         @for (plan of dailyPlans; track plan.name) {
           <p-card header="{{ plan.name }}" subheader="Amount: ${{ plan.amount }}">
             <p><strong>Duration:</strong> {{ plan.duration }}</p>
