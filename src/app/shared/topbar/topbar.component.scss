@@ -8,11 +8,87 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
-  left: 72px;
+  left: 0;
   right: 0;
   z-index: 100;
 
   .left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary-blue);
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+      margin-left: 2rem;
+
+      .nav-item {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 12px;
+        border: 2px solid var(--medium-grey);
+        color: var(--text-grey);
+        transition: all 0.2s ease-in-out;
+        position: relative;
+
+        .nav-icon {
+          font-size: 20px;
+        }
+
+        &:hover {
+          background-color: var(--primary-blue);
+          border-color: var(--primary-blue);
+          color: var(--white);
+          transform: scale(1.05);
+        }
+
+        &.active {
+          background-color: var(--primary-blue);
+          border-color: var(--primary-blue);
+          color: var(--white);
+        }
+      }
+
+      .sidebar-profile {
+        margin-left: 1rem;
+      }
+
+      .profile-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid var(--medium-grey);
+        cursor: pointer;
+        transition: border-color 0.2s ease;
+        object-fit: cover;
+
+        &:hover {
+          border-color: var(--primary-blue);
+        }
+      }
+
+      .sidebar-tooltip {
+        background: var(--light-black);
+        color: var(--white);
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 12px;
+        border-radius: 8px;
+      }
+    }
+
     .title {
       margin: 0;
       color: var(--light-black);

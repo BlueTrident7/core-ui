@@ -1,10 +1,32 @@
 <header class="topbar">
   <div class="left">
-    <h3 class="title">Welcome to Chipher 07</h3>
-    <span class="subtitle">Overview</span>
+    <div class="logo">Cipher07</div>
+    <ul class="sidebar-nav">
+      <li
+        *ngFor="let item of menuItems"
+        [routerLink]="item.routerLink"
+        routerLinkActive="active"
+        class="nav-item"
+        pTooltip="{{ item.label }}"
+        tooltipPosition="top"
+        tooltipStyleClass="sidebar-tooltip"
+      >
+        <i [class]="item.icon" class="nav-icon"></i>
+      </li>
+      <!-- <div class="sidebar-profile">
+        <img
+          src="assets/profile_male.png"
+          alt="Profile"
+          class="profile-avatar"
+        />
+      </div> -->
+    </ul>
   </div>
 
   <div class="right">
+    <h3 class="title">Welcome to Chipher 07</h3>
+    <span class="subtitle">Overview</span>
+
     <!-- <span class="p-input-icon-left search">
       <i class="pi pi-search"></i>
       <input pInputText placeholder="Search..." />
@@ -14,7 +36,12 @@
 
     <button pButton type="button" icon="pi pi-download" label="Export" class="p-button-text"></button> -->
 
-    <p-avatar image="assets/profile_male.png" (click)="op.toggle($event)" styleClass="avatar" [style]="{ cursor: 'pointer' }"></p-avatar>
+    <p-avatar
+      image="assets/profile_male.png"
+      (click)="op.toggle($event)"
+      styleClass="avatar"
+      [style]="{ cursor: 'pointer' }"
+    ></p-avatar>
 
     <p-overlayPanel #op>
       <p-menu [model]="profileMenuItems"></p-menu>
