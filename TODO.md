@@ -1,43 +1,27 @@
-# Investment Page Improvements TODO
 
-- [x] Update grid layout to be responsive (4 cols desktop, 2 tablet, 1 mobile)
-- [x] Clean up CSS overrides and remove incomplete styles
-- [x] Improve card alignment and spacing for better visual appeal
-- [x] Optimize gradients and animations for faster performance
-- [x] Update HTML to show only plan name, amount, plan type (duration), return rate, description
-- [x] Change grid to 6 cards per row
-- [x] Make tab navigation sticky on scroll
-- [x] Change amount display to Indian Rupees (INR)
-- [x] Ensure grid shows exactly 6 cards per row (remove responsive breakpoints)
+# Fix TypeScript Compilation Errors
 
-# Home Component Navigation TODO
+## Issues Identified
+1. ApiCallBack interface signature mismatch with component implementations.
+2. CategoryPostDto and InvestmentPlanPostDto used as constructors but are interfaces.
+3. AdminPanelDto missing 'stats' and 'users' properties used in template.
 
-- [x] Add navigation to investment page on "Get Started" button click
+## Plan
+- Update ApiCallBack interface to match component usage (onResult and onError signatures).
+- Convert CategoryPostDto and InvestmentPlanPostDto from interfaces to classes.
+- Update AdminPanelDto to include stats and users properties.
+- Ensure components implement ApiCallBack<any> correctly.
+- Add ApiCallBack implementation to InvestmentPlansComponent.
 
-# Routing Update TODO
+## Files to Edit
+- src/app/base/api/api-callback.ts
+- src/app/dto/category-post-dto.ts
+- src/app/dto/investment-plans-dto.ts
+- src/app/dto/admin-panel-dto.ts
+- src/app/pages/admin-main/category/category.component.ts
+- src/app/pages/admin-main/investment-plans/investment-plans.component.ts
+- src/app/pages/admin-main/overview/overview.component.ts
 
-- [x] Create NavbarComponent to wrap main pages with sidebar and topbar
-- [x] Update app.routes.ts to use lazy loading and nested routes under /main
-- [x] Update sidebar routerLinks to use /main prefix
-- [x] Update home component navigation to use /main/investment
-
-# Navigation Update TODO
-
-- [x] Disable sidebar in navbar component
-- [x] Update topbar navigation links to use /main prefix
-
-# Home Page Improvements TODO
-
-- [x] Remove header from home page
-- [x] Improve "Get Started" button styling with gradients and animations
-- [x] Center tabs and content in home page
-- [x] Make home page full screen with proper height and overflow handling
-- [x] Fix double scrollbars by changing overflow to hidden
-- [x] Add scroll container for content visibility without scrollbar
-- [x] Hide scrollbar visually while keeping scroll functionality
-- [x] Add developer contact emails in footer
-
-# Admin Component Routing TODO
-
-- [x] Add admin route to app.routes.ts under /main path
-- [x] Admin link already exists in topbar navigation
+## Followup Steps
+- [x] Run build to verify fixes.
+- [ ] Confirm build success with user.

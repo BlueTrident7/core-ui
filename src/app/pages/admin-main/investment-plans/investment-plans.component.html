@@ -1,0 +1,141 @@
+<div class="layout">
+  <main class="main-content">
+    <!-- <div class="overview-header">
+      <h2>Investment Plans</h2>
+    </div> -->
+
+    <div class="main-table-section">
+      <p-card class="user-management-card">
+        <ng-template pTemplate="header">
+          <div class="card-header">
+            <h2>Investment Plans Management</h2>
+            <button
+              pButton
+              label="Add Investment Plan"
+              icon="pi pi-plus"
+              class="add-btn"
+              (click)="openAddInvestmentPlanDialog()"
+            ></button>
+          </div>
+        </ng-template>
+
+        <p-table
+          [value]="investmentPlans"
+          responsiveLayout="scroll"
+          [scrollable]="true"
+          [tableStyle]="{ 'min-width': '35rem' }"
+          class="p-datatable-gridlines"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Plan Name</th>
+              <th>Amount</th>
+              <th>Lock Period</th>
+              <th>Action</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-plan>
+            <tr>
+              <td>{{ plan.planName }}</td>
+              <td>{{ plan.amount | currency : "INR" }}</td>
+              <td>{{ plan.lockPeriod }} months</td>
+              <td>
+                <button
+                  pButton
+                  type="button"
+                  label="Edit"
+                  icon="pi pi-pencil"
+                  class="edit-btn"
+                  (click)="editInvestmentPlan(plan)"
+                ></button>
+                <button
+                  pButton
+                  type="button"
+                  label="Delete"
+                  icon="pi pi-trash"
+                  class="delete-btn"
+                  (click)="deleteInvestmentPlan(plan)"
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-card>
+    </div>
+
+    <!-- Custom Dialog -->
+    <div class="custom-dialog-overlay" *ngIf="showInvestmentDialog">
+      <div class="custom-dialog">
+        <div class="custom-dialog-header">
+          <h3>Add Investment Plan</h3>
+          <button class="close-btn" (click)="closeDialog()">×</button>
+        </div>
+
+        <form [formGroup]="investmentForm" class="custom-dialog-body">
+          <div class="form-row">
+            <div class="field">
+              <label for="planName">Plan Name</label>
+              <input id="planName" type="text" formControlName="planName" />
+            </div>
+
+            <div class="field">
+              <label for="planName">Description</label>
+              <input
+                id="description"
+                type="text"
+                formControlName="description"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="planType">Plan Type</label>
+              <select id="planType" formControlName="planType">
+                <option
+                  *ngFor="let option of planTypes"
+                  [value]="option.identifierCode"
+                >
+                  {{ option.name }}
+                </option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="planPolicy">Policy</label>
+              <input id="planPolicy" type="text" formControlName="planPolicy" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="lockPeriod">Lock Period (months)</label>
+              <input
+                id="lockPeriod"
+                type="number"
+                formControlName="lockPeriod"
+              />
+            </div>
+            <div class="field">
+              <label for="amount">Amount</label>
+              <input id="amount" type="number" formControlName="amount" />
+            </div>
+          </div>
+
+          <div class="custom-dialog-footer">
+            <button
+              type="submit"
+              class="btn success"
+              (click)="saveInvestmentPlan()"
+            >
+              {{ this.buttonLabel }}
+            </button>
+            <button type="button" class="btn warning" (click)="clearForm()">
+              Clear
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>

@@ -42,9 +42,32 @@ export const routes: Routes = [
           import('./pages/home/home.component').then((m) => m.HomeComponent),
       },
       {
-        path: 'admin',
+        path: 'admin-main',
         loadComponent: () =>
-          import('./pages/admin/admin.component').then((m) => m.AdminComponent),
+          import('./pages/admin-main/admin-main/admin-main.component').then((m) => m.AdminMainComponent),
+        children: [
+          { path: '', redirectTo: 'overview', pathMatch: 'full' },
+          {
+            path: 'category',
+            loadComponent: () =>
+              import('./pages/admin-main/category/category.component').then((m) => m.CategoryComponent),
+          },
+          {
+            path: 'investment-plans',
+            loadComponent: () =>
+              import('./pages/admin-main/investment-plans/investment-plans.component').then((m) => m.InvestmentPlansComponent),
+          },
+          {
+            path: 'logs',
+            loadComponent: () =>
+              import('./pages/admin-main/logs/logs.component').then((m) => m.LogsComponent),
+          },
+          {
+            path: 'overview',
+            loadComponent: () =>
+              import('./pages/admin-main/overview/overview.component').then((m) => m.OverviewComponent),
+          },
+        ],
       },
     ],
   },

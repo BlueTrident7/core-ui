@@ -1,0 +1,230 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 25%, #d1e7ff 50%, #b3d9ff 75%, #ffffff 100%);
+  min-height: 100vh;
+  position: relative;
+}
+
+.main-content {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.overview-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #3c5b8c;
+  color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.overview-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Stats cards - above user management */
+.stats-cards-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1rem 0 2rem 0;
+  padding: 0;
+}
+
+.stats-card {
+  flex: 1;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 1rem;
+  text-align: center;
+  color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #000000;
+}
+
+.stats-card:nth-child(1) {
+  background-color: #3c5b8c;
+}
+
+.stats-card:nth-child(2) {
+  background-color: #3c5b8c;
+}
+
+.stats-card:nth-child(3) {
+  background-color: #3c5b8c;
+}
+
+.stats-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.stats-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.stats-card p {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Main table section - prioritized */
+.main-table-section {
+  margin: 1.5rem !important;
+  padding: 1.5rem !important;
+  background: #ffffff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid #000000 !important;
+}
+
+.main-table-section h2 {
+  color: #000000 !important;
+  font-size: 1.4rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+/* Content sections - tertiary */
+.content-section {
+  margin: 1.5rem;
+  padding: 1rem;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #000000;
+}
+
+.content-section h2 {
+  color: #000000;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Table styling - main focus */
+.p-datatable-gridlines {
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  border-top: none;
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.p-datatable-gridlines th {
+  background-color: #3c5b8c;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+.p-datatable-gridlines td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #000000;
+  font-weight: 500;
+  color: #000000;
+}
+
+/* Button styling */
+.p-button {
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.p-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.edit-btn {
+  background-color: #0000ff !important;
+  border: 1px solid #000000 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.edit-btn:hover {
+  background-color: #0000ff !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.delete-btn {
+  background-color: #0000ff !important;
+  border: 1px solid #000000 !important;
+  color: #ffffff !important;
+  margin-left: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.delete-btn:hover {
+  background-color: #0000ff !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Checkbox styling */
+.p-checkbox {
+  margin: 0.5rem 0;
+}
+
+.p-checkbox label {
+  color: #000000;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .stats-cards-top {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .main-content {
+    padding: 0.5rem;
+  }
+
+  .content-section, .main-table-section {
+    margin: 0.5rem !important;
+    padding: 0.75rem !important;
+  }
+
+  .overview-header h2 {
+    font-size: 1.2rem;
+  }
+}

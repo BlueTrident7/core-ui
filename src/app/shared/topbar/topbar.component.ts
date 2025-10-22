@@ -64,11 +64,11 @@ export class TopbarComponent {
       title: 'Investment',
       effect: 'flip',
     },
-    { label: 'Admin', icon: 'pi pi-cog', routerLink: '/main/admin', title: 'Admin', hasSpinner: true },
+    { label: 'Admin', icon: 'pi pi-cog', routerLink: '/main/admin-main', title: 'Admin', hasSpinner: true },
   ];
 
   profileMenuItems: MenuItem[] = [
-    { label: 'Profile', icon: 'pi pi-user', routerLink: '/profile' },
+    { label: 'Profile', icon: 'pi pi-user', routerLink: '/main/profile' },
     {
       label: 'Admin Settings',
       icon: 'pi pi-cog',
