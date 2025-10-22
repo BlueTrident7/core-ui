@@ -1,72 +1,86 @@
 <div class="investment-container">
-  <p-tabView [(activeIndex)]="activeIndex" (onChange)="onTabChange($event)">
-    <p-tabPanel header="Daily" leftIcon="pi pi-clock">
-      <div class="plans-grid">
-        @for (plan of dailyPlans; track plan.name) {
-          <p-card header="{{ plan.name }}" subheader="Amount: ${{ plan.amount }}">
-            <p><strong>Duration:</strong> {{ plan.duration }}</p>
-            <p><strong>Return Rate:</strong> {{ plan.returnRate }}%</p>
-            <p>{{ plan.description }}</p>
-            <ng-template pTemplate="footer">
-              <div class="footer-content">
-                <p-button label="Invest Now" icon="pi pi-check" class="p-button p-button-primary invest-button"></p-button>
-                <i class="pi pi-info-circle info-icon" pTooltip="I'll add the conditions for the invest plan" tooltipPosition="top"></i>
-              </div>
-            </ng-template>
-          </p-card>
-        }
-      </div>
-    </p-tabPanel>
-    <p-tabPanel header="Weekly" leftIcon="pi pi-calendar">
-      <div class="plans-grid">
-        @for (plan of weeklyPlans; track plan.name) {
-          <p-card header="{{ plan.name }}" subheader="Amount: ${{ plan.amount }}">
-            <p><strong>Duration:</strong> {{ plan.duration }}</p>
-            <p><strong>Return Rate:</strong> {{ plan.returnRate }}%</p>
-            <p>{{ plan.description }}</p>
-            <ng-template pTemplate="footer">
-              <div class="footer-content">
-                <p-button label="Invest Now" icon="pi pi-check" class="p-button p-button-primary invest-button"></p-button>
-                <i class="pi pi-info-circle info-icon" pTooltip="I'll add the conditions for the invest plan" tooltipPosition="top"></i>
-              </div>
-            </ng-template>
-          </p-card>
-        }
-      </div>
-    </p-tabPanel>
-    <p-tabPanel header="Monthly" leftIcon="pi pi-calendar-plus">
-      <div class="plans-grid">
-        @for (plan of monthlyPlans; track plan.name) {
-          <p-card header="{{ plan.name }}" subheader="Amount: ${{ plan.amount }}">
-            <p><strong>Duration:</strong> {{ plan.duration }}</p>
-            <p><strong>Return Rate:</strong> {{ plan.returnRate }}%</p>
-            <p>{{ plan.description }}</p>
-            <ng-template pTemplate="footer">
-              <div class="footer-content">
-                <p-button label="Invest Now" icon="pi pi-check" class="p-button p-button-primary invest-button"></p-button>
-                <i class="pi pi-info-circle info-icon" pTooltip="I'll add the conditions for the invest plan" tooltipPosition="top"></i>
-              </div>
-            </ng-template>
-          </p-card>
-        }
-      </div>
-    </p-tabPanel>
-    <p-tabPanel header="Yearly" leftIcon="pi pi-calendar-times">
-      <div class="plans-grid">
-        @for (plan of yearlyPlans; track plan.name) {
-          <p-card header="{{ plan.name }}" subheader="Amount: ${{ plan.amount }}">
-            <p><strong>Duration:</strong> {{ plan.duration }}</p>
-            <p><strong>Return Rate:</strong> {{ plan.returnRate }}%</p>
-            <p>{{ plan.description }}</p>
-            <ng-template pTemplate="footer">
-              <div class="footer-content">
-                <p-button label="Invest Now" icon="pi pi-check" class="p-button p-button-primary invest-button"></p-button>
-                <i class="pi pi-info-circle info-icon" pTooltip="I'll add the conditions for the invest plan" tooltipPosition="top"></i>
-              </div>
-            </ng-template>
-          </p-card>
-        }
-      </div>
-    </p-tabPanel>
-  </p-tabView>
+  <div class="custom-tabview">
+    <!-- TAB NAVIGATION -->
+    <div class="tab-nav">
+      <button
+        *ngFor="let tab of ['Daily', 'Weekly', 'Monthly', 'Yearly']; let i = index"
+        class="tab-link"
+        [class.active]="activeIndex === i"
+        (click)="activeIndex = i"
+      >
+        {{ tab }}
+      </button>
+    </div>
+
+    <!-- TAB CONTENT AREA -->
+    <div class="tab-content">
+      <ng-container [ngSwitch]="activeIndex">
+        <!-- DAILY -->
+        <div *ngSwitchCase="0" class="plans-grid fade-in">
+          <div class="plan-card" *ngFor="let plan of dailyPlans">
+            <div class="plan-header">
+              <h3>{{ plan.name }}</h3>
+              <p class="plan-type">{{ plan.duration }}</p>
+            </div>
+            <div class="plan-body">
+              <h2 class="amount">₹{{ plan.amount }}</h2>
+              <p class="description">{{ plan.description }}</p>
+            </div>
+            <button class="invest-btn">Invest Now</button>
+          </div>
+        </div>
+
+        <!-- WEEKLY -->
+        <div *ngSwitchCase="1" class="plans-grid fade-in">
+          <div class="plan-card" *ngFor="let plan of weeklyPlans">
+            <div class="plan-header">
+              <h3>{{ plan.name }}</h3>
+              <p class="plan-type">{{ plan.duration }}</p>
+            </div>
+            <div class="plan-body">
+              <h2 class="amount">₹{{ plan.amount }}</h2>
+              <p class="description">{{ plan.description }}</p>
+            </div>
+            <button class="invest-btn">Invest Now</button>
+          </div>
+        </div>
+
+        <!-- MONTHLY -->
+        <div *ngSwitchCase="2" class="plans-grid fade-in">
+          <div class="plan-card" *ngFor="let plan of monthlyPlans">
+            <div class="plan-header">
+              <h3>{{ plan.name }}</h3>
+              <p class="plan-type">{{ plan.duration }}</p>
+            </div>
+            <div class="plan-body">
+              <h2 class="amount">₹{{ plan.amount }}</h2>
+              <p class="description">{{ plan.description }}</p>
+            </div>
+            <button class="invest-btn">Invest Now</button>
+          </div>
+        </div>
+
+        <!-- YEARLY -->
+        <div *ngSwitchCase="3" class="plans-grid fade-in">
+          <div class="plan-card" *ngFor="let plan of yearlyPlans">
+            <div class="plan-header">
+              <h3>{{ plan.name }}</h3>
+              <p class="plan-type">{{ plan.duration }}</p>
+            </div>
+            <div class="plan-body">
+              <h2 class="amount">₹{{ plan.amount }}</h2>
+              <p class="description">{{ plan.description }}</p>
+            </div>
+            <button class="invest-btn">Invest Now</button>
+          </div>
+        </div>
+
+        <!-- DEFAULT -->
+        <div *ngSwitchDefault class="fade-in text-center">
+          <h3>Welcome!</h3>
+          <p>Select a tab to view your investment details.</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
 </div>

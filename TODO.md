@@ -1,13 +1,11 @@
-# TODO: Fix Topbar Hover Name Display
+# Investment Page Improvements TODO
 
-## Steps to Complete:
-- [x] Update topbar.component.html: Remove pTooltip from nav-items and add data-label attribute with item.label
-- [x] Update topbar.component.scss: Add CSS for ::after pseudo-element on .nav-item:hover to display the label below the icon with fade-in transition
-- [x] Test the hover effect in the browser to ensure labels appear correctly and look good
-
-# TODO: Fix Transaction Nav Button Icon
-
-## Steps to Complete:
-- [x] Update topbar.component.ts: Change the icon for Transaction menu item to an emoji (e.g., 💱)
-- [x] Update topbar.component.html: Modify the icon rendering to handle emojis properly
-- [ ] Test that the emoji displays correctly in the topbar navigation
+- [x] Update grid layout to be responsive (4 cols desktop, 2 tablet, 1 mobile)
+- [x] Clean up CSS overrides and remove incomplete styles
+- [x] Improve card alignment and spacing for better visual appeal
+- [x] Optimize gradients and animations for faster performance
+- [x] Update HTML to show only plan name, amount, plan type (duration), return rate, description
+- [x] Change grid to 6 cards per row
+- [x] Make tab navigation sticky on scroll
+- [x] Change amount display to Indian Rupees (INR)
+- [x] Ensure grid shows exactly 6 cards per row (remove responsive breakpoints)
