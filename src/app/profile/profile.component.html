@@ -2,22 +2,43 @@
   <div class="profile-container">
     <div class="profile-card">
       <div class="profile-left">
-        <img src="/assets/profile_male.png" alt="Avatar" class="avatar" />
+        <img [src]="getAvatar()" alt="Avatar" class="avatar" />
       </div>
-      <div class="profile-right">
-        <h3 class="user-name">{{ user.name }}</h3>
-        <p class="user-role">{{ user.role }}</p>
-        <!-- <h3 class="section-title">Profile</h3> -->
-        <div class="details-inline">
-          <span><strong>Full Name:</strong> {{ user.details.fullName }}</span>
-          <span><strong>Email:</strong> {{ user.details.email }}</span>
-          <span><strong>Mobile Number:</strong> {{ user.details.mobileNumber }}</span>
-          <span><strong>Category (Handicap):</strong> {{ user.details.category }}</span>
-          <span><strong>Gender:</strong> {{ user.details.gender }}</span>
-          <span><strong>DOB:</strong> {{ user.details.dob }}</span>
+      <div class="details-row">
+        <div class="detail-item">
+          <span class="label">Full Name</span>
+          <span class="value">{{
+            coreService.userDetails?.fullName || "-"
+          }}</span>
         </div>
-        <div class="badges-line">
-          <span><strong>Badges:</strong> <span class="badge" *ngFor="let badge of user.details.badges">{{ badge }}</span></span>
+        <div class="detail-item">
+          <span class="label">Gender</span>
+          <span class="value">{{
+            coreService.userDetails?.gender || "-"
+          }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Mobile</span>
+          <span class="value">{{
+            coreService.userDetails?.phoneNumber || "-"
+          }}</span>
+        </div>
+      </div>
+
+      <div class="details-row">
+        <div class="detail-item">
+          <span class="label">Email</span>
+          <span class="value">{{ coreService.userDetails?.email || "-" }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">Category</span>
+          <span class="value">{{
+            coreService.userDetails?.categoryName || "-"
+          }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="label">DOB</span>
+          <span class="value">{{ coreService.userDetails?.age || "-" }}</span>
         </div>
       </div>
     </div>
@@ -27,39 +48,82 @@
 
     <div class="bank-card">
       <h3 class="section-title">Add Bank Details</h3>
-      <form [formGroup]="bankForm" (ngSubmit)="onSubmitBankDetails()" class="bank-form">
+      <form
+        [formGroup]="bankForm"
+        (ngSubmit)="onSubmitBankDetails()"
+        class="bank-form"
+      >
         <div class="input-group">
-          <input type="text" formControlName="accountNumber" placeholder="Account Number" class="form-input" />
-          <div class="error" *ngIf="bf['accountNumber'].touched && bf['accountNumber'].errors">
-            <small *ngIf="bf['accountNumber'].errors['required']">Account number is required</small>
-            <small *ngIf="bf['accountNumber'].errors['pattern']">Enter a valid account number (10-18 digits)</small>
+          <input
+            type="text"
+            formControlName="accountNumber"
+            placeholder="Account Number"
+            class="form-input"
+          />
+          <div
+            class="error"
+            *ngIf="bf['accountNumber'].touched && bf['accountNumber'].errors"
+          >
+            <small *ngIf="bf['accountNumber'].errors['required']"
+              >Account number is required</small
+            >
+            <small *ngIf="bf['accountNumber'].errors['pattern']"
+              >Enter a valid account number (10-18 digits)</small
+            >
           </div>
         </div>
 
         <div class="input-group">
-          <input type="text" formControlName="confirmAccountNumber" placeholder="Confirm Account Number" class="form-input" />
-          <div class="error" *ngIf="bf['confirmAccountNumber'].touched && bankForm.errors?.['mismatch']">
+          <input
+            type="text"
+            formControlName="confirmAccountNumber"
+            placeholder="Confirm Account Number"
+            class="form-input"
+          />
+          <div
+            class="error"
+            *ngIf="bf['confirmAccountNumber'].touched && bankForm.errors?.['mismatch']"
+          >
             <small>Account numbers do not match</small>
           </div>
         </div>
 
         <div class="input-group">
-          <input type="text" formControlName="ifscCode" placeholder="IFSC Code" class="form-input" />
-          <div class="error" *ngIf="bf['ifscCode'].touched && bf['ifscCode'].errors">
-            <small *ngIf="bf['ifscCode'].errors['required']">IFSC code is required</small>
-            <small *ngIf="bf['ifscCode'].errors['pattern']">Enter a valid IFSC code (e.g., ABCD0123456)</small>
+          <input
+            type="text"
+            formControlName="ifscCode"
+            placeholder="IFSC Code"
+            class="form-input"
+          />
+          <div
+            class="error"
+            *ngIf="bf['ifscCode'].touched && bf['ifscCode'].errors"
+          >
+            <small *ngIf="bf['ifscCode'].errors['required']"
+              >IFSC code is required</small
+            >
+            <small *ngIf="bf['ifscCode'].errors['pattern']"
+              >Enter a valid IFSC code (e.g., ABCD0123456)</small
+            >
           </div>
         </div>
 
         <div class="input-group">
-          <input type="text" formControlName="name" placeholder="Account Holder Name" class="form-input" />
+          <input
+            type="text"
+            formControlName="name"
+            placeholder="Account Holder Name"
+            class="form-input"
+          />
           <div class="error" *ngIf="bf['name'].touched && bf['name'].errors">
-            <small *ngIf="bf['name'].errors['required']">Name is required</small>
+            <small *ngIf="bf['name'].errors['required']"
+              >Name is required</small
+            >
           </div>
         </div>
 
         <button type="submit" class="submit-btn" [disabled]="!bankForm.valid">
-          {{ bankForm.valid ? 'Save Bank Details' : 'Please fill all fields' }}
+          {{ bankForm.valid ? "Save Bank Details" : "Please fill all fields" }}
         </button>
       </form>
     </div>

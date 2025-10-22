@@ -1,3 +1,4 @@
+import { UserData } from './../base/api/user-data';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -9,6 +10,7 @@ import {
 import { ApiCallBack } from '../base/api/api-callback';
 import { MessageService } from 'primeng/api';
 import { CoreService } from '../base/api/core.service';
+import { ApiConstant } from '../api-constant';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +20,7 @@ import { CoreService } from '../base/api/core.service';
   styleUrls: ['./profile.component.css'],
   providers: [MessageService],
 })
-export class ProfileComponent implements ApiCallBack {
+export class ProfileComponent implements ApiCallBack, OnInit {
   user = {
     name: 'Maria Fernanda',
     role: 'Premium User',
@@ -36,7 +38,11 @@ export class ProfileComponent implements ApiCallBack {
 
   bankForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private coreService: CoreService) {
+  constructor(
+    private fb: FormBuilder,
+    public coreService: CoreService,
+    private userData: UserData
+  ) {
     this.bankForm = this.fb.group(
       {
         accountNumber: [
@@ -52,11 +58,22 @@ export class ProfileComponent implements ApiCallBack {
       },
       { validators: this.accountNumberMatchValidator }
     );
+  }
+  ngOnInit(): void {
     this.getProfile();
+  }
+  getAvatar() {
+    const gender = this.userData?.userProfile?.gender?.toLowerCase();
+
+    if (gender === 'male') {
+      return 'assets/avatar/male.png';
+    } else {
+      return 'assets/avatar/female.png';
+    }
   }
 
   getProfile() {
-    this.coreService.getUsersProfile(this, 1);
+    this.coreService.getUsersProfile(this, this.userData?.userProfile?.id);
   }
 
   get bf() {
@@ -77,6 +94,15 @@ export class ProfileComponent implements ApiCallBack {
       this.bankForm.markAllAsTouched();
     }
   }
-  onResult(result: any, type: any, other?: any): void {}
+  onResult(result: any, type: any, other?: any): void {
+    switch (type) {
+      case ApiConstant.USER_PROFILE:
+        this.coreService.userDetails = result?.data;
+        break;
+
+      default:
+        break;
+    }
+  }
   onError(err: any, type: any, other?: any): void {}
 }

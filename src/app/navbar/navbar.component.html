@@ -36,7 +36,12 @@
     <a class="nav-item" routerLink="/main/profile" routerLinkActive="active">
       Profile
     </a>
-    <a class="nav-item" routerLink="/main/admin-main" routerLinkActive="active">
+    <a
+      class="nav-item"
+      routerLink="/main/admin-main"
+      routerLinkActive="active"
+      *ngIf="userData.userProfile?.role === 'ADMIN'"
+    >
       Admin
     </a>
   </div>
@@ -48,11 +53,11 @@
     </span>
 
     <div class="navbar-user">
-      <span class="brand">{{ userName }}</span>
-      <img src="assets/profile_male.png" alt="User" class="profile-img" />
+      <span class="brand">{{ this.userData.userProfile?.fullName }}</span>
+      <img [src]="getAvatar()" alt="User" class="profile-img" />
     </div>
 
-    <a class="nav-item logout-btn" routerLink="/auth">Logout</a>
+    <a class="nav-item logout-btn" (click)="onLogout()">Logout</a>
   </div>
 </nav>
 

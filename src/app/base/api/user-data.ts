@@ -14,13 +14,19 @@ export class UserData {
 
   setUserProfile(user: any) {
     this.userProfile = user;
+    localStorage.setItem('userProfile', JSON.stringify(user));
   }
 
   getUserProfile(): any {
+    const storedProfile = localStorage.getItem('userProfile');
+    if (storedProfile) {
+      this.userProfile = JSON.parse(storedProfile);
+    }
     return this.userProfile;
   }
 
   clear() {
     this.userProfile = null;
+    localStorage.removeItem('userProfile');
   }
 }

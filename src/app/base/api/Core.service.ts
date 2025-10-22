@@ -8,12 +8,16 @@ import { ApiService } from './api.service';
 import { CategoryPostDto } from '../../dto/category-post-dto';
 import { CreateOrderRequest } from '../../dto/CreateOrderRequest';
 import { PaymentVerificationRequest } from '../../dto/PaymentVerificationRequest';
+import { UserDTO } from '../../dto/admin-panel-dto';
+import { UserInfo } from 'os';
+import { UserProfileDto } from '../../dto/user-profile-dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoreService {
   selectedPlan: any;
+  userDetails:UserProfileDto | undefined ;
 
   constructor(private apiService: ApiService) {}
 
