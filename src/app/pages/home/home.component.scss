@@ -1,82 +1,220 @@
-.home-container {
-  padding: 1rem;
+// Variables for colors
+$primary-color: #007bff; // Light blue
+$text-color: #000; // Black
+$bg-color: #fff; // White
+$accent-color: #f0f8ff; // Very light blue for accents
+
+// Global styles for component
+.home-page {
+  font-family: 'Arial', sans-serif;
+  color: $text-color;
+  background-color: $bg-color;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+// Header
+.header {
+  background-color: $bg-color;
+  border-bottom: 1px solid $primary-color;
+  position: fixed;
   width: 100%;
-}
-
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.metric-card {
-  padding: 1.5rem;
-  border-radius: 12px;
-  text-align: center;
-  color: white;
-  font-weight: 500;
-
-  h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 0.9rem;
-    opacity: 0.9;
+  top: 0;
+  z-index: 1000;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
   }
-
-  .value {
-    margin: 0;
+  .logo h1 {
+    color: $primary-color;
+    font-size: 1.8rem;
+  }
+  .nav-list {
+    list-style: none;
+    display: flex;
+    li {
+      margin-left: 2rem;
+      a {
+        color: $text-color;
+        text-decoration: none;
+        transition: color 0.3s;
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
     font-size: 1.5rem;
-    font-weight: 700;
-  }
-
-  &.blue {
-    background: #3b82f6;
-  }
-
-  &.orange {
-    background: #f59e0b;
-  }
-
-  &.purple {
-    background: #8b5cf6;
-  }
-
-  &.pink {
-    background: #ec4899;
-  }
-
-  &.black {
-    background: #111827;
+    color: $text-color;
+    cursor: pointer;
   }
 }
 
-.charts-container {
-  display: flex;
-  gap: 2rem;
-  height: calc(100vh - 300px); /* Adjust based on cards and topbar height to fill remaining space */
+// Hero section
+.hero {
+  background: linear-gradient(135deg, $bg-color 0%, $accent-color 100%);
+  padding: 100px 0 80px;
+  text-align: center;
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: $text-color;
+  }
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: $text-color;
+  }
+  .btn-primary {
+    background-color: $primary-color;
+    color: $bg-color;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
 }
 
-.chart-wrapper {
-  flex: 1;
-  background: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  min-height: 300px;
-
-  h3 {
-    margin: 0 0 1rem 0;
-    color: #111827;
-    font-size: 1.1rem;
-    flex-shrink: 0;
+// Features section
+.features {
+  padding: 80px 0;
+  background-color: $bg-color;
+  .container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: $text-color;
   }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  .feature-card {
+    background-color: $accent-color;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    h3 {
+      color: $primary-color;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: $text-color;
+    }
+  }
+}
 
-  canvas {
-    height: 100%;
+// About section
+.about {
+  padding: 80px 0;
+  background-color: $accent-color;
+  text-align: center;
+  h2 {
+    margin-bottom: 1rem;
+    color: $text-color;
+  }
+  p {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    color: $text-color;
+  }
+  .btn-secondary {
+    background-color: $bg-color;
+    color: $primary-color;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border: 1px solid $primary-color;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: $primary-color;
+      color: $bg-color;
+    }
+  }
+}
+
+// Footer
+.footer {
+  background-color: $text-color;
+  color: $bg-color;
+  padding: 2rem 0;
+  text-align: center;
+  .footer-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    li {
+      margin: 0 1rem;
+      a {
+        color: $bg-color;
+        text-decoration: none;
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+// Scroll to top button
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: $primary-color;
+  color: $bg-color;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .header .nav-list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
     width: 100%;
-    flex: 1;
+    background-color: $bg-color;
+    border-top: 1px solid $primary-color;
+    li {
+      margin: 0;
+      text-align: center;
+      padding: 1rem 0;
+    }
+  }
+  .header .menu-toggle {
+    display: block;
+  }
+  .hero h2 {
+    font-size: 2rem;
+  }
+  .features .feature-grid {
+    grid-template-columns: 1fr;
   }
 }

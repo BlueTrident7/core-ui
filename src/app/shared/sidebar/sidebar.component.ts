@@ -14,11 +14,11 @@ import { MenuItem } from 'primeng/api';
 })
 export class SidebarComponent {
   menuItems: MenuItem[] = [
-    { label: 'Home', icon: 'pi pi-home', routerLink: '/', title: 'Home' },
-    { label: 'Dashboard', icon: 'pi pi-chart-line', routerLink: '/dashboard', title: 'Dashboard' },
-    { label: 'Portfolio', icon: 'pi pi-briefcase', routerLink: '/portfolio', title: 'Portfolio' },
-    { label: 'Transaction', icon: 'pi pi-exchange', routerLink: '/transaction', title: 'Transaction' },
-    { label: 'Investment', icon: 'pi pi-money-bill', routerLink: '/investment', title: 'Investment' },
-    { label: 'Admin', icon: 'pi pi-cog', routerLink: '/admin', title: 'Admin' }
+    { label: 'Home', icon: 'pi pi-home', routerLink: '/main/home', title: 'Home' },
+    { label: 'Dashboard', icon: 'pi pi-chart-line', routerLink: '/main/dashboard', title: 'Dashboard' },
+    { label: 'Portfolio', icon: 'pi pi-briefcase', routerLink: '/main/portfolio', title: 'Portfolio' },
+    { label: 'Transaction', icon: 'pi pi-exchange', routerLink: '/main/transaction', title: 'Transaction' },
+    { label: 'Investment', icon: 'pi pi-money-bill', routerLink: '/main/investment', title: 'Investment' },
+    { label: 'Admin', icon: 'pi pi-cog', routerLink: '/main/admin', title: 'Admin' }
   ];
 }

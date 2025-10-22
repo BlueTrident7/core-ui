@@ -9,3 +9,19 @@
 - [x] Make tab navigation sticky on scroll
 - [x] Change amount display to Indian Rupees (INR)
 - [x] Ensure grid shows exactly 6 cards per row (remove responsive breakpoints)
+
+# Home Component Navigation TODO
+
+- [x] Add navigation to investment page on "Get Started" button click
+
+# Routing Update TODO
+
+- [x] Create NavbarComponent to wrap main pages with sidebar and topbar
+- [x] Update app.routes.ts to use lazy loading and nested routes under /main
+- [x] Update sidebar routerLinks to use /main prefix
+- [x] Update home component navigation to use /main/investment
+
+# Navigation Update TODO
+
+- [x] Disable sidebar in navbar component
+- [x] Update topbar navigation links to use /main prefix
