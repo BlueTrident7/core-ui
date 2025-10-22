@@ -35,32 +35,36 @@ export class TopbarComponent {
   dateRange: Date[] = [];
 
   menuItems: MenuItem[] = [
-    { label: 'Home', icon: 'pi pi-home', routerLink: '/', title: 'Home' },
+    { label: 'Home', icon: 'pi pi-home', routerLink: '/', title: 'Home', effect: 'bounce' },
     {
       label: 'Dashboard',
       icon: 'pi pi-chart-line',
       routerLink: '/dashboard',
       title: 'Dashboard',
+      effect: 'pulse',
     },
     {
       label: 'Portfolio',
       icon: 'pi pi-briefcase',
       routerLink: '/portfolio',
       title: 'Portfolio',
+      effect: 'shake',
     },
     {
       label: 'Transaction',
-      icon: 'pi pi-exchange',
+      icon: 'pi pi-list',
       routerLink: '/transaction',
       title: 'Transaction',
+      effect: 'wobble',
     },
     {
       label: 'Investment',
       icon: 'pi pi-money-bill',
       routerLink: '/investment',
       title: 'Investment',
+      effect: 'flip',
     },
-    { label: 'Admin', icon: 'pi pi-cog', routerLink: '/admin', title: 'Admin' },
+    { label: 'Admin', icon: 'pi pi-cog', routerLink: '/admin', title: 'Admin', hasSpinner: true },
   ];
 
   profileMenuItems: MenuItem[] = [

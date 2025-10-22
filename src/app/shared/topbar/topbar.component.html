@@ -7,11 +7,12 @@
         [routerLink]="item.routerLink"
         routerLinkActive="active"
         class="nav-item"
-        pTooltip="{{ item.label }}"
-        tooltipPosition="top"
-        tooltipStyleClass="sidebar-tooltip"
+        [class.has-spinner]="item['hasSpinner']"
+        [class]="item['effect'] ? 'effect-' + item['effect'] : ''"
+        [attr.data-label]="item.label"
       >
-        <i [class]="item.icon" class="nav-icon"></i>
+        <i *ngIf="item.icon && item.icon.startsWith('pi')" [class]="item.icon" class="nav-icon"></i>
+        <span *ngIf="item.icon && !item.icon.startsWith('pi')" class="nav-icon">{{ item.icon }}</span>
       </li>
       <!-- <div class="sidebar-profile">
         <img
