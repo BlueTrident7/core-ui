@@ -1,66 +1,53 @@
 <div class="home-page">
-  <header class="header">
-    <div class="container">
-      <div class="logo">
-        <h1>Cipher07</h1>
+  <div class="scroll-container">
+    <section id="home" class="hero">
+      <div class="container">
+        <h2>Welcome to Cipher07</h2>
+        <p>Unlock your financial potential with secure, innovative investment solutions.</p>
+        <button class="btn-primary" (click)="navigateToInvestment()">Get Started</button>
       </div>
-      <nav class="nav">
-        <ul class="nav-list">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <button class="menu-toggle" (click)="toggleMenu()">☰</button>
-      </nav>
-    </div>
-  </header>
+    </section>
 
-  <section id="home" class="hero">
-    <div class="container">
-      <h2>Welcome to Cipher07</h2>
-      <p>Unlock your financial potential with secure, innovative investment solutions.</p>
-      <button class="btn-primary" (click)="navigateToInvestment()">Get Started</button>
-    </div>
-  </section>
-
-  <section id="features" class="features">
-    <div class="container">
-      <h2>Why Choose Cipher07?</h2>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <h3>Secure Investments</h3>
-          <p>Advanced encryption and risk management for peace of mind.</p>
-        </div>
-        <div class="feature-card">
-          <h3>High Returns</h3>
-          <p>Data-driven strategies to maximize your portfolio growth.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Expert Support</h3>
-          <p>24/7 access to our team of financial experts.</p>
+    <section id="features" class="features">
+      <div class="container">
+        <h2>Why Choose Cipher07?</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>Secure Investments</h3>
+            <p>Advanced encryption and risk management for peace of mind.</p>
+          </div>
+          <div class="feature-card">
+            <h3>High Returns</h3>
+            <p>Data-driven strategies to maximize your portfolio growth.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Expert Support</h3>
+            <p>24/7 access to our team of financial experts.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="about" class="about">
-    <div class="container">
-      <h2>About Us</h2>
-      <p>At Cipher07, we combine cutting-edge technology with financial expertise to provide tailored investment opportunities. Our mission is to empower investors with transparent, secure, and profitable solutions.</p>
-      <a href="#features" class="btn-secondary">Learn More</a>
-    </div>
-  </section>
+    <section id="about" class="about">
+      <div class="container">
+        <h2>About Us</h2>
+        <p>At Cipher07, we combine cutting-edge technology with financial expertise to provide tailored investment opportunities. Our mission is to empower investors with transparent, secure, and profitable solutions.</p>
+        <a href="#features" class="btn-secondary">Learn More</a>
+      </div>
+    </section>
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2023 Cipher07. All rights reserved.</p>
+      <p>&copy; 2025 Cipher07. All rights reserved.</p>
       <ul class="footer-links">
         <li><a href="#privacy">Privacy Policy</a></li>
         <li><a href="#terms">Terms of Service</a></li>
+        <li><a href="mailto:sreehariradhakrishnan2000&#64;gmail.com">Developer: sreehariradhakrishnan2000&#64;gmail.com</a></li>
+        <li><a href="mailto:kakarlanage&#64;gmail.com">Developer: kakarlanage&#64;gmail.com</a></li>
       </ul>
     </div>
   </footer>
+  </div>
 
   <button class="scroll-to-top" (click)="scrollToTop()" [style.display]="showScrollButton ? 'block' : 'none'">↑</button>
 </div>

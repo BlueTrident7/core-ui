@@ -25,3 +25,19 @@
 
 - [x] Disable sidebar in navbar component
 - [x] Update topbar navigation links to use /main prefix
+
+# Home Page Improvements TODO
+
+- [x] Remove header from home page
+- [x] Improve "Get Started" button styling with gradients and animations
+- [x] Center tabs and content in home page
+- [x] Make home page full screen with proper height and overflow handling
+- [x] Fix double scrollbars by changing overflow to hidden
+- [x] Add scroll container for content visibility without scrollbar
+- [x] Hide scrollbar visually while keeping scroll functionality
+- [x] Add developer contact emails in footer
+
+# Admin Component Routing TODO
+
+- [x] Add admin route to app.routes.ts under /main path
+- [x] Admin link already exists in topbar navigation

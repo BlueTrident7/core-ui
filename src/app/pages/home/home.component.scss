@@ -10,6 +10,22 @@ $accent-color: #f0f8ff; // Very light blue for accents
   color: $text-color;
   background-color: $bg-color;
   line-height: 1.6;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.scroll-container {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+
+  /* Hide scrollbar but keep functionality */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .container {
@@ -18,132 +34,114 @@ $accent-color: #f0f8ff; // Very light blue for accents
   padding: 0 20px;
 }
 
-// Header
-.header {
-  background-color: $bg-color;
-  border-bottom: 1px solid $primary-color;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-  }
-  .logo h1 {
-    color: $primary-color;
-    font-size: 1.8rem;
-  }
-  .nav-list {
-    list-style: none;
-    display: flex;
-    li {
-      margin-left: 2rem;
-      a {
-        color: $text-color;
-        text-decoration: none;
-        transition: color 0.3s;
-        &:hover {
-          color: $primary-color;
-        }
-      }
-    }
-  }
-  .menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: $text-color;
-    cursor: pointer;
-  }
-}
-
 // Hero section
 .hero {
   background: linear-gradient(135deg, $bg-color 0%, $accent-color 100%);
-  padding: 100px 0 80px;
+  padding: 150px 0 100px;
   text-align: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
     color: $text-color;
   }
   p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    margin-bottom: 3rem;
     color: $text-color;
   }
   .btn-primary {
-    background-color: $primary-color;
+    background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
     color: $bg-color;
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
     &:hover {
-      background-color: darken($primary-color, 10%);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(79, 195, 247, 0.5);
+      background: linear-gradient(135deg, #29b6f6 0%, #0277bd 100%);
     }
   }
 }
 
 // Features section
 .features {
-  padding: 80px 0;
+  padding: 100px 0;
   background-color: $bg-color;
   .container h2 {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     color: $text-color;
+    font-size: 2.5rem;
   }
   .feature-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    justify-items: center;
   }
   .feature-card {
     background-color: $accent-color;
-    padding: 2rem;
-    border-radius: 8px;
+    padding: 2.5rem;
+    border-radius: 12px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     h3 {
       color: $primary-color;
       margin-bottom: 1rem;
+      font-size: 1.5rem;
     }
     p {
       color: $text-color;
+      font-size: 1.1rem;
+    }
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
     }
   }
 }
 
 // About section
 .about {
-  padding: 80px 0;
+  padding: 100px 0;
   background-color: $accent-color;
   text-align: center;
   h2 {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     color: $text-color;
+    font-size: 2.5rem;
   }
   p {
-    max-width: 600px;
-    margin: 0 auto 2rem;
+    max-width: 700px;
+    margin: 0 auto 3rem;
     color: $text-color;
+    font-size: 1.2rem;
   }
   .btn-secondary {
     background-color: $bg-color;
     color: $primary-color;
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 2rem;
     text-decoration: none;
-    border: 1px solid $primary-color;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    border: 2px solid $primary-color;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
     &:hover {
       background-color: $primary-color;
       color: $bg-color;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
     }
   }
 }
@@ -152,7 +150,7 @@ $accent-color: #f0f8ff; // Very light blue for accents
 .footer {
   background-color: $text-color;
   color: $bg-color;
-  padding: 2rem 0;
+  padding: 3rem 0;
   text-align: center;
   .footer-links {
     list-style: none;
@@ -164,6 +162,8 @@ $accent-color: #f0f8ff; // Very light blue for accents
       a {
         color: $bg-color;
         text-decoration: none;
+        font-size: 1rem;
+        transition: color 0.3s;
         &:hover {
           color: $primary-color;
         }
@@ -175,46 +175,46 @@ $accent-color: #f0f8ff; // Very light blue for accents
 // Scroll to top button
 .scroll-to-top {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: $primary-color;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
   color: $bg-color;
   border: none;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 1.5rem;
+  width: 60px;
+  height: 60px;
+  font-size: 1.8rem;
   cursor: pointer;
-  transition: opacity 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
   &:hover {
-    opacity: 0.8;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(79, 195, 247, 0.5);
   }
 }
 
 // Responsive design
 @media (max-width: 768px) {
-  .header .nav-list {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: $bg-color;
-    border-top: 1px solid $primary-color;
-    li {
-      margin: 0;
-      text-align: center;
-      padding: 1rem 0;
-    }
-  }
-  .header .menu-toggle {
-    display: block;
-  }
   .hero h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
+  }
+  .hero p {
+    font-size: 1.2rem;
+  }
+  .hero .btn-primary {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
   }
   .features .feature-grid {
     grid-template-columns: 1fr;
+  }
+  .features .container h2 {
+    font-size: 2rem;
+  }
+  .about h2 {
+    font-size: 2rem;
+  }
+  .about p {
+    font-size: 1rem;
   }
 }
