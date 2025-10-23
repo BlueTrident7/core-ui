@@ -33,4 +33,7 @@ export class ApiConstant {
   public static readonly GET_ADMIN_OVERVIEW = 'GET_ADMIN_OVERVIEW';
 
   public static readonly USER_PROFILE = 'USER_PROFILE';
+
+  public static readonly LOGIN = 'LOGIN';
+  public static readonly REGISTER = 'REGISTER';
 }

@@ -22,6 +22,7 @@ import {
 import { CoreService } from '../../../base/api/core.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { ApiCallBack } from '../../../base/api/api-callback';
+
 @Component({
   selector: 'app-investment-plans',
   standalone: true,
@@ -124,6 +125,7 @@ export class InvestmentPlansComponent implements OnInit, ApiCallBack<any> {
   onResult(result: any, type: any, other?: any): void {
     switch (type) {
       case ApiConstant.SAVE_INVESTMENT_PLAN:
+        alert('Investment plan saved successfully!');
         this.showInvestmentDialog = false;
         this.buttonLabel = 'Save';
         this.getAllInvestmentPlans();
@@ -133,9 +135,11 @@ export class InvestmentPlansComponent implements OnInit, ApiCallBack<any> {
         this.investmentPlans = result.data;
         break;
       case ApiConstant.DELETE_INVESTMENT_PLAN:
+        alert('Investment plan deleted successfully!');
         this.getAllInvestmentPlans();
         break;
       case ApiConstant.UPDATE_INVESTMENT_PLAN:
+        alert('Investment plan updated successfully!');
         this.showInvestmentDialog = false;
         this.getAllInvestmentPlans();
         this.buttonLabel = 'Save';
@@ -144,5 +148,7 @@ export class InvestmentPlansComponent implements OnInit, ApiCallBack<any> {
         break;
     }
   }
-  onError(err: any, type: any, other?: any): void {}
+  onError(err: any, type: any, other?: any): void {
+    alert(err?.error?.message || 'An error occurred. Please try again.');
+  }
 }

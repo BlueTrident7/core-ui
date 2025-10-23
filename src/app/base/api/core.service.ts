@@ -75,4 +75,14 @@ export class CoreService {
   }
 
   userDetails: any;
+
+  // Login method
+  login(callback: ApiCallBack<any>, loginData: any): Observable<any> {
+    return this.post(ApiConstant.BASE_URL + '/auth/login', loginData, callback);
+  }
+
+  // Register method
+  register(callback: ApiCallBack<any>, registerData: any): Observable<any> {
+    return this.post(ApiConstant.BASE_URL + '/auth/register', registerData, callback);
+  }
 }

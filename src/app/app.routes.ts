@@ -1,17 +1,33 @@
 import { Routes } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'main', pathMatch: 'full' },
+  // {
+  //   path: '',
+  //   redirectTo: '/login',
+  //   pathMatch: 'full',
+  // },
+  // {
+  //   path: 'login',
+  //   loadComponent: () =>
+  //     import('./pages/login/login.component').then((m) => m.LoginComponent),
+  // },
+  // {
+  //   path: 'register',
+  //   loadComponent: () =>
+  //     import('./pages/register/register.component').then((m) => m.RegisterComponent),
+  // },
 
   // ✅ Wrap all main pages inside NavbarComponent
   {
     path: 'main',
     component: NavbarComponent,
+    // canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'portfolio', pathMatch: 'full' },
       {
-        path: 'dashboard',
+        path: 'portfolio',
         loadComponent: () =>
           import('./pages/dashboard/dashboard.component').then(
             (m) => m.DashboardComponent
@@ -72,5 +88,5 @@ export const routes: Routes = [
     ],
   },
 
-  { path: '**', redirectTo: 'main', pathMatch: 'full' },
+  { path: '**', redirectTo: 'main/portfolio', pathMatch: 'full' },
 ];

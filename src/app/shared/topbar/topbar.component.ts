@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
@@ -11,6 +12,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { MenuModule } from 'primeng/menu';
 import { TooltipModule } from 'primeng/tooltip';
 import { MenuItem } from 'primeng/api';
+import { CoreService } from '../../base/api/core.service';
 
 @Component({
   selector: 'app-topbar',
@@ -34,21 +36,16 @@ import { MenuItem } from 'primeng/api';
 export class TopbarComponent {
   dateRange: Date[] = [];
 
+  constructor(private router: Router, private coreService: CoreService) {}
+
   menuItems: MenuItem[] = [
     { label: 'Home', icon: 'pi pi-home', routerLink: '/main/home', title: 'Home', effect: 'bounce' },
     {
-      label: 'Dashboard',
-      icon: 'pi pi-chart-line',
-      routerLink: '/main/dashboard',
-      title: 'Dashboard',
-      effect: 'pulse',
-    },
-    {
       label: 'Portfolio',
-      icon: 'pi pi-briefcase',
+      icon: 'pi pi-chart-line',
       routerLink: '/main/portfolio',
       title: 'Portfolio',
-      effect: 'shake',
+      effect: 'pulse',
     },
     {
       label: 'Transaction',
@@ -69,16 +66,17 @@ export class TopbarComponent {
 
   profileMenuItems: MenuItem[] = [
     { label: 'Profile', icon: 'pi pi-user', routerLink: '/main/profile' },
-    {
-      label: 'Admin Settings',
-      icon: 'pi pi-cog',
-      routerLink: '/admin-setting',
-    },
+    // {
+    //   label: 'Admin Settings',
+    //   icon: 'pi pi-cog',
+    //   routerLink: '/admin-setting',
+    // },
     { label: 'Logout', icon: 'pi pi-sign-out', command: () => this.logout() },
   ];
 
   logout() {
-    // Implement logout logic
-    console.log('Logout');
+    // Clear user details and redirect to login
+    this.coreService.userDetails = null;
+    this.router.navigate(['/login']);
   }
 }

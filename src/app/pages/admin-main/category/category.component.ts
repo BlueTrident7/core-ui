@@ -17,6 +17,7 @@ import { CoreService } from '../../../base/api/core.service';
 import { ApiCallBack } from '../../../base/api/api-callback';
 import { ApiConstant } from '../../../api-constant';
 
+
 @Component({
   selector: 'app-category',
   standalone: true,
@@ -99,6 +100,7 @@ export class CategoryComponent implements OnInit, ApiCallBack<any> {
   onResult(result: any, type: any, other?: any): void {
     switch (type) {
       case ApiConstant.SAVE_CATEGORY:
+        alert('Category saved successfully!');
         this.showCategoryDialog = false;
         this.buttonLabel = 'Save';
         this.getAllCategories();
@@ -109,9 +111,11 @@ export class CategoryComponent implements OnInit, ApiCallBack<any> {
 
         break;
       case ApiConstant.DELETE_CATEGORY:
+        alert('Category deleted successfully!');
         this.getAllCategories();
         break;
       case ApiConstant.UPDATE_CATEGORY:
+        alert('Category updated successfully!');
         this.showCategoryDialog = false;
         this.getAllCategories();
         this.buttonLabel = 'Save';
@@ -120,5 +124,7 @@ export class CategoryComponent implements OnInit, ApiCallBack<any> {
         break;
     }
   }
-  onError(err: any, type: any, other?: any): void {}
+  onError(err: any, type: any, other?: any): void {
+    alert(err?.error?.message || 'An error occurred. Please try again.');
+  }
 }

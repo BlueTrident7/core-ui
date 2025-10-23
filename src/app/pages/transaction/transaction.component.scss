@@ -1,34 +1,105 @@
 .transaction-container {
   width: 100%;
-  padding: 1rem;
-  height: calc(100vh - 120px); /* Adjust for topbar, sidebar padding, and content offset */
-  overflow: auto;
+  padding: 2rem;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  background: #f7f8fa;
+  min-height: calc(100vh - 100px);
+}
 
-  ::ng-deep {
-    .p-datatable {
-      flex: 1;
-      .p-datatable-wrapper {
-        height: 100%;
+.transaction-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  width: 100%;
+  max-width: 1400px;
+  overflow-x: auto;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.filter-section {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  .tab {
+    background: #f0f0f5;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &.active {
+      background: #6366f1;
+      color: #fff;
+    }
+
+    &:hover {
+      background: #e5e7eb;
+    }
+  }
+}
+
+::ng-deep {
+  .p-datatable {
+    width: 100%;
+    border: none;
+
+    .p-datatable-wrapper {
+      overflow-x: auto;
+    }
+
+    .p-datatable-thead > tr > th {
+      background: #f9fafb;
+      color: #374151;
+      font-weight: 600;
+      text-align: left;
+      padding: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .p-datatable-tbody > tr > td {
+      padding: 1rem;
+      border-bottom: 1px solid #f1f1f1;
+      text-align: left;
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .p-datatable-tbody > tr:hover {
+      background-color: #f9fafb;
+    }
+
+    .status {
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      &.done {
+        background: #d1fae5;
+        color: #065f46;
       }
-      .p-datatable-thead > tr > th,
-      .p-datatable-tbody > tr > td,
-      .p-datatable-tfoot > tr > td {
-        padding: 0.75rem;
-        text-align: center;
+      &.pending {
+        background: #fef3c7;
+        color: #92400e;
       }
-      .p-datatable-thead > tr > th {
-        background: var(--primary-blue);
-        color: white;
-        font-weight: 600;
+      &.failed {
+        background: #fee2e2;
+        color: #991b1b;
       }
-      .p-datatable-tbody > tr:nth-child(even) {
-        background: var(--light-grey);
-      }
-      .p-datatable-tfoot > tr > td {
-        background: var(--medium-grey);
-        font-weight: bold;
+      &.captured {
+        background: #d1fae5;
+        color: #065f46;
       }
     }
   }
