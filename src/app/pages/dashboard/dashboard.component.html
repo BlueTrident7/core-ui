@@ -27,105 +27,103 @@
 
       <div class="controls">
         <!-- <input placeholder="Search" class="search" /> -->
-        <button class="download" (click)="onDownload()">Download ↓</button>
-        <input class="date-range" formControlName="dateRange" />
+        <!-- <button class="download" (click)="onDownload()">Download ↓</button> -->
+        <!-- <input class="date-range" formControlName="dateRange" /> -->
       </div>
     </header>
 
     <section class="panel analytics">
-      <div class="panel-header">
-        <h3>Crypto Analytics</h3>
-        <div class="legend">
-          <span class="legend-item"
-            ><span class="dot dot-personal"></span>Personal Wallet</span
-          >
-          <span class="legend-item"
-            ><span class="dot dot-corporate"></span>Corporate Wallet</span
-          >
-          <span class="legend-item"
-            ><span class="dot dot-invest"></span>Investment Wallet</span
-          >
-        </div>
-      </div>
+      <div class="chart-and-wallet">
+        <div class="chart-area" aria-hidden="false">
+          <div class="y-axis">
+            <span
+              *ngFor="let val of [30000, 25000, 20000, 15000, 10000, 5000, 0]"
+              >{{ val }}</span
+            >
+          </div>
 
-      <div class="chart-area" aria-hidden="false">
-        <div class="y-axis">
-          <span
-            *ngFor="let val of [30000, 25000, 20000, 15000, 10000, 5000, 0]"
-            >{{ val }}</span
-          >
-        </div>
-
-        <div class="bars">
-          <div class="bar" *ngFor="let m of months">
-            <div
-              class="segment invest"
-              [style.height]="getSegmentHeight(m.investment)"
-              title="{{ m.investment }}"
-            ></div>
-            <div
-              class="segment corp"
-              [style.height]="getSegmentHeight(m.corporate)"
-              title="{{ m.corporate }}"
-            ></div>
-            <div
-              class="segment personal"
-              [style.height]="getSegmentHeight(m.personal)"
-              title="{{ m.personal }}"
-            ></div>
-            <div class="bar-label">{{ m.name }}</div>
+          <div class="bars">
+            <div class="bar" *ngFor="let m of months">
+              <div
+                class="segment invest"
+                [style.height]="getSegmentHeight(m.investment)"
+                title="{{ m.investment }}"
+              ></div>
+              <div
+                class="segment corp"
+                [style.height]="getSegmentHeight(m.corporate)"
+                title="{{ m.corporate }}"
+              ></div>
+              <div
+                class="segment personal"
+                [style.height]="getSegmentHeight(m.personal)"
+                title="{{ m.personal }}"
+              ></div>
+              <div class="bar-label">{{ m.name }}</div>
+            </div>
           </div>
         </div>
+
+        <aside class="wallet panel">
+          <div class="panel-header"><h3>My Wallet</h3></div>
+          <div class="wallet-bar">
+            <div
+              class="wallet-seg"
+              *ngFor="let w of walletBreakdown"
+              [class]="w.method.toLowerCase()"
+              [style.flex]="w.percent"
+            ></div>
+          </div>
+
+          <ul class="wallet-list">
+          <li *ngFor="let w of walletBreakdown">
+            <span class="legend-dot"></span>
+            <div class="label">{{ w.method }} ({{ w.percent }}%)</div>
+            <div class="value">{{ w.value }}</div>
+          </li>
+          </ul>
+        </aside>
       </div>
     </section>
 
-    <section class="panel row">
-      <div class="transactions">
-        <div class="panel-header"><h3>Transactions</h3></div>
-        <table class="tx-table">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Coin</th>
-              <th>Date</th>
-              <th>Process</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let t of transactions">
-              <td>{{ t.id }}</td>
-              <td>{{ t.name }}</td>
-              <td>{{ t.coin }}</td>
-              <td>{{ t.date }}</td>
-              <td>
-                <span class="pill">{{ t.process }}</span>
-              </td>
-              <td class="amount">{{ t.amount }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <aside class="wallet panel">
-        <div class="panel-header"><h3>My Wallet</h3></div>
-        <div class="wallet-bar">
-          <div
-            class="wallet-seg"
-            *ngFor="let w of walletBreakdown"
-            [style.flex]="w.percent"
-          ></div>
-        </div>
-
-        <ul class="wallet-list">
-          <li *ngFor="let w of walletBreakdown">
-            <span class="legend-dot"></span>
-            <div class="label">{{ w.symbol }} ({{ w.percent }}%)</div>
-            <div class="value">{{ w.value }}</div>
-          </li>
-        </ul>
-      </aside>
+    <section class="panel transactions-full">
+      <div class="panel-header"><h3>Transactions</h3></div>
+      <table class="tx-table">
+        <thead>
+          <tr>
+            <th>Transaction ID</th>
+            <th>Order ID</th>
+            <th>Payment ID</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Status</th>
+            <th>Method</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Created At</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let t of transactions">
+            <td>{{ t.id }}</td>
+            <td>{{ t.orderId }}</td>
+            <td>{{ t.paymentId }}</td>
+            <td class="amount">{{ t.amount }}</td>
+            <td>{{ t.currency }}</td>
+            <td>
+              <span class="pill" [class]="t.status === 'captured' ? 'success' : 'failed'">{{ t.status }}</span>
+            </td>
+            <td>{{ t.method }}</td>
+            <td>{{ t.email }}</td>
+            <td>{{ t.contact }}</td>
+            <td>{{ t.createdAt | date:'medium' }}</td>
+            <td>
+              <span title="{{ t.description }}">{{ t.description }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </section>
   </main>
 </div>

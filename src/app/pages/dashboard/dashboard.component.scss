@@ -224,17 +224,22 @@ body {
   font-size: 12px;
 }
 
-/* Bottom area layout */
-.row {
+/* Chart and wallet layout */
+.chart-and-wallet {
   display: flex;
   gap: 18px;
 }
-.transactions {
+.chart-area {
   flex: 2;
 }
 .wallet {
   flex: 1;
   min-width: 260px;
+}
+
+/* Transactions full width */
+.transactions-full {
+  width: 100%;
 }
 
 /* Transactions table */
@@ -260,6 +265,14 @@ body {
   border-radius: 12px;
   font-size: 12px;
 }
+.pill.success {
+  background: #e6fff0;
+  color: #1b5e20;
+}
+.pill.failed {
+  background: #ffe6e6;
+  color: #b91c1c;
+}
 .amount {
   text-align: right;
   color: #111827;
@@ -277,20 +290,17 @@ body {
   flex: 1;
   min-width: 0;
 }
-.wallet-seg:nth-child(1) {
+.wallet-seg.card {
   background: #f8b84b;
 }
-.wallet-seg:nth-child(2) {
+.wallet-seg.netbanking {
   background: #8ec07c;
 }
-.wallet-seg:nth-child(3) {
+.wallet-seg.upi {
   background: #6fc3d8;
 }
-.wallet-seg:nth-child(4) {
+.wallet-seg.wallet {
   background: #58a6ff;
-}
-.wallet-seg:nth-child(5) {
-  background: #f7c1d4;
 }
 
 .wallet-list {
