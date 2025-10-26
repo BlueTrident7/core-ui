@@ -36,6 +36,7 @@
 .navbar-center {
   display: flex;
   gap: 25px;
+  padding-left: 134px;
 }
 .nav-item {
   color: #e5e7eb;
