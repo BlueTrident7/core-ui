@@ -9,7 +9,7 @@
 .left-side {
   flex: 1;
   position: relative;
-  background-image: url('../../assets/login_background.png');
+
   background-size: cover;
   background-position: center;
   display: flex;
