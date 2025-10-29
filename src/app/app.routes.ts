@@ -61,6 +61,7 @@ export const routes: Routes = [
         path: 'maintenance',
         loadComponent: () =>
           import('./pages/maintenance/maintenance.component').then((m) => m.MaintenanceComponent),
+        data: { hideTopbar: true },
       },
       {
         path: 'admin-main',
